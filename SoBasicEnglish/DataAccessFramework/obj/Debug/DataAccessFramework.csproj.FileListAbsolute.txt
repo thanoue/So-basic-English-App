@@ -1,0 +1,6 @@
+C:\Users\Sin\Documents\Visual Studio 2017\Projects\SoBasicEnglish\DataAccessFramework\bin\Debug\DataAccessFramework.exe.config
+C:\Users\Sin\Documents\Visual Studio 2017\Projects\SoBasicEnglish\DataAccessFramework\bin\Debug\DataAccessFramework.exe
+C:\Users\Sin\Documents\Visual Studio 2017\Projects\SoBasicEnglish\DataAccessFramework\bin\Debug\DataAccessFramework.pdb
+C:\Users\Sin\Documents\Visual Studio 2017\Projects\SoBasicEnglish\DataAccessFramework\obj\Debug\DataAccessFramework.exe
+C:\Users\Sin\Documents\Visual Studio 2017\Projects\SoBasicEnglish\DataAccessFramework\obj\Debug\DataAccessFramework.pdb
+C:\Users\Sin\Documents\Visual Studio 2017\Projects\SoBasicEnglish\DataAccessFramework\obj\Debug\DataAccessFramework.csprojResolveAssemblyReference.cache

@@ -1,0 +1,9 @@
+C:\Users\Sin\Documents\Visual Studio 2017\Projects\SoBasicEnglish\BusinessLogicFramework\bin\Debug\BusinessLogicFramework.exe.config
+C:\Users\Sin\Documents\Visual Studio 2017\Projects\SoBasicEnglish\BusinessLogicFramework\bin\Debug\BusinessLogicFramework.exe
+C:\Users\Sin\Documents\Visual Studio 2017\Projects\SoBasicEnglish\BusinessLogicFramework\bin\Debug\BusinessLogicFramework.pdb
+C:\Users\Sin\Documents\Visual Studio 2017\Projects\SoBasicEnglish\BusinessLogicFramework\bin\Debug\DataAccessFramework.exe
+C:\Users\Sin\Documents\Visual Studio 2017\Projects\SoBasicEnglish\BusinessLogicFramework\bin\Debug\DataAccessFramework.pdb
+C:\Users\Sin\Documents\Visual Studio 2017\Projects\SoBasicEnglish\BusinessLogicFramework\bin\Debug\DataAccessFramework.exe.config
+C:\Users\Sin\Documents\Visual Studio 2017\Projects\SoBasicEnglish\BusinessLogicFramework\obj\Debug\BusinessLogicFramework.csprojResolveAssemblyReference.cache
+C:\Users\Sin\Documents\Visual Studio 2017\Projects\SoBasicEnglish\BusinessLogicFramework\obj\Debug\BusinessLogicFramework.exe
+C:\Users\Sin\Documents\Visual Studio 2017\Projects\SoBasicEnglish\BusinessLogicFramework\obj\Debug\BusinessLogicFramework.pdb

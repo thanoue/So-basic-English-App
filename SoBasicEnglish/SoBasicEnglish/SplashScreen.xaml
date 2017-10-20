@@ -1,0 +1,21 @@
+﻿<Controls:MetroWindow x:Class="SoBasicEnglish.SplashScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SoBasicEnglish"
+        mc:Ignorable="d"
+               
+                   
+                      
+                      WindowStartupLocation="CenterScreen"
+                      Loaded="MetroWindow_Loaded"
+        ShowInTaskbar="False"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      Background="LightBlue"
+        Title="SplashScreen" Height="107.734" Width="438.4">
+    <StackPanel Margin="0,0,0,3.2">
+        <ProgressBar x:Name="pbInsert" ValueChanged="ProgressBar_ValueChanged"  BorderBrush="Black"  Controls:ButtonHelper.CornerRadius="2" Background="Azure"  HorizontalAlignment="Left" VerticalAlignment="Top" Maximum="100" Value="{Binding ValueProgress}" Margin="20,10,0,0" Width="387" Height="29"/>
+        <TextBlock Margin="20,5,25,0" Height="22"  x:Name="txtProgress" Text="{Binding ProgressText}" FontStyle="Italic" FontSize="15" TextAlignment="Center" ></TextBlock>
+    </StackPanel>
+</Controls:MetroWindow>
