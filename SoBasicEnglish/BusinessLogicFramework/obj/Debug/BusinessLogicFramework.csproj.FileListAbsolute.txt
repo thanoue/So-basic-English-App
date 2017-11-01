@@ -7,3 +7,12 @@ C:\Users\Sin\Documents\Visual Studio 2017\Projects\SoBasicEnglish\BusinessLogicF
 C:\Users\Sin\Documents\Visual Studio 2017\Projects\SoBasicEnglish\BusinessLogicFramework\obj\Debug\BusinessLogicFramework.csprojResolveAssemblyReference.cache
 C:\Users\Sin\Documents\Visual Studio 2017\Projects\SoBasicEnglish\BusinessLogicFramework\obj\Debug\BusinessLogicFramework.exe
 C:\Users\Sin\Documents\Visual Studio 2017\Projects\SoBasicEnglish\BusinessLogicFramework\obj\Debug\BusinessLogicFramework.pdb
+D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\BusinessLogicFramework\bin\Debug\BusinessLogicFramework.exe.config
+D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\BusinessLogicFramework\bin\Debug\BusinessLogicFramework.exe
+D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\BusinessLogicFramework\bin\Debug\BusinessLogicFramework.pdb
+D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\BusinessLogicFramework\bin\Debug\DataAccessFramework.exe
+D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\BusinessLogicFramework\bin\Debug\DataAccessFramework.pdb
+D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\BusinessLogicFramework\bin\Debug\DataAccessFramework.exe.config
+D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\BusinessLogicFramework\obj\Debug\BusinessLogicFramework.csprojResolveAssemblyReference.cache
+D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\BusinessLogicFramework\obj\Debug\BusinessLogicFramework.exe
+D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\BusinessLogicFramework\obj\Debug\BusinessLogicFramework.pdb

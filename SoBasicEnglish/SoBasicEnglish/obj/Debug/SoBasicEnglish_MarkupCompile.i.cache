@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Sin\Documents\Visual Studio 2017\Projects\SoBasicEnglish\SoBasicEnglish\obj\Debug\
+D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\SoBasicEnglish\obj\Debug\
 SoBasicEnglish
 none
 false
 DEBUG;TRACE
-C:\Users\Sin\Documents\Visual Studio 2017\Projects\SoBasicEnglish\SoBasicEnglish\App.xaml
-16290222277
+D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\SoBasicEnglish\App.xaml
+191514198224
 
-311479103428
-892048047724
-ChangePasswordScreen.xaml;EditorScreen.xaml;EditUserProfileScreen.xaml;ExamScreen.xaml;GameScreen.xaml;MainScreen.xaml;LoginScreen.xaml;Menu.xaml;Rating.xaml;Resources\Icons.xaml;Resources\IconsNonShared.xaml;SignUpScreen.xaml;SplashScreen.xaml;StudyScreen.xaml;Styles\Fonts.xaml;UserRoleScreen.xaml;
+371954127210
+97-1852484058
+ChangePasswordScreen.xaml;EditorScreen.xaml;EditUserProfileScreen.xaml;ExamScreen.xaml;GameScreen.xaml;MainScreen.xaml;LoginScreen.xaml;Menu.xaml;Rating.xaml;Resources\Icons.xaml;Resources\IconsNonShared.xaml;SignUpScreen.xaml;SplashScreen.xaml;StudyScreen.xaml;Styles\Fonts.xaml;UserRoleScreen.xaml;Views\LoginWindow.xaml;Views\MenuWindow.xaml;Views\SignUpWindow.xaml;
 
 True
 

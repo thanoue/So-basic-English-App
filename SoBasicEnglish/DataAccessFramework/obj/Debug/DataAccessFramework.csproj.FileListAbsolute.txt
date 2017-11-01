@@ -4,3 +4,9 @@ C:\Users\Sin\Documents\Visual Studio 2017\Projects\SoBasicEnglish\DataAccessFram
 C:\Users\Sin\Documents\Visual Studio 2017\Projects\SoBasicEnglish\DataAccessFramework\obj\Debug\DataAccessFramework.exe
 C:\Users\Sin\Documents\Visual Studio 2017\Projects\SoBasicEnglish\DataAccessFramework\obj\Debug\DataAccessFramework.pdb
 C:\Users\Sin\Documents\Visual Studio 2017\Projects\SoBasicEnglish\DataAccessFramework\obj\Debug\DataAccessFramework.csprojResolveAssemblyReference.cache
+D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\DataAccessFramework\bin\Debug\DataAccessFramework.exe.config
+D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\DataAccessFramework\bin\Debug\DataAccessFramework.exe
+D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\DataAccessFramework\bin\Debug\DataAccessFramework.pdb
+D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\DataAccessFramework\obj\Debug\DataAccessFramework.csprojResolveAssemblyReference.cache
+D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\DataAccessFramework\obj\Debug\DataAccessFramework.exe
+D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\DataAccessFramework\obj\Debug\DataAccessFramework.pdb
