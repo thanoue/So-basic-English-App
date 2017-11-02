@@ -17,6 +17,7 @@ namespace SoBasicEnglish
         public static string serverName { get; set; }
         public static string userFullname { get; set; }
         public static string userLoginName { get; set; }
+        public static string userPassword { get; set; }
         public static byte[] userAVT { get; set; }
         public static int dateProcess { get; set; }
         public static int role { get; set; }

@@ -28,6 +28,10 @@ namespace BusinessLogicFramework
         {
             return db.GetLevelScoreByUserLoginName(userLoginName);
         }
+        public DataTable GetChampionShip()
+        {
+            return db.ExecuteQuery("spGetChampionShip", CommandType.StoredProcedure);
+        }
         public bool UpdateUserScore(ref string error, string loginName, int Score)
         {
             return db.ExcuteNoneQuery("spUpdateUserScore", CommandType.StoredProcedure,

@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
          xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
           WindowStartupLocation="CenterScreen"
+          xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"   
         xmlns:local="clr-namespace:SoBasicEnglish.Views"
         mc:Ignorable="d"
                 BorderThickness="0" 
@@ -64,7 +66,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <DockPanel Grid.Column="0">
-                        <Controls:Tile Title="User info" Width="147" Height="Auto" Margin="3,4,3,10" >
+                        <Controls:Tile Command="{Binding  ClickUserTile }" Title="User info" Width="147" Height="Auto" Margin="3,4,3,10" >
                             <Controls:Tile.Effect>
                                 <DropShadowEffect ShadowDepth="6" BlurRadius="7"></DropShadowEffect>
                             </Controls:Tile.Effect>
@@ -90,7 +92,7 @@
                                 </Controls:Tile>
                             </Grid>
                             <Grid Grid.Column="1">
-                                <Controls:Tile TitleFontSize="10" Title="Champions" Height="Auto" Margin="0,5,28.8,7" Width="Auto">
+                                <Controls:Tile TitleFontSize="10" Command="{Binding ClickChampionTile}" Title="Champions" Height="Auto" Margin="0,5,28.8,7" Width="Auto">
                                     <Controls:Tile.Effect>
                                         <DropShadowEffect ShadowDepth="6" BlurRadius="7"></DropShadowEffect>
                                     </Controls:Tile.Effect>
@@ -99,7 +101,7 @@
                             </Grid>
                         </Grid>
                         <Grid Grid.Row="1">
-                            <Controls:Tile Title="Study" Width="Auto" Height="Auto" Margin="21,3,26.6,10"  >
+                            <Controls:Tile Command="{Binding ClickStudyTile}" Title="Study" Width="Auto" Height="Auto" Margin="21,3,26.6,10"  >
                                 <Controls:Tile.Effect>
                                     <DropShadowEffect ShadowDepth="6" BlurRadius="7"></DropShadowEffect>
                                 </Controls:Tile.Effect>
@@ -134,7 +136,7 @@
 
             </Grid>
         </Grid>
-        <Controls:Flyout x:Name="flUser" Foreground="White" Header="User menu" Margin="0,0,0,0.4" Width="221">
+        <Controls:Flyout x:Name="flUser" IsOpen="{Binding OpenUserFlyout}" Foreground="White" Header="User menu" Margin="0,0,0,0.4" Width="221">
             <Controls:Flyout.Background>
                 <SolidColorBrush Color="Black" Opacity="0.85"></SolidColorBrush>
             </Controls:Flyout.Background>
@@ -154,26 +156,26 @@
                     <Grid>
                         <Grid >
 
-                            <Image  Source="{Binding UserAvtIMG}" Stretch="Fill" >
+                            <Image  Source="{Binding UserAvt}" Stretch="Fill" >
                                 <Image.Clip>
                                     <EllipseGeometry Center="80,72" RadiusX="66" RadiusY="66" />
                                 </Image.Clip>
                             </Image>
                         </Grid>
                     </Grid>
-                    <TextBlock TextAlignment="Center" x:Name="lbUserName"  FontSize="15" Foreground="White"  Text="Trần Kha" VerticalAlignment="Center"  HorizontalAlignment="Center" Height="29" Margin="10,3.6,9.8,0.2" Grid.Row="1" Width="141"/>
+                    <TextBlock TextAlignment="Center" x:Name="lbUserName"  FontSize="15" Foreground="White"  Text="{Binding UserFullName}" VerticalAlignment="Center"  HorizontalAlignment="Center" Height="29" Margin="10,3.6,9.8,0.2" Grid.Row="1" Width="141"/>
                     <Grid Grid.Row="2" Margin="0 0 0 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Grid Margin="0 0 0 5"  Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                            <Label x:Name="lbUserLevel" VerticalAlignment="Top" TextElement.FontStyle="Italic"  Foreground="White" FontSize="15" Width="auto" Content="2" Height="27" Margin="0,0,-0.2,0" />
+                            <Label x:Name="lbUserLevel" VerticalAlignment="Top" TextElement.FontStyle="Italic"  Foreground="White" FontSize="15" Width="auto" Content="{Binding UserLevel}" Height="27" Margin="0,0,-0.2,0" />
 
                         </Grid>
                         <Border Grid.Column="0" Width="102" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center"
                                      BorderBrush="Green" BorderThickness="1" CornerRadius="15">
-                            <Border x:Name="pcLevel" Width="0" Height="25" BorderThickness="0" CornerRadius="15"
+                            <Border x:Name="pcLevel" Width="{Binding WidthOfProgress}" Height="25" BorderThickness="0" CornerRadius="15"
                             HorizontalAlignment="Left" VerticalAlignment="Center">
                                 <Border.Background>
                                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
@@ -192,7 +194,7 @@
 
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Score : " TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="15"/>
-                        <TextBlock x:Name="lbUserLevelScore" Grid.Column="1" Text="120" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
+                        <TextBlock x:Name="lbUserLevelScore" Grid.Column="1" Text="{Binding UserScore}" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
                     </Grid>
 
                 </Grid>
@@ -205,11 +207,25 @@
                     <StackPanel Grid.Row="0" >
                         <Grid  Margin="20 10 10 0" 
                                x:Name="gEdituserInfo"
+                               
                               >
+                            <i:Interaction.Triggers>
+
+                                <i:EventTrigger EventName="MouseDown">
+
+                                    <i:InvokeCommandAction Command="{Binding ClickEditUserInfo}"  />
+
+                                </i:EventTrigger>
+
+                            </i:Interaction.Triggers>
+
                             <Grid.Background>
                                 <SolidColorBrush Color="CadetBlue" Opacity="0.2"/>
                             </Grid.Background>
-                            <Label x:Name="lbEditIUserInfo"   FontSize="15" VerticalAlignment="Center"  Foreground="White" Content="Edit your info " Width="138" Margin="7,0,45.8,0"/>
+                            <Label  x:Name="lbEditIUserInfo"   FontSize="15" VerticalAlignment="Center"  Foreground="White" Content="Edit your info " Width="138" Margin="7,0,45.8,0">
+                               
+                              
+                            </Label>
                             <Image Margin="5 0 10 0" Source="..\Images/Assets/Edit_04.png" Height="30" Width="30" HorizontalAlignment="Right">
                                 <Image.Clip>
                                     <RectangleGeometry RadiusX="10"
@@ -223,55 +239,85 @@
                                x:Name="gChangePass"
                               
                               >
+                            <!--ClickChangePassWord-->
+                            <i:Interaction.Triggers>
+
+                                <i:EventTrigger EventName="MouseDown">
+
+                                    <i:InvokeCommandAction Command="{Binding ClickChangePassWord}"  />
+
+                                </i:EventTrigger>
+
+                            </i:Interaction.Triggers>
                             <Grid.Background>
                                 <SolidColorBrush Color="CadetBlue" Opacity="0.2"/>
                             </Grid.Background>
                             <Label                       
                                x:Name="lbChangePassword"
                                FontSize="15"
-                               VerticalAlignment="Center" Foreground="White" Content="Change password" Width="138" Height="30" Margin="7,0,45.8,0"/>
+                               VerticalAlignment="Center" Foreground="White" Content="Change password" Width="138" Height="30" Margin="7,0,45.8,0">
+                              
+                            </Label>
                             <Image Margin="5 0 10 0" Source="..\Images/Assets/Password-Text-01.png" Height="30" Width="30" HorizontalAlignment="Right"/>
                         </Grid>
                         <Grid Margin="20 10 10 0"
-                              x:Name="gLogOut"
-                              
+                              x:Name="gLogOut"                              
                               >
                             <Grid.Background>
                                 <SolidColorBrush Color="CadetBlue" Opacity="0.2"/>
                             </Grid.Background>
                             <Label
-                         
                                x:Name="lbLogOut"
                                FontSize="15"
-                               VerticalAlignment="Center" Foreground="White" Content="Log out" Width="138" Margin="7,0,45.8,0"/>
+                               VerticalAlignment="Center" Foreground="White" Content="Log out" Width="138" Margin="7,0,45.8,0">
+                              
+                            </Label>
                             <Image Margin="5 0 10 0" Source="..\Images/Assets/Exit-03.png" Height="30" Width="30" HorizontalAlignment="Right"/>
                         </Grid>
                     </StackPanel>
-
                 </Grid>
             </Grid>
         </Controls:Flyout>
-        <Controls:Flyout IsOpen="False" x:Name="flProccess" Foreground="White" Header="Proccessing" Margin="0,0,-0.4,0.2" Width="221" Position="Right">
+        <Controls:Flyout x:Name="flProccess" IsOpen="{Binding OpenDateFlyout}" Foreground="White" Header="Proccessing" Margin="0,0,-0.4,0.2" Width="221" Position="Right">
             <Controls:Flyout.Background>
                 <SolidColorBrush Color="Black" Opacity="0.7"></SolidColorBrush>
             </Controls:Flyout.Background>
             <Grid Margin="0 10 0 0">
-                <DataGrid SelectionMode="Extended" IsReadOnly="True" HeadersVisibility="Row" Background="Transparent" Name="dataGroupedGrid" Grid.Row="1" AutoGenerateColumns="False" >
+                <DataGrid x:Name="gvDate" ItemsSource="{Binding DateListOnGridView}" SelectionMode="Extended" IsReadOnly="True" HeadersVisibility="Row" Background="Transparent" Grid.Row="1" AutoGenerateColumns="False" >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseUp">
+                            <i:InvokeCommandAction Command="{Binding ChooeDateProcess}" CommandParameter="{Binding SelectedItem,ElementName =gvDate}"  />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                     <DataGrid.Columns >
-                        <DataGridTemplateColumn Header="Turn Number" Width="Auto" >
+                        <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock  Text="{Binding Path=detailInfo}"></TextBlock>
+                                    <TextBlock  Text="{Binding Path =TurnNumber }" ></TextBlock>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                    </DataGrid.Columns>
+                        <DataGridTemplateColumn Header="" Width="Auto" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock  Text="{Binding Path=DetailInfo}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="" Width="0" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Foreground="Transparent"  Text="{Binding Path=LevelDetail}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>                   
                     <DataGrid.GroupStyle>
                         <GroupStyle>
                             <GroupStyle.HeaderTemplate>
                                 <DataTemplate>
-                                    <StackPanel>
-                                        <TextBlock Text="{Binding Path=Name}" ></TextBlock>
+                                    <StackPanel>                                      
+                                        <TextBlock Text="{Binding Path=Name}" ></TextBlock>                                        
                                     </StackPanel>
                                 </DataTemplate>
                             </GroupStyle.HeaderTemplate>
@@ -283,7 +329,8 @@
                                                 <Expander IsExpanded="False" Foreground="Wheat">
                                                     <Expander.Header >
                                                         <StackPanel Orientation="Horizontal">
-                                                            <TextBlock Text="{Binding Name}" ></TextBlock>
+                                                            <TextBlock Text="{Binding Name}"  >                                                                
+                                                            </TextBlock>
                                                         </StackPanel>
                                                     </Expander.Header>
                                                     <ItemsPresenter />
@@ -297,20 +344,243 @@
                     </DataGrid.GroupStyle>
                 </DataGrid>
             </Grid>
-        </Controls:Flyout>
-        <Controls:Flyout IsOpen="False" BorderThickness="2" x:Name="flChampions"  Foreground="black" Margin="248,65,245.6,69.2" Width="300" Position="Top" TitleVisibility="Hidden" CloseButtonVisibility="Collapsed">
+        </Controls:Flyout>       
+        <Controls:Flyout IsOpen="{Binding OpenChampionFlyout}" Visibility="Collapsed" BorderThickness="2" x:Name="flChampions"   Foreground="black" Margin="248,65,245.6,69.2" Width="300" Position="Top" TitleVisibility="Collapsed" CloseButtonVisibility="Collapsed">
             <Controls:Flyout.Background>
-                <SolidColorBrush Color="Black" Opacity="0.7"></SolidColorBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#FF507050" Offset="0"/>
+                    <GradientStop Color="#FF200000" Offset="1"/>
+                </LinearGradientBrush>
             </Controls:Flyout.Background>
             <Grid >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height=".2*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Controls:Tile Margin="10,10,46.8,9.8" Background="Transparent" x:Name="btnCloseChampions" Height="Auto" Width="Auto" Grid.Row="1">
+                <Grid>
+                    <Border BorderBrush="Azure" BorderThickness="1" Margin="10">
+                        <ListView ItemsSource="{Binding UserChampionList}" Background="Transparent" x:Name="lvChampion">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ListViewItem Background="Transparent" Margin="10 5 20 0" Height="80"  >
+                                        <Border BorderBrush="Black" BorderThickness="1" Height="78">
+                                            <StackPanel Orientation="Horizontal" Height="auto" Margin="5" >
+                                                <Image Width="60" Height="60"  Source="{Binding UserAvatar}" Stretch="Fill" RenderTransformOrigin="0.432,0.544" >
+                                                    <Image.Clip>
+                                                        <EllipseGeometry Center="30,30" RadiusX="28" RadiusY="28" />
+                                                    </Image.Clip>
+                                                </Image>
+                                                <StackPanel Margin="5 0 0 0 "  >
+                                                    <TextBlock Width="auto"    FontSize="20" Foreground="Coral" Text="{Binding UserName}" FontFamily="/SoBasicEnglish;component/Fonts/#VNI-Tubes"   ></TextBlock>
+                                                    <StackPanel Orientation="Horizontal" >
+                                                        <TextBlock VerticalAlignment="Center" Foreground="Orchid" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Heavy" FontSize="10" > Level</TextBlock>
+                                                        <Border Background="Brown"  Width="auto" MinWidth="28" Height="28"  Margin="5 0 0 0" CornerRadius="15" BorderBrush="Black" BorderThickness="1" >
+                                                            <TextBlock VerticalAlignment="Center"  HorizontalAlignment="Center" Width="auto" Foreground="OldLace" FontWeight="DemiBold"  Margin="0 0 0 0" FontSize="15" Text="{Binding UserLevel}" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Thin"  >
+                                                            </TextBlock>
+                                                        </Border>
+                                                        <TextBlock Margin="3 0 0 3" FontSize="25" VerticalAlignment="Center">-</TextBlock>
+                                                        <TextBlock VerticalAlignment="Center" Margin="5 0 0 0" Foreground="Orchid" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Heavy" FontSize="10" > Score</TextBlock>
+                                                        <Border Background="Green"  Width="auto" MinWidth="28" Height="28"  Margin="5 0 0 0" CornerRadius="15" BorderBrush="Black" BorderThickness="1" >
+                                                            <TextBlock VerticalAlignment="Center"  HorizontalAlignment="Center" Width="auto" Foreground="OldLace" FontWeight="DemiBold"  Margin="0 0 0 0" FontSize="15" Text="{Binding UserScore}" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Thin"  >
+                                                            </TextBlock>
+                                                        </Border>
+                                                    </StackPanel>
+
+                                                </StackPanel>
+                                            </StackPanel>
+
+                                        </Border>
+                                    </ListViewItem>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Border>
+                </Grid>
+                <Controls:Tile Margin="0,10,0,9.8" Background="Transparent" x:Name="btnCloseChampions" Command="{Binding ClickChampionTile}" Height="Auto" Width="Auto" Grid.Row="1">
                     <Image Source="..\Images/Assets/Up arrow.png" Height="149" Width="102" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" IsEnabled="False" VerticalAlignment="Center"  />
                 </Controls:Tile>
             </Grid>
         </Controls:Flyout>
-    </Grid>
+        <Grid>
+            <simpleChildWindow:ChildWindow x:Name="child01"
+		                               Title="TestChild 1"                                       
+                                       ShowTitleBar="False"
+                                       ShowCloseButton="False"		                              
+		                               CloseByEscape="False"		   
+                                       CloseOnOverlay="False"
+                                       
+                                       IsOpen="{Binding OpenEditUserInFo,Mode=TwoWay}">
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="593" >
+                    <Grid.Background>
+                        <SolidColorBrush Color="CadetBlue" Opacity="0.7" ></SolidColorBrush>
+                    </Grid.Background>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="1.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Margin="0 10 0 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="2.7*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Margin="0,10,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Ellipse Margin="33,10,29,-120.6"  Grid.RowSpan="2" >
+                                <Ellipse.Fill>
+                                    <ImageBrush x:Name="imgAVT" ImageSource="{Binding UserAvt}"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Controls:Tile Grid.Row="1" x:Name="btnAVT"  RenderTransformOrigin="0.495,0.902" Margin="91,172.8,81,-181.6" Height="Auto" Width="Auto">
+                                <Controls:Tile.Effect>
+                                    <DropShadowEffect ShadowDepth="6" BlurRadius="7"></DropShadowEffect>
+                                </Controls:Tile.Effect>
+                                <Image Source="..\Images/Assets/Media-End.png" Height="34" Width="61" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" IsEnabled="False"  />
+                            </Controls:Tile>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Column="1" Margin="10 20 10 0">
+                        <StackPanel>
+
+                            <TextBlock Margin="20 10 0 0" Text="Full name: ..."/>
+                            <TextBox 
+                    Margin="10 5 10 0"
+                                Text="{Binding UserFullName,Mode=TwoWay}"
+                    x:Name="txtUserFullName"
+                    FontSize="20">
+                                <TextBox.Style>
+                                    <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                        <Style.Resources>
+                                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                                <VisualBrush.Visual>
+                                                    <TextBlock FontStyle="Italic" FontSize="10" Text="At least 10 Chars..." Foreground="Gray" />
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Style.Resources>
+                                        <Style.Triggers>
+                                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                            </Trigger>
+                                            <Trigger Property="Text" Value="{x:Null}">
+                                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                            </Trigger>
+                                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                                <Setter Property="Background" Value="White" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                            <TextBlock Margin="20 8 0 0" Text="Detail infomation: ..."/>
+                            <TextBox Text="{Binding BasicInfo,Mode=TwoWay}"
+                                      Margin="10 5 10 0"
+                                        x:Name="txtBasicInfo"
+                                    TextWrapping="Wrap"
+                                FontSize="20" Height="108"  Background="#FF604646" Block.LineHeight="10">
+                                
+                            </TextBox>
+                            <Canvas Height="62">
+                                <Controls:Tile Command="{Binding ChangeUserProfile}" Height="35" Margin="0" Width="36" Canvas.Left="237" Canvas.Top="10">
+                                    <Controls:Tile.Effect>
+                                        <DropShadowEffect ShadowDepth="6" BlurRadius="7"/>
+                                    </Controls:Tile.Effect>
+                                    <Image Source="..\Images/Assets/Check-01.png" Height="24" Width="37" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" IsEnabled="False"  />
+                                </Controls:Tile>
+                                <Controls:Tile Height="35" Margin="0" Command="{Binding CancelChangUserProfile}" Width="36" Canvas.Left="282" Canvas.Top="10">
+                                    <Controls:Tile.Effect>
+                                        <DropShadowEffect ShadowDepth="6" BlurRadius="7"/>
+                                    </Controls:Tile.Effect>
+                                    <Image Source="..\Images/Assets/Cancel.png" Height="24" Width="37" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" IsEnabled="False"  />
+                                </Controls:Tile>
+                            </Canvas>
+
+
+                        </StackPanel>
+                    </Grid>
+                </Grid>               
+            </simpleChildWindow:ChildWindow>
+         
+        </Grid>
+        <Grid>
+            <simpleChildWindow:ChildWindow
+		                               Title="TestChild 1"                                       
+                                       ShowTitleBar="False"
+                                       ShowCloseButton="False"		                              
+		                               CloseByEscape="True"		   
+                                       CloseOnOverlay="True"          
+                                       IsOpen="{Binding OpenChangePassWord,Mode=TwoWay}">
+                <Grid Height="225" Width="430" >
+                    <Canvas>
+                        <StackPanel Background="OldLace" Orientation="Horizontal">
+
+                            <Controls:Tile   Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10 20 0 20" Width="100"  >
+                                <Controls:Tile.Effect>
+                                    <DropShadowEffect ShadowDepth="6" BlurRadius="7"></DropShadowEffect>
+                                </Controls:Tile.Effect>
+                                <Image Source="..\Images/Assets/User-Shield.png" Height="153" Width="102" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" IsEnabled="False"  />
+                            </Controls:Tile>
+                            <StackPanel Margin="10 0 0 0" Width="299">
+
+                                <GroupBox  Margin="10,10,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="285" Height="195" Header="Your new Password" Grid.RowSpan="2">
+                                    <StackPanel x:Name="stpChangPassword">
+                                        <PasswordBox x:Name="txtOldPass" Controls:TextBoxHelper.ClearTextButton="True" 
+                     Margin="10,10,4.2,0" BorderBrush="DarkBlue" BorderThickness="1.5"
+                               VerticalAlignment="Center"
+                             Controls:TextBoxHelper.WatermarkAlignment="Right"
+                             Controls:TextBoxHelper.Watermark="Old password" Password="" FontSize="13" />
+
+                                        <PasswordBox Grid.Row="0" x:Name="txtNewPass" Controls:TextBoxHelper.ClearTextButton="True" 
+                      VerticalAlignment="Center"
+                             Controls:TextBoxHelper.WatermarkAlignment="Right"
+                             Controls:TextBoxHelper.Watermark="New password" Height="30"
+                             Width="200" Password="" FontSize="13"  Margin="37,10,35.8,0">
+                                        </PasswordBox>
+                                        <PasswordBox Grid.Row="0" x:Name="txtConfiPass" Controls:TextBoxHelper.ClearTextButton="True" 
+                      VerticalAlignment="Center"
+                             Controls:TextBoxHelper.WatermarkAlignment="Right"
+                             Controls:TextBoxHelper.Watermark="Confirm your new password"
+                             Width="200" Password="" FontSize="13"  Margin="37,10,35.8,0" Height="30">
+                                        </PasswordBox>
+                                        <StackPanel Orientation="Horizontal" Height="40" Margin="37,0,35.8,0" >
+                                            <Controls:Tile Command="{Binding ChangePassword}" CommandParameter="{Binding Children,ElementName=stpChangPassword}" Height="30" Margin="130 0 0 0" Width="30" Canvas.Left="237" Canvas.Top="10">
+                                                <Controls:Tile.Effect>
+                                                    <DropShadowEffect ShadowDepth="6" BlurRadius="7"/>
+                                                </Controls:Tile.Effect>
+                                                <Image Source="..\Images/Assets/Check-01.png" Height="14" Width="20" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" IsEnabled="False"  />
+                                            </Controls:Tile>
+                                            <Controls:Tile Command="{Binding CancelChangePass}" Height="30" Margin="10 0 0 0" Width="30" Canvas.Left="282" Canvas.Top="10">
+                                                <Controls:Tile.Effect>
+                                                    <DropShadowEffect ShadowDepth="6" BlurRadius="7"/>
+                                                </Controls:Tile.Effect>
+                                                <Image Source="..\Images/Assets/Cancel.png" Height="14" Width="20" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" IsEnabled="False"  />
+                                            </Controls:Tile>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </GroupBox>
+                            </StackPanel>
+                        </StackPanel>
+                        <Controls:Flyout Width="170" IsOpen="{Binding IsOpenChangePassError}" Visibility="Collapsed"  BorderThickness="0"  Foreground="black" Position="Right" TitleVisibility="Hidden" CloseButtonVisibility="Hidden" HorizontalContentAlignment="Right" Canvas.Left="245" Canvas.Top="10">
+
+                            <Controls:Flyout.Background>
+                                <SolidColorBrush Color="Transparent" Opacity="0.7"></SolidColorBrush>
+                            </Controls:Flyout.Background>
+                            <Border Width="auto" CornerRadius="15" BorderBrush="Orchid" BorderThickness="1" Margin="-32,0,-0.4,0.4" Height="54" >
+                                <Border.Background>
+                                    <SolidColorBrush Color="Indigo" Opacity="0.7"></SolidColorBrush>
+                                </Border.Background>
+                                <Grid Width="auto" Margin="10.2,9.2,9.8,-0.4">
+                                    <StackPanel Width="auto" Orientation="Horizontal" Margin="0,-6,0,0" >
+                                        <Image Height="28" Margin="5" Source="..\Images/Assets/Cancel.png" ></Image>
+                                        <TextBlock FontWeight="Bold" Width="146" Foreground="AntiqueWhite"  Margin="5,-10,0,-10.4" VerticalAlignment="Center" FontSize="13" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Hairline" Text="{Binding ChangePassErrorMessage,Mode=OneWay}" TextWrapping="Wrap"></TextBlock>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </Controls:Flyout>
+                    </Canvas>
+                </Grid>
+            </simpleChildWindow:ChildWindow>
+        </Grid>
+    </Grid>    
 </Controls:MetroWindow>

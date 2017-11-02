@@ -109,14 +109,14 @@ namespace SoBasicEnglish.ViewModels
                 {
                     if (dbLogin.Login(loginName, passWord) == loginName)
                     {
-                        string userLoginName = dbLogin.GetUserNameByUserLoginName(loginName);
+                        string userName = dbLogin.GetUserNameByUserLoginName(loginName);
                         Model.role = dbLogin.GetRoleByUserLoginName(loginName);
-                        Model.userFullname = userLoginName; Model.userLoginName = loginName;
-                      
-                            Model.userAVT = dbLogin.GetUserAVT(loginName);
+                        Model.userFullname = userName; Model.userLoginName = loginName;
+                        Model.userPassword = passWord;
+             
+                       Model.userAVT = dbLogin.GetUserAVT(loginName);
                             //Menu mc = new Menu();
                             OpenDiaglog = true;
-
                             conn.Open();
                         conn.Close();
                      

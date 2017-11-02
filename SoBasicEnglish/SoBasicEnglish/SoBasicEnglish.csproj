@@ -150,6 +150,7 @@
     <Compile Include="GameScreen.xaml.cs">
       <DependentUpon>GameScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\DateProcess.cs" />
     <Compile Include="Models\GettingreadyQuestion.cs" />
     <Compile Include="Models\GrammarQuestion.cs" />
     <Compile Include="Models\KeyWord.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="Models\ListeningQuestion.cs" />
     <Compile Include="Models\Sentence.cs" />
     <Compile Include="Models\SentenceEx.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Rating.xaml.cs">
       <DependentUpon>Rating.xaml</DependentUpon>
     </Compile>
@@ -181,6 +183,7 @@
       <DependentUpon>UserRoleScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
     <Compile Include="Views\LoginWindow.xaml.cs">

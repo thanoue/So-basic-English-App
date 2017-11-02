@@ -41,7 +41,7 @@
                     <PasswordBox  Margin="5" x:Name="txtUserLoginpassWord"
                                  Controls:TextBoxHelper.ClearTextButton="True"
                                  Controls:TextBoxHelper.Watermark="password"
-                                 Password="123"
+                                 Password="1234"
                                  Width="270" FontSize="15" FontStyle="Italic" >
                     </PasswordBox>
 

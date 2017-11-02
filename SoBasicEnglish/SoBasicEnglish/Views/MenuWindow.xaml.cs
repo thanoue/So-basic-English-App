@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SoBasicEnglish.ViewModels;
 
 namespace SoBasicEnglish.Views
 {
@@ -22,6 +23,7 @@ namespace SoBasicEnglish.Views
         public MenuWindow()
         {
             InitializeComponent();
+            this.DataContext = new MenuViewModel();
         }
     }
 }

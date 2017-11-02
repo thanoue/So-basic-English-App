@@ -28,6 +28,10 @@ namespace BusinessLogicFramework
         {
             return db.GetUserNameByUserLoginName(userLoginName);
         }
+        public string GetBasicInfoByUserLoginName(string userLoginName)
+        {
+            return db.GetBasicInfoByUserLoginName(userLoginName);
+        }
         public string GetPassWordByUserLoginName(string userLoginName,string emailAddress)
         {
             return db.GetPassWordByUserLoginName(userLoginName, emailAddress);
@@ -50,6 +54,24 @@ namespace BusinessLogicFramework
                   new SqlParameter("@userName", userName),
                    new SqlParameter("@basicInfo", basicInfo),
                     new SqlParameter("@userAvatar", userAvatar)
+                );
+        }
+        public bool UpdateUserProfile(ref string error, string loginName, string userFullName, string basicInfo, byte[] userAvatar)
+        {
+            return db.ExcuteNoneQuery("spUpdateUserProfile", CommandType.StoredProcedure,
+                ref error,
+                 new SqlParameter("@userLoginName", loginName),
+                new SqlParameter("@userAvt", userAvatar),
+                 new SqlParameter("@userFullName", userFullName),
+                   new SqlParameter("@userbasicInfo", basicInfo)
+                );
+        }
+        public bool UpdateUserPassword(ref string error, string loginName, string userNewPassword)
+        {
+            return db.ExcuteNoneQuery("spUpdateUserPassword", CommandType.StoredProcedure,
+                ref error,
+                 new SqlParameter("@userLoginName", loginName),
+                new SqlParameter("@userNewPassword", userNewPassword)
                 );
         }
         public bool ChangTheRole(ref string error, string loginName, int roleId)

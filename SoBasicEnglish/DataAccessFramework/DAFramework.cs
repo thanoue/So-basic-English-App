@@ -101,11 +101,31 @@ namespace DataAccessFramework
                 conn.Close();
             return kq;
         }
+        public string GetBasicInfoByUserLoginName(string userLoginName)
+        {
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("select basicInfo from NguoiDung where loginName= '" + userLoginName + "'", conn);
+            string kq = "";
+            try
+            {
+
+                kq = (string)cmd.ExecuteScalar();
+
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+            if (conn.State == ConnectionState.Open)
+                conn.Close();
+            return kq;
+        }
         public string GetUserNameByUserLoginName(string userLoginName)
         {
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand("select UserName from NguoiDung where loginName= '" + userLoginName + "'", conn);
+            SqlCommand cmd = new SqlCommand("select userName from NguoiDung where loginName= '" + userLoginName + "'", conn);
             string kq = "";
             try
             {
