@@ -157,3 +157,4 @@ D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\SoBasicEnglish\bin\D
 D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\SoBasicEnglish\obj\Debug\Views\MenuWindow.baml
 D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\SoBasicEnglish\obj\Debug\Views\SignUpWindow.g.cs
 D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\SoBasicEnglish\obj\Debug\Views\SignUpWindow.baml
+D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\SoBasicEnglish\bin\Debug\WPFNotification.dll

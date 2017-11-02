@@ -5,8 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SoBasicEnglish"
         mc:Ignorable="d"
-        Title="GameScreen" Height="300" Width="300">
+        Title="GameScreen" Height="300" Width="364.593">
     <Grid>
-       
+        <!--<simpleChildWindow:ChildWindow x:Name="child01"
+		                               Title="TestChild 1"		   
+                                       ShowTitleBar="False"
+                                       ShowCloseButton="False"		                              
+		                               CloseByEscape="True"		   
+                                       CloseOnOverlay="True"          
+                                       IsOpen="{Binding OpenDiaglog,Mode=OneWay}"
+		                              >-->
+        <Grid Background="BlueViolet"  Height="150" Width="220">
+            <StackPanel>
+                <StackPanel Margin="5,20,10.4,0" Orientation="Horizontal">
+                    <Image Margin="5" Source="Images/Assets/Help - 02.png" ></Image>
+                    <TextBlock  VerticalAlignment="Center" FontSize="25" TextAlignment="Center" Width="152" FontFamily="Showcard Gothic" Height="27" >Success!!</TextBlock>
+                </StackPanel>
+                <StackPanel Background="AntiqueWhite" Margin="-1 20 0 0" Orientation="Vertical" Height="54" >
+                    <Button HorizontalAlignment="Center" ToolTip="Go to the Login Page"
+                            
+                            Command ="{Binding ShowMenuCommand}"
+                            Background="ForestGreen" Width="50" Height="50" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                        <Image Source="Images/Assets/Check-01.png" Height="20" Width="20"/>
+                    </Button>
+
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <!--</simpleChildWindow:ChildWindow>-->
     </Grid>
 </Window>

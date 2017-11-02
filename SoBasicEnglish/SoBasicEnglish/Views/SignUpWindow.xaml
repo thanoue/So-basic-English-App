@@ -4,145 +4,237 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SoBasicEnglish.Views"
+        xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
         mc:Ignorable="d"
+                      x:Name="signUpWindow"
         WindowStartupLocation="CenterScreen"
         Background="Lavender"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-         Title="SignUpScreen" Height="552.348" Width="586.179"
-                      
+         Title="SignUpScreen" Height="552.348" Width="586.179"                      
       >
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="1.5*"/>
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0" Margin="0 60 0 0">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="2.7*"/>
-            </Grid.RowDefinitions>
-            <Grid Margin="0,10,0,0">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Margin="0 60 0 0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="77*"/>
-                    <RowDefinition Height="20*"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="0.8*"/>
                 </Grid.RowDefinitions>
-                <Ellipse Margin="33,10,29,-56.8"  Grid.RowSpan="2" >
-                    <Ellipse.Fill>
-                        <ImageBrush x:Name="imgAVT" ImageSource="..\Images/Avt/customer.png"/>
-                    </Ellipse.Fill>
-                </Ellipse>
-                <Button Grid.Row="1" x:Name="btnAVT" Content="Choose your AVT.." Margin="22,100.8,18,-105.8" RenderTransformOrigin="0.495,0.902"/>
+                <Grid Margin="0,10,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height=".2*"/>
+                    </Grid.RowDefinitions>
+                    <Image  Source="{Binding UserAvt,Mode=OneWay}" Stretch="Fill" >
+                        <Image.Clip>
+                            <EllipseGeometry Center="120,100" RadiusX="100" RadiusY="100" />
+                        </Image.Clip>
+                    </Image>
+                    <Button Grid.Row="1"
+                        Command="{Binding SelectIimage}"
+                        x:Name="btnAVT" Content="Choose your AVT.." Margin="22,9.6,18,0.4" RenderTransformOrigin="0.495,0.902"/>
+                </Grid>
             </Grid>
-        </Grid>
-        <Grid Grid.Column="1" Margin="10 0 10 0">
-            <StackPanel>
-                <TextBlock Margin="20 40 0 0" Text="Login name: ..."/>
-                <TextBox 
+            <Grid Grid.Column="1" Margin="10 0 10 0">
+                <StackPanel x:Name="stpSignUp">
+                    <TextBlock Margin="20 40 0 0" Text="Login name: ..."/>
+                    <TextBox 
                     Margin="10 5 10 0"
                     x:Name="txtUserLoginName"
+                    Text="{Binding UserLoginName,Mode=OneWayToSource}"
                     FontSize="20">
-                    <TextBox.Style>
-                        <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                            <Style.Resources>
-                                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                                    <VisualBrush.Visual>
-                                        <TextBlock FontStyle="Italic" FontSize="10" Text="At least 8 chars..." Foreground="Gray" />
-                                    </VisualBrush.Visual>
-                                </VisualBrush>
-                            </Style.Resources>
-                            <Style.Triggers>
-                                <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
-                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                </Trigger>
-                                <Trigger Property="Text" Value="{x:Null}">
-                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                </Trigger>
-                                <Trigger Property="IsKeyboardFocused" Value="True">
-                                    <Setter Property="Background" Value="White" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBox.Style>
-                </TextBox>
-                <TextBlock Margin="20 10 0 0" Text="Password: ..."/>
-                <PasswordBox 
+                        <TextBox.Style>
+                            <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <TextBlock FontStyle="Italic" FontSize="10" Text="At least 8 chars..." Foreground="Gray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <TextBlock Margin="20 10 0 0" Text="Password: ..."/>
+                    <PasswordBox 
+                    Controls:TextBoxHelper.Watermark="make it diffcult to remember..."
                     Margin="10 5 10 0"
                     x:Name="txtUserLoginpPassword"
                     FontSize="20">
 
-                </PasswordBox>
-                <TextBlock Margin="20 10 0 0" x:Name="tbRetypePassWord" Text="Retype your password: ..."/>
-                <PasswordBox 
+                    </PasswordBox>
+                    <TextBlock Margin="20 10 0 0" x:Name="tbRetypePassWord" Text="Retype your password: ..."/>
+                    <PasswordBox 
                     Margin="10 5 10 0"
                     x:Name="txtUserLoginpPasswordRetype"
                     FontSize="20"/>
-                <TextBlock Margin="20 10 0 0" Text="Email: ..."/>
-                <TextBox 
+                    <TextBlock Margin="20 10 0 0" Text="Email: ..."/>
+                    <TextBox 
                     Margin="10 5 10 0"
                     x:Name="txtEmail"
                     FontSize="20">
-                    <TextBox.Style>
-                        <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
-                            <Style.Resources>
-                                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                                    <VisualBrush.Visual>
-                                        <TextBlock FontStyle="Italic" FontSize="10" Text="Sould be a Gmail..." Foreground="Gray" />
-                                    </VisualBrush.Visual>
-                                </VisualBrush>
-                            </Style.Resources>
-                            <Style.Triggers>
-                                <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
-                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                </Trigger>
-                                <Trigger Property="Text" Value="{x:Null}">
-                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                </Trigger>
-                                <Trigger Property="IsKeyboardFocused" Value="True">
-                                    <Setter Property="Background" Value="White" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBox.Style>
-                </TextBox>
-                <TextBlock Margin="20 10 0 0" Text="Full name: ..."/>
-                <TextBox 
+                        <TextBox.Style>
+                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <TextBlock FontStyle="Italic" FontSize="10" Text="Sould be a Gmail..." Foreground="Gray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <TextBlock Margin="20 10 0 0" Text="Full name: ..."/>
+                    <TextBox 
                     Margin="10 5 10 0"
                     x:Name="txtUserFullName"
                     FontSize="20">
-                    <TextBox.Style>
-                        <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
-                            <Style.Resources>
-                                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                                    <VisualBrush.Visual>
-                                        <TextBlock FontStyle="Italic" FontSize="10" Text="At least 10 Chars..." Foreground="Gray" />
-                                    </VisualBrush.Visual>
-                                </VisualBrush>
-                            </Style.Resources>
-                            <Style.Triggers>
-                                <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
-                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                </Trigger>
-                                <Trigger Property="Text" Value="{x:Null}">
-                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                </Trigger>
-                                <Trigger Property="IsKeyboardFocused" Value="True">
-                                    <Setter Property="Background" Value="White" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBox.Style>
-                </TextBox>
-                <TextBlock Margin="20 8 0 0" Text="Detail infomation: ..."/>
-                <TextBox 
+                        <TextBox.Style>
+                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <TextBlock FontStyle="Italic" FontSize="10" Text="At least 10 Chars..." Foreground="Gray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <TextBlock Margin="20 8 0 0" Text="Detail infomation: ..."/>
+                    <TextBox 
                     Margin="10 5 10 0"
-                    x:Name="rtxtBasicInfo"
+                    x:Name="txtBasicInfo"
                     TextWrapping="Wrap"
                     FontSize="20" Height="108"  BorderBrush="#FF0D183A" Background="#FF604646" Block.LineHeight="10">
-                    
-                </TextBox>
-                <Button FontSize="18" Margin="10 7 10 0" Content="Sign Up!!!"
+
+                    </TextBox>
+                    <Button
+                    Command="{Binding SignUpCommand}"
+                    CommandParameter="{Binding Children,ElementName=stpSignUp}"
+                    FontSize="18" Margin="10 7 10 0" Content="Sign Up!!!"
                         />
-            </StackPanel>
+                </StackPanel>
+            </Grid>
+           
         </Grid>
+       
+        <Controls:Flyout Width="auto" IsOpen="{Binding IsOpenNoti}" Visibility="Collapsed"  BorderThickness="0" x:Name="flChampions"  Foreground="black" Margin="245,10,21,450.4" Position="Right" TitleVisibility="Hidden" CloseButtonVisibility="Hidden" HorizontalContentAlignment="Right">
+            
+            <Controls:Flyout.Background>
+                <SolidColorBrush Color="Transparent" Opacity="0.7"></SolidColorBrush>
+            </Controls:Flyout.Background>
+            <Border Width="auto" CornerRadius="20" BorderBrush="Orchid" BorderThickness="1" Margin="0,0,0,0.4" >
+                <Border.Background>
+                    <SolidColorBrush Color="Indigo" Opacity="0.8"></SolidColorBrush>
+                </Border.Background>
+                <Grid Width="auto" Margin="10">
+                    <StackPanel Width="auto" Orientation="Horizontal" >
+                        <Image Margin="5" Source="..\Images/Assets/Cancel.png" ></Image>
+                        <TextBlock FontWeight="Bold" Width="250" Foreground="AntiqueWhite"  Margin="5 0 0 0" VerticalAlignment="Center" FontSize="15" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Hairline" Text="{Binding NotiMessage}" TextWrapping="Wrap"></TextBlock>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Controls:Flyout>
+        <!--<Grid>
+            <simpleChildWindow:ChildWindow x:Name="child01"
+		                               Title="TestChild 1"		   
+                                       ShowTitleBar="False"
+                                       ShowCloseButton="False"		                              
+		                               CloseByEscape="True"		   
+                                       CloseOnOverlay="True"          
+                                       IsOpen="{Binding OpenDiaglog,Mode=OneWay}"
+		                              >
+                <Grid Background="BlueViolet"  Height="150" Width="220">
+                    <StackPanel>
+                        <StackPanel Margin="5,20,10.4,0" Orientation="Horizontal">
+                            <Image Margin="5" Source="..\Images/Assets/Help - 02.png" ></Image>
+                            <TextBlock  VerticalAlignment="Center" FontSize="25" TextAlignment="Center" Width="152" FontFamily="Showcard Gothic" Height="27" >Success!!</TextBlock>
+                        </StackPanel>
+                        <StackPanel Margin="0 5 0 0" Orientation="Horizontal" >
+                            <Button ToolTip="Go to the Login Page"
+                            
+                           Command="{Binding CloseWindowCommand, Mode=OneWay}" 
+                                    CommandParameter="{Binding ElementName=signUpWindow}"
+                            Margin="40 0 0 0" HorizontalAlignment="Left" Background="ForestGreen" Width="60" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                <Image Source="..\Images/Assets/Check-01.png" Height="30" Width="30"></Image>
+                            </Button>
+                            <Button
+                             Command="{Binding CLickNo}"
+                            ToolTip="Create others User"
+                            Margin="20 0 0 0"  HorizontalAlignment="Left"  Background="Red" Width="60" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                <Image Source="..\Images/Assets/Cancel.png" Height="30" Width="30"></Image>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </simpleChildWindow:ChildWindow>
+        </Grid>
+        <Grid>
+            <simpleChildWindow:ChildWindow 
+		                               Title="TestChild 1"		   
+                                       ShowTitleBar="False"
+                                       ShowCloseButton="False"		                              
+		                               CloseByEscape="True"		   
+                                       CloseOnOverlay="True"          
+                                       IsOpen="{Binding OpenFailDiaglog,Mode=OneWay}"
+		                              >
+            <Grid Background="BlueViolet"  Height="150" Width="220">
+                <StackPanel>
+                    <StackPanel Margin="5,20,10.4,0" Orientation="Horizontal">
+                        <Image Margin="5" Source="..\Images/Assets/Help - 02.png" ></Image>
+                        <TextBlock  VerticalAlignment="Center" FontSize="25" TextAlignment="Center" Width="152" FontFamily="Showcard Gothic" Height="27" >Success!!</TextBlock>
+                    </StackPanel>
+                    <StackPanel Background="AntiqueWhite" Margin="-1 20 0 0" Orientation="Vertical" Height="54" >
+                        <Button HorizontalAlignment="Center" ToolTip="Go to the Login Page"
+                            
+                            Command ="{Binding }"
+                            Background="ForestGreen" Width="50" Height="50" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                <Image Source="..\Images/Assets/Check-01.png" Height="20" Width="20"/>
+                        </Button>
+
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            </simpleChildWindow:ChildWindow>
+        </Grid>-->
+        
     </Grid>
 </Controls:MetroWindow>

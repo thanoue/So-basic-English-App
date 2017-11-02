@@ -69,5 +69,15 @@ namespace SoBasicEnglish.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap z783147575155_c63412a4906445e279a3d529e379b9a7 {
+            get {
+                object obj = ResourceManager.GetObject("z783147575155_c63412a4906445e279a3d529e379b9a7", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

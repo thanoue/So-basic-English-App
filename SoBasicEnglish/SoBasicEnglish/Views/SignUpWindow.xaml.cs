@@ -11,18 +11,22 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using SoBasicEnglish.ViewModels;
+using WPFNotification.Services;
 
 namespace SoBasicEnglish.Views
 {
     /// <summary>
     /// Interaction logic for SignUpWindow.xaml
     /// </summary>
-    public partial class SignUpWindow 
+    public partial class SignUpWindow  
     {
+        
         public SignUpWindow()
         {
             InitializeComponent();
+          
+            DataContext = new SignUpViewModel();
         }
     }
 }
