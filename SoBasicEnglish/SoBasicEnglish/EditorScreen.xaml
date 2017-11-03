@@ -22,11 +22,11 @@ WindowStartupLocation="CenterScreen"
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <StackPanel x:Name="stDateChoose" >
-                <ListView  Height="auto" Margin="10 20 10 0" x:Name="lvDateList" SelectionChanged="lvDateList_SelectionChanged" >
+                <ListView ItemsSource="{Binding DateListOnGridView}"  Height="auto" Margin="10 20 10 0" x:Name="lvDateList" >
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Name of lesson" Width="150"
-                                         DisplayMemberBinding="{Binding detailInfo}"   ></GridViewColumn>
+                                         DisplayMemberBinding="{Binding DetailInfo}"   ></GridViewColumn>
                         </GridView>
                     </ListView.View>
                     <ListView.GroupStyle>

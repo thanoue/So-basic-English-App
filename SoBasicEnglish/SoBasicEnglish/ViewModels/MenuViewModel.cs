@@ -18,12 +18,14 @@ using Microsoft.Win32;
 using System.Windows.Media.Imaging;
 using System.IO;
 using System.Drawing;
+using System.Windows.Threading;
 
 namespace SoBasicEnglish.ViewModels
 {
     public class MenuViewModel : INotifyPropertyChanged
     {
         #region  Icommand Object
+        public ICommand Click_AboutApp { get; set; }
         public ICommand ClickUserTile { get; set; }
          public ICommand ClickStudyTile { get; set; }
        public  ICommand ClickChampionTile { get; set; }
@@ -35,20 +37,27 @@ namespace SoBasicEnglish.ViewModels
         public ICommand CancelChangePass { get; set; }
         public ICommand ChooeDateProcess { get; set; }
         public ICommand SelectIimage { get; set; }
+        public ICommand FlipSelectionChanged { get; set; }
+        public ICommand ClickAboutAuthor { get; set; }
+        public ICommand ClickSetting { get; set; }
+        public ICommand ClickEditing { get; set; }
         #endregion
         #region Object
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged(string propName)
-        {
-            if (this.PropertyChanged != null)
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
-        }
+        public bool OpenAboutApp { get => _openAboutApp; set { _openAboutApp = value; NotifyPropertyChanged("OpenAboutApp"); } }
+        private bool _openAboutApp = false;
+        public event PropertyChangedEventHandler PropertyChanged;       
         dbUserScore dbUserScore;dbDateProcess dbDateProcess;dbLogin dbLogin;
+        
+        private bool _openAboutAuthor = false;
+        public bool OpenAboutAuthor { get => _openAboutAuthor; set { _openAboutAuthor = value; NotifyPropertyChanged("OpenAboutAuthor"); } }
         private byte[] _userAvt;
         public byte[] UserAvt { get => _userAvt; set { _userAvt = value;
                 NotifyPropertyChanged("UserAvt");
             } }
+        private int _flipSelectedIndex = 0;
+        public int FlipSelectedIndex { get => _flipSelectedIndex; set { _flipSelectedIndex = value; NotifyPropertyChanged("FlipSelectedIndex"); } }
+        public string TitleOfFlip { get => _titleOfFlip; set { _titleOfFlip = value; NotifyPropertyChanged("TitleOfFlip"); } }
+        private string _titleOfFlip = "The Basic English app you can see!";
         public string UserLevel { get => _userLevel; set { _userLevel = value;
                 NotifyPropertyChanged("UserLevel");
             }
@@ -86,15 +95,16 @@ namespace SoBasicEnglish.ViewModels
                 NotifyPropertyChanged("UserChampionList");
             } }
         private ObservableCollection<User> _userChampionList = new ObservableCollection<User>();
-        public ObservableCollection<DateProcess> DateList { get => _dateList; set { _dateList = value; NotifyPropertyChanged("DateList"); } }
+     
         public ListCollectionView DateListOnGridView { get => _dateListOnGridView; set { _dateListOnGridView = value;
                 NotifyPropertyChanged("DateListOnGridView");
             } }
-
-
         private ObservableCollection<DateProcess> _dateList = new ObservableCollection<DateProcess>();
+        public ObservableCollection<DateProcess> DateList { get => _dateList; set { _dateList = value; NotifyPropertyChanged("DateList"); } }
         //public List<DateProcess> dateList = new List<DateProcess>();
         private ListCollectionView _dateListOnGridView;
+        DispatcherTimer timerToCloseNotify;
+        DispatcherTimer TimerToCloseError;
         #endregion
         #region Constructor
         public MenuViewModel()
@@ -112,10 +122,84 @@ namespace SoBasicEnglish.ViewModels
             ChangePassword = new RelayCommand<UIElementCollection>(CheckIfCanChangePass, Submit_ChangePassword);
             CancelChangePass = new DelegateCommand(Cancel_ChangePass);
             ChooeDateProcess = new RelayCommand<object>(ChooseDateToStudy);
+            ClickAboutAuthor = new DelegateCommand(Click_AboutAuthor);
+            ClickSetting = new DelegateCommand(GotoSettingWindow, CheckIfCanGoToSetting);
+            ClickEditing = new DelegateCommand(GoToEditWinDow, CheckIfCanGoToEdit);
             SelectIimage = new DelegateCommand(Browse);
+            FlipSelectionChanged = new DelegateCommand(Flip_SelectionChanged);
+            Click_AboutApp = new DelegateCommand(OpenAboutAppMiniWindow);
+            timerToCloseNotify = new DispatcherTimer();
+            timerToCloseNotify.Tick += TimerToCloseNotify_Tick;
+            timerToCloseNotify.Interval = new TimeSpan(0, 0, 4);
+            timerToCloseNotify.Start();
+            TimerToCloseError = new DispatcherTimer();
+            TimerToCloseError.Tick += TimerToCloseError_Tick;
+            TimerToCloseError.Interval = new TimeSpan(0, 0, 2);
         }
         #endregion
         #region Commands
+        private void OpenAboutAppMiniWindow()
+        {
+            OpenAboutApp = true;
+        }
+        private bool CheckIfCanGoToEdit()
+        {
+            if (Model.role > 1)
+                return true;
+            return false;
+        }
+        private void GoToEditWinDow()
+        {
+            EditorWindow temp = new EditorWindow();
+            temp.ShowDialog();
+        }
+        private void TimerToCloseError_Tick(object sender, EventArgs e)
+        {
+            IsOpenChangePassError = false;
+            TimerToCloseError.Stop();
+        }
+        private bool CheckIfCanGoToSetting()
+        {
+            if (Model.role > 2)
+                return true;
+            return false;
+        }
+        private void GotoSettingWindow()
+        {
+            UserRoleWindow tem = new UserRoleWindow();
+            tem.ShowDialog();
+        }
+        private void Click_AboutAuthor()
+        {
+            OpenAboutAuthor = true;
+        }
+        private void Flip_SelectionChanged()
+        {
+            switch (FlipSelectedIndex)
+            {
+                case 0:
+                    TitleOfFlip = "The Basic English app you can see!";
+                    break;
+                case 1:
+                    TitleOfFlip = "You can study and do many Exams";
+                    break;
+                case 2:
+                    TitleOfFlip = "Your Target is our mission";
+                    break;
+                case 3:
+                    TitleOfFlip = "this is the best choice you can have !!!";
+                    break;
+                default :
+                    break;
+            }
+        }
+        private void TimerToCloseNotify_Tick(object sender, EventArgs e)
+        {
+            if (FlipSelectedIndex >= 0 && FlipSelectedIndex < 3)
+                FlipSelectedIndex += 1;
+            else
+                FlipSelectedIndex = 0;
+        }
         private void  ChooseDateToStudy(object obj)
         {
             DateProcess temp = obj as DateProcess;
@@ -165,12 +249,14 @@ namespace SoBasicEnglish.ViewModels
                 {
                     ChangePassErrorMessage = "Retype your new password!!";
                     IsOpenChangePassError = true;
+                    TimerToCloseError.Start();
                 }
             }
             else
             {
                 ChangePassErrorMessage = "Your old pasword isn't match";
                 IsOpenChangePassError = true;
+                TimerToCloseError.Start();
             }
           
         }
@@ -257,6 +343,11 @@ namespace SoBasicEnglish.ViewModels
         }
         #endregion
         #region Function
+        public void NotifyPropertyChanged(string propName)
+        {
+            if (this.PropertyChanged != null)
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+        }
         private void GetChampionList()
         {
             UserChampionList.Clear();
@@ -313,8 +404,5 @@ namespace SoBasicEnglish.ViewModels
 
         }
         #endregion
-
-
-
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SoBasicEnglish"
         mc:Ignorable="d"
-        Title="GameScreen" Height="300" Width="364.593">
+        Title="GameScreen" Height="300" Width="503.168">
     <Grid>
         <!--<simpleChildWindow:ChildWindow x:Name="child01"
 		                               Title="TestChild 1"		   
@@ -15,7 +15,7 @@
                                        CloseOnOverlay="True"          
                                        IsOpen="{Binding OpenDiaglog,Mode=OneWay}"
 		                              >-->
-        <Grid Background="BlueViolet"  Height="150" Width="220">
+        <!--<Grid Background="BlueViolet"  Height="150" Width="220">
             <StackPanel>
                 <StackPanel Margin="5,20,10.4,0" Orientation="Horizontal">
                     <Image Margin="5" Source="Images/Assets/Help - 02.png" ></Image>
@@ -31,7 +31,39 @@
 
                 </StackPanel>
             </StackPanel>
+        </Grid>-->
+        <Grid Width="460" Height="270" Background="Transparent">
+            <Border  Margin="20" CornerRadius="40">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="DarkViolet"  Offset="0"/>
+                        <GradientStop Color="Olive"  Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.Effect>
+                    <DropShadowEffect  ShadowDepth="12" BlurRadius="5"></DropShadowEffect>
+                </Border.Effect>
+                <StackPanel Margin="70 50 10 50" >
+                    <StackPanel Height="100" Orientation="Horizontal">
+                        <Image  Source="Images/Assets/Beverage Coffee-04-WF.png"  Width="109" ></Image>
+                        <StackPanel Margin="5 0 0 0 ">
+                            <TextBlock Foreground="Beige" FontSize="22" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Light"> So Basic English ver1.0</TextBlock>
+                            <TextBlock FontSize="13" Foreground="Beige" Margin="10" Width="217" Text="We create this App to support a learing English website. Its named HelloChao. Hope you really like it !!! many thanks" TextWrapping="Wrap" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Semibold" Height="64"></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                    <TextBlock FontSize="16" Margin="10 10 0 0" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Heavy">
+                    CopyRight © 2017 khoi dep trai
+                    </TextBlock>
+                    <StackPanel  Margin="30 10 0 0" Orientation="Horizontal">
+                        <TextBlock Margin="10 0 10 0">Home:</TextBlock>
+                        <TextBlock Foreground="Blue" FontStyle="Oblique" TextDecorations="Underline"  >https://www.hellochao.vn/</TextBlock>
+                    </StackPanel>
+
+                </StackPanel>
+            </Border>
         </Grid>
+       
+
         <!--</simpleChildWindow:ChildWindow>-->
     </Grid>
 </Window>

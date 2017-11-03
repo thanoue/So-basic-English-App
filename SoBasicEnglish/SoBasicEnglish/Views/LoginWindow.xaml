@@ -12,10 +12,7 @@
         Title="Login"
         Height="371.2" Width="525">
     <Grid>
-
         <Grid>
-
-
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="2*" />
@@ -57,20 +54,13 @@
                     <Grid>
                         <TextBlock  Text="OR" HorizontalAlignment="Center"  Margin="30 10 0 0"></TextBlock>
                     </Grid>
-                    <Grid Margin="30,15,-0.4,0" Height="100">
+                    <Grid Margin="30,15,-0.4,0" Height="100" x:Name="gForgetPass">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="1*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <TextBox x:Name="txtEmail" Margin="0 5 0 0" Grid.Row="1"
-                             FontSize="15"
-                             Width="270"
-                             Controls:TextBoxHelper.ClearTextButton="True" 
-                             Controls:TextBoxHelper.WatermarkAlignment="Right"
-                             Controls:TextBoxHelper.Watermark="Email" >
 
-                        </TextBox>
                         <TextBox 
                         Controls:TextBoxHelper.ClearTextButton="True" 
                              Controls:TextBoxHelper.WatermarkAlignment="Right"
@@ -78,7 +68,15 @@
                         FontSize="15" Width="270" x:Name="txtLoginNameToReSetPassWord" Grid.Row="0">
 
                         </TextBox>
-                        <Button FontSize="15" x:Name="btnForgotPass"  Margin="30,9.6,30,-9" Grid.Row="2" Content="Forgot your password?"/>
+                        <TextBox x:Name="txtEmailToResetPassword" Margin="0 5 0 0" Grid.Row="1"
+                             FontSize="15"
+                             Width="270"
+                             Controls:TextBoxHelper.ClearTextButton="True" 
+                             Controls:TextBoxHelper.WatermarkAlignment="Right"
+                             Controls:TextBoxHelper.Watermark="Email" >
+
+                        </TextBox>
+                        <Button FontSize="15" x:Name="btnForgotPass" Command="{Binding Click_ForgetPassword}" CommandParameter="{ Binding Children,ElementName=gForgetPass}" Margin="30,9.6,30,-9" Grid.Row="2" Content="Forgot your password?"/>
                     </Grid>
                     <Grid Margin="10,20,9.6,0">
                         <Button Command="{Binding ShowSignUpCommand}" Content="Sign Up" FontSize="20" x:Name="btnSignUp"  Margin="0,0,0,-9"/>
@@ -121,52 +119,28 @@
                 </Grid>
             </simpleChildWindow:ChildWindow>
         </Grid>
-        <Controls:Flyout IsOpen="{Binding IsOpenError}" Visibility="Collapsed"  BorderThickness="0"  Foreground="black" Position="Left" TitleVisibility="Hidden" CloseButtonVisibility="Hidden" HorizontalContentAlignment="Right" Canvas.Left="245" Canvas.Top="10" Margin="0,0,280.4,276.6">
+        
+        <Controls:Flyout IsOpen="{Binding IsOpenError}" Visibility="Collapsed"  BorderThickness="0"  Foreground="black" Position="Left" TitleVisibility="Hidden" CloseButtonVisibility="Hidden" HorizontalContentAlignment="Right" Canvas.Left="245" Canvas.Top="10" Margin="0,0,227.4,276.6">
 
             <Controls:Flyout.Background>
                 <SolidColorBrush Color="Transparent" Opacity="0.7"></SolidColorBrush>
             </Controls:Flyout.Background>
-            <Border Width="auto" CornerRadius="15" BorderBrush="Orchid" BorderThickness="1"  Height="60" Margin="0,0,0.6,0" >
+            <Border Width="auto" CornerRadius="15" BorderBrush="Orchid" BorderThickness="1"  Height="60" Margin="0,0,0.4,0" >
                 <Border.Background>
                     <SolidColorBrush Color="Indigo" Opacity="0.7"></SolidColorBrush>
                 </Border.Background>
                 <Grid Width="auto" Margin="10.2,9.2,9.4,9.6">
                     <StackPanel Width="auto" Orientation="Horizontal" Margin="0,0,-0.6,-0.2" >
                         <Image VerticalAlignment="Center" Source="..\Images/Assets/Cancel.png" Width="29" />
-                        <TextBlock FontWeight="Bold" Width="180" Foreground="AntiqueWhite"  Margin="5,12,0,11.2" VerticalAlignment="Center" FontSize="13" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Hairline" Text="{Binding ErrorMessage,Mode=OneWay}" TextWrapping="Wrap"></TextBlock>
+                        <TextBlock FontWeight="Bold" Width="229" Foreground="AntiqueWhite"  Margin="5,0,0,0.2" VerticalAlignment="Center" FontSize="13" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Semibold" Text="{Binding ErrorMessage,Mode=OneWay}" TextWrapping="Wrap" Height="auto"></TextBlock>
                     </StackPanel>
                 </Grid>
             </Border>
         </Controls:Flyout>
+        <Grid>
+            <Controls:ProgressRing Controls:VisibilityHelper.IsCollapsed="True" Controls:VisibilityHelper.IsVisible="{Binding IsActive}" Height="45" Margin="172,239,298.4,57.6" Width="48" >
 
-        <!--<Grid>
-            <simpleChildWindow:ChildWindow 
-		                               Title="TestChild 1"		   
-                                       ShowTitleBar="False"
-                                       ShowCloseButton="False"		                              
-		                               CloseByEscape="True"		   
-                                       CloseOnOverlay="True"                                         
-                                       Background="AliceBlue"
-                                       IsOpen="{Binding OpenErrorDialog,Mode=TwoWay}"
-		                              >
-                <Grid Background="BlueViolet"  Height="150" Width="220">
-                    <StackPanel>
-                        <StackPanel Margin="5,20,10.4,0" Orientation="Horizontal">
-                            <Image Margin="5" Source="..\Images/Assets/Cancel.png" ></Image>
-                            <TextBlock  VerticalAlignment="Center" FontSize="25" TextAlignment="Center" Width="152" FontFamily="Showcard Gothic" Height="27" >Try again!</TextBlock>
-                        </StackPanel>
-                        <StackPanel Background="AntiqueWhite" Margin="-1 20 0 0" Orientation="Vertical" Height="54" >
-                            <Button HorizontalAlignment="Center" ToolTip="Go to the Login Page"
-                            
-                            Command ="{Binding CLickNo}"
-                            Background="ForestGreen" Width="50" Height="50" Style="{DynamicResource MetroCircleButtonStyle}"  >
-                                <Image Source="..\Images/Assets/Check-01.png" Height="20" Width="20"/>
-                            </Button>
-
-                        </StackPanel>
-                    </StackPanel>
-                </Grid>
-            </simpleChildWindow:ChildWindow>
-        </Grid>-->
+            </Controls:ProgressRing>
+        </Grid>
     </Grid>
 </Controls:MetroWindow>

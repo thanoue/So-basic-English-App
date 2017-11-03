@@ -56,7 +56,7 @@ namespace SoBasicEnglish
         SpeechSynthesizer speechSynthesizer = new SpeechSynthesizer();private DispatcherTimer timer;dbUserScore dbUserScore;
         private int GetReadyGainedScore = 0; private int KeyWordExGainedScore = 0;private int SentenceExGainedScore = 0;private int ListenPart1GainedScore = 0;private int GrammarExGainedScore = 0;
         private byte[] ListeningAudioFile; private byte[] GrammarWordFile;dbLesson  dbLesson;MediaPlayer audioMediaPlayer;private DispatcherTimer audioTimer;private bool isPlayingAudioFile = false;
-        private dbLessonRating dbLessonRating;string[] OralTextSentence;
+        private dbLessonRating dbLessonRating;
         private ObservableCollection<TextBlock> OralWordList = new ObservableCollection<TextBlock>();
         Notifier notifier = new Notifier(cfg =>
         {

@@ -16,8 +16,8 @@
         Title="Menu" Height="724.4" Width="800">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <Button x:Name="btnsetting"  Content="settings" />
-            <Button>
+            <Button x:Name="btnsetting"  Command="{Binding ClickAboutAuthor}"  Content="About author" />
+            <Button Command="{Binding Click_AboutApp}">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="20"
                    Height="20"
@@ -42,17 +42,30 @@
             <Grid Grid.Row="0">
                 <Controls:FlipView x:Name="FlipViewTest"
                     RightTransition="RightReplace"
+                    SelectedIndex="{Binding FlipSelectedIndex}"
+                    BannerText="{Binding TitleOfFlip}"
                    Foreground="{DynamicResource WhiteBrush}"
                    Height="420"
                   >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding FlipSelectionChanged}"  />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
                     <Controls:FlipView.Items>
                         <Grid Background="#2E8DEF">
-
+                            <Image IsEnabled="False" Source="/SoBasicEnglish;component/Images/learn.jpg" Stretch="Fill" ></Image>
+                        </Grid>
+                        <Grid Background="Aqua">
+                            <Image IsEnabled="False" Source="/SoBasicEnglish;component/Images/LearnEnglish.jpg" Stretch="Fill" ></Image>
                         </Grid>
                         <Grid Background="#00A600">
+                            <Image IsEnabled="False" Source="/SoBasicEnglish;component/Images/feature-landing_tcm32-288767.jpg" Stretch="Fill" ></Image>
 
                         </Grid>
                         <Grid Background="#BF1E4B">
+                            <Image IsEnabled="False" Source="/SoBasicEnglish;component/Images/11.jpg" Stretch="Fill" ></Image>
 
                         </Grid>
                     </Controls:FlipView.Items>
@@ -115,7 +128,7 @@
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
-                            <Controls:Tile Title="Edit" TitleFontSize="10" Height="Auto" Margin="10,5,19.8,10" Width="Auto">
+                            <Controls:Tile Title="Edit" Command="{Binding ClickEditing}" TitleFontSize="10" Height="Auto" Margin="10,5,19.8,10" Width="Auto">
                                 <Controls:Tile.Effect>
                                     <DropShadowEffect ShadowDepth="6" BlurRadius="7"></DropShadowEffect>
                                 </Controls:Tile.Effect>
@@ -123,7 +136,7 @@
                             </Controls:Tile>
                         </Grid>
                         <Grid Grid.Row="1">
-                            <Controls:Tile  TitleFontSize="10" Title="Setting" Height="Auto" Margin="10,5,20.8,10" Width="Auto">
+                            <Controls:Tile Command="{Binding ClickSetting}" TitleFontSize="10" Title="Setting" Height="Auto" Margin="10,5,20.8,10" Width="Auto">
                                 <Controls:Tile.Effect>
                                     <DropShadowEffect ShadowDepth="6" BlurRadius="7"></DropShadowEffect>
                                 </Controls:Tile.Effect>
@@ -223,8 +236,8 @@
                                 <SolidColorBrush Color="CadetBlue" Opacity="0.2"/>
                             </Grid.Background>
                             <Label  x:Name="lbEditIUserInfo"   FontSize="15" VerticalAlignment="Center"  Foreground="White" Content="Edit your info " Width="138" Margin="7,0,45.8,0">
-                               
-                              
+
+
                             </Label>
                             <Image Margin="5 0 10 0" Source="..\Images/Assets/Edit_04.png" Height="30" Width="30" HorizontalAlignment="Right">
                                 <Image.Clip>
@@ -256,7 +269,7 @@
                                x:Name="lbChangePassword"
                                FontSize="15"
                                VerticalAlignment="Center" Foreground="White" Content="Change password" Width="138" Height="30" Margin="7,0,45.8,0">
-                              
+
                             </Label>
                             <Image Margin="5 0 10 0" Source="..\Images/Assets/Password-Text-01.png" Height="30" Width="30" HorizontalAlignment="Right"/>
                         </Grid>
@@ -270,7 +283,7 @@
                                x:Name="lbLogOut"
                                FontSize="15"
                                VerticalAlignment="Center" Foreground="White" Content="Log out" Width="138" Margin="7,0,45.8,0">
-                              
+
                             </Label>
                             <Image Margin="5 0 10 0" Source="..\Images/Assets/Exit-03.png" Height="30" Width="30" HorizontalAlignment="Right"/>
                         </Grid>
@@ -311,13 +324,13 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                    </DataGrid.Columns>                   
+                    </DataGrid.Columns>
                     <DataGrid.GroupStyle>
                         <GroupStyle>
                             <GroupStyle.HeaderTemplate>
                                 <DataTemplate>
-                                    <StackPanel>                                      
-                                        <TextBlock Text="{Binding Path=Name}" ></TextBlock>                                        
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Path=Name}" ></TextBlock>
                                     </StackPanel>
                                 </DataTemplate>
                             </GroupStyle.HeaderTemplate>
@@ -329,7 +342,7 @@
                                                 <Expander IsExpanded="False" Foreground="Wheat">
                                                     <Expander.Header >
                                                         <StackPanel Orientation="Horizontal">
-                                                            <TextBlock Text="{Binding Name}"  >                                                                
+                                                            <TextBlock Text="{Binding Name}"  >
                                                             </TextBlock>
                                                         </StackPanel>
                                                     </Expander.Header>
@@ -344,8 +357,8 @@
                     </DataGrid.GroupStyle>
                 </DataGrid>
             </Grid>
-        </Controls:Flyout>       
-        <Controls:Flyout IsOpen="{Binding OpenChampionFlyout}" Visibility="Collapsed" BorderThickness="2" x:Name="flChampions"   Foreground="black" Margin="248,65,245.6,69.2" Width="300" Position="Top" TitleVisibility="Collapsed" CloseButtonVisibility="Collapsed">
+        </Controls:Flyout>
+        <Controls:Flyout IsOpen="{Binding OpenChampionFlyout}" Visibility="Collapsed" BorderThickness="2" x:Name="flChampions"   Foreground="black" Margin="238,10,234.6,23.2" Position="Top" TitleVisibility="Collapsed" CloseButtonVisibility="Collapsed">
             <Controls:Flyout.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                     <GradientStop Color="#FF507050" Offset="0"/>
@@ -355,7 +368,7 @@
             <Grid >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height=".2*"></RowDefinition>
+                    <RowDefinition Height=".1*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid>
                     <Border BorderBrush="Azure" BorderThickness="1" Margin="10">
@@ -397,7 +410,7 @@
                     </Border>
                 </Grid>
                 <Controls:Tile Margin="0,10,0,9.8" Background="Transparent" x:Name="btnCloseChampions" Command="{Binding ClickChampionTile}" Height="Auto" Width="Auto" Grid.Row="1">
-                    <Image Source="..\Images/Assets/Up arrow.png" Height="149" Width="102" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" IsEnabled="False" VerticalAlignment="Center"  />
+                    <Image Source="..\Images/Assets/Up arrow.png" Height="56" Width="78" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" IsEnabled="False" VerticalAlignment="Center"  />
                 </Controls:Tile>
             </Grid>
         </Controls:Flyout>
@@ -479,7 +492,7 @@
                                         x:Name="txtBasicInfo"
                                     TextWrapping="Wrap"
                                 FontSize="20" Height="108"  Background="#FF604646" Block.LineHeight="10">
-                                
+
                             </TextBox>
                             <Canvas Height="62">
                                 <Controls:Tile Command="{Binding ChangeUserProfile}" Height="35" Margin="0" Width="36" Canvas.Left="237" Canvas.Top="10">
@@ -499,9 +512,9 @@
 
                         </StackPanel>
                     </Grid>
-                </Grid>               
+                </Grid>
             </simpleChildWindow:ChildWindow>
-         
+
         </Grid>
         <Grid>
             <simpleChildWindow:ChildWindow
@@ -582,5 +595,100 @@
                 </Grid>
             </simpleChildWindow:ChildWindow>
         </Grid>
-    </Grid>    
+        <Grid>
+            <simpleChildWindow:ChildWindow
+		                               Title="TestChild 1"                                       
+                                       ShowTitleBar="False"
+                                       ShowCloseButton="False"		                              
+		                               CloseByEscape="True"		   
+                                       CloseOnOverlay="True"       
+                                        Background="Transparent"
+                                       IsOpen="{Binding OpenAboutAuthor,Mode=TwoWay}">
+                <Grid Height="360" Width="710">
+                    <Border Margin="10"   CornerRadius="50"  >
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="DarkViolet"  Offset="0"/>
+                                <GradientStop Color="Olive"  Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="12" BlurRadius="5"></DropShadowEffect>
+                        </Border.Effect>
+                        <Grid  >
+                            <StackPanel Orientation="Horizontal" >
+
+                                <StackPanel Width="270" >
+                                    <Image Width="200" Height="200" Margin="0 52 0 0" Source="..\Images/11180636_722783177833472_2752526502789701336_n.jpg" Stretch="Fill" RenderTransformOrigin="0.432,0.544" >
+                                        <Image.Clip>
+                                            <EllipseGeometry Center="100,100" RadiusX="100" RadiusY="100" />
+                                        </Image.Clip>
+                                    </Image>
+                                    <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="10" Text="Traàn Vónh Kha" FontFamily="/SoBasicEnglish;component/Fonts/#VNI-Tubes" >
+
+                                    </TextBlock>
+                                </StackPanel>
+                                <Border Width="10" Margin="0 50 0 50" Background="#FF3F1717"></Border>
+                                <StackPanel Margin="10 50" Width="400" >
+                                    <TextBlock  Foreground="Beige"  HorizontalAlignment="Center" Margin="20 20 0 0" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Light" FontSize="40"  >HCMUTE</TextBlock>
+                                    <TextBlock Foreground="Beige" FontSize="30" Margin="20 10 0 0" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Light" > Advanced in C# Applications</TextBlock>
+                                    <TextBlock Foreground="Beige" FontStyle="Italic" FontSize="20" Margin="20 10 0 0" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Light" >Contact me :</TextBlock>
+                                    <StackPanel Margin="60 10 0 0" Orientation="Horizontal">
+                                        <Image Source="/SoBasicEnglish;component/Images/Assets/Facebook.png" ></Image>
+                                        <TextBlock FontWeight="Bold" VerticalAlignment="Center" Margin="10 0 0 0" FontSize="22" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Semibold" >facebook.com/thanoue</TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Margin="60 15 0 0" Orientation="Horizontal">
+                                        <Image Source="/SoBasicEnglish;component/Images/Assets/Google Drive.png" ></Image>
+                                        <TextBlock FontWeight="Bold" VerticalAlignment="Center" Margin="10 0 0 0" FontSize="22" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Semibold" >khoikhaguitar.vl@gmail.com</TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
+               
+            </simpleChildWindow:ChildWindow>
+        </Grid>
+        <Grid>
+            <simpleChildWindow:ChildWindow
+		                               Title="TestChild 1"                                       
+                                       ShowTitleBar="False"
+                                       ShowCloseButton="False"		                              
+		                               CloseByEscape="True"		   
+                                       CloseOnOverlay="True"       
+                                        Background="Transparent"
+                                       IsOpen="{Binding OpenAboutApp,Mode=TwoWay}">
+                <Grid Width="460" Height="270" Background="Transparent">
+                    <Border  Margin="20" CornerRadius="40">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="DarkViolet"  Offset="0"/>
+                                <GradientStop Color="Olive"  Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="12" BlurRadius="5"></DropShadowEffect>
+                        </Border.Effect>
+                        <StackPanel Margin="70 50 10 50" >
+                            <StackPanel Height="100" Orientation="Horizontal">
+                                <Image  Source="..\Images/Assets/Beverage Coffee-04-WF.png"  Width="109" ></Image>
+                                <StackPanel Margin="5 0 0 0 ">
+                                    <TextBlock Foreground="Beige" FontSize="22" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Light"> So Basic English ver1.0</TextBlock>
+                                    <TextBlock FontSize="13" Foreground="Beige" Margin="10" Width="217" Text="We create this App to support a learing English website. Its named HelloChao. Hope you really like it !!! many thanks" TextWrapping="Wrap" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Semibold" Height="64"></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                            <TextBlock FontSize="16" Margin="10 10 0 0" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Heavy">
+                    CopyRight © 2017 khoi dep trai
+                            </TextBlock>
+                            <StackPanel  Margin="30 10 0 0" Orientation="Horizontal">
+                                <TextBlock Margin="10 0 10 0">Home:</TextBlock>
+                                <TextBlock Foreground="Blue" FontStyle="Oblique" TextDecorations="Underline"  >https://www.hellochao.vn/</TextBlock>
+                            </StackPanel>
+
+                        </StackPanel>
+                    </Border>
+                </Grid>             
+            </simpleChildWindow:ChildWindow>
+        </Grid>
+    </Grid>
 </Controls:MetroWindow>

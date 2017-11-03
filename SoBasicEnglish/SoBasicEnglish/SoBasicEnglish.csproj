@@ -36,6 +36,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ROFL-01-WF.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="itextsharp">
       <HintPath>..\..\..\..\EGDownloads\itextsharp.dll</HintPath>
@@ -182,10 +185,15 @@
     <Compile Include="UserRoleScreen.xaml.cs">
       <DependentUpon>UserRoleScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\EditorViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
+    <Compile Include="ViewModels\UserRoleViewModel.cs" />
+    <Compile Include="Views\EditorWindow.xaml.cs">
+      <DependentUpon>EditorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -194,6 +202,9 @@
     </Compile>
     <Compile Include="Views\SignUpWindow.xaml.cs">
       <DependentUpon>SignUpWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserRoleWindow.xaml.cs">
+      <DependentUpon>UserRoleWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="ChangePasswordScreen.xaml">
       <SubType>Designer</SubType>
@@ -267,6 +278,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\EditorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -276,6 +291,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SignUpWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserRoleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -319,6 +338,12 @@
     <Resource Include="Fonts\Lato-Thin.ttf" />
     <Resource Include="Fonts\Lato-ThinItalic.ttf" />
     <Resource Include="Fonts\VNI-Tubes.TTF" />
+    <Resource Include="Fonts\VNI-Jamai.TTF" />
+    <Resource Include="Fonts\VNI-Matisse.ttf" />
+    <Resource Include="Fonts\VNI-Thanhcao.TTF" />
+    <Resource Include="Fonts\VNI-Top.TTF" />
+    <Resource Include="Fonts\VNI-Viettay.ttf" />
+    <Resource Include="Fonts\VNI-Whimsy.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -502,6 +527,30 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\z783147575155_c63412a4906445e279a3d529e379b9a7.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\learn.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Assets\Facebook.png" />
+    <Resource Include="Images\Assets\GMail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Assets\Google Drive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\11180636_722783177833472_2752526502789701336_n.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ROFL-01-WF.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Assets\Beverage Coffee-04-WF.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\11.jpg" />
+    <Resource Include="Images\feature-landing_tcm32-288767.jpg" />
+    <Resource Include="Images\LearnEnglish.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.2.0.0\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.2.0.0\build\dotnet\Fody.targets')" />

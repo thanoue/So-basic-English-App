@@ -7,14 +7,11 @@ using System.Data.SqlClient;
 using BusinessLogicFramework;
 using System.Windows;
 using System.ComponentModel;
-using SoBasicEnglish.Views;
-using Prism.Mvvm;
 using Prism.Commands;
 using System;
 using System.IO;
 using Microsoft.Win32;
-using Prism.Mvvm;
-using Prism.Commands;
+
 using System.Windows.Media.Imaging;
 using System.Drawing;
 using System.Windows.Threading;
@@ -23,12 +20,8 @@ namespace SoBasicEnglish.ViewModels
 {
    
     public class SignUpViewModel :  INotifyPropertyChanged
-    {
-       
-        public event PropertyChangedEventHandler PropertyChanged;
-
-
-        DispatcherTimer timerToCloseNotify;
+    {       
+        public event PropertyChangedEventHandler PropertyChanged;      
         public void NotifyPropertyChanged(string propName)
         {
             if (this.PropertyChanged != null)
@@ -36,6 +29,7 @@ namespace SoBasicEnglish.ViewModels
         }
         dbLogin dbLogin;
         public ICommand SignUpCommand { get; set; }
+        public ICommand DefaultNotification { get; set; }
         public ICommand SelectIimage { get; set; }
         public ICommand ClosingWindow { get; set; }
         public RelayCommand<Window> CloseWindowCommand { get; private set; }
@@ -69,8 +63,8 @@ namespace SoBasicEnglish.ViewModels
             } }
 
         private bool _openDiaglog = false;
-
-        public ICommand DefaultNotification { get; set; }
+        DispatcherTimer timerToCloseNotify;
+       
         private int temp = 0;
 
         public SignUpViewModel()

@@ -49,7 +49,7 @@ namespace SoBasicEnglish
                 var eMailValidator = new System.Net.Mail.MailAddress(emailVerify);
 
             }
-            catch (FormatException ex)
+            catch (FormatException )
             {
                 return false;
             }
