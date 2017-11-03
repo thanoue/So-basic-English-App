@@ -14,11 +14,16 @@ using System;
 using System.Data;
 using System.Windows.Data;
 using System.Collections.Generic;
+using Microsoft.Win32;
+using System.Windows.Media.Imaging;
+using System.IO;
+using System.Drawing;
 
 namespace SoBasicEnglish.ViewModels
 {
     public class MenuViewModel : INotifyPropertyChanged
     {
+        #region  Icommand Object
         public ICommand ClickUserTile { get; set; }
          public ICommand ClickStudyTile { get; set; }
        public  ICommand ClickChampionTile { get; set; }
@@ -29,6 +34,10 @@ namespace SoBasicEnglish.ViewModels
         public ICommand ChangePassword { get; set; }
         public ICommand CancelChangePass { get; set; }
         public ICommand ChooeDateProcess { get; set; }
+        public ICommand SelectIimage { get; set; }
+        #endregion
+        #region Object
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string propName)
         {
@@ -82,15 +91,16 @@ namespace SoBasicEnglish.ViewModels
                 NotifyPropertyChanged("DateListOnGridView");
             } }
 
-      
 
         private ObservableCollection<DateProcess> _dateList = new ObservableCollection<DateProcess>();
         //public List<DateProcess> dateList = new List<DateProcess>();
-        private ListCollectionView _dateListOnGridView;        
+        private ListCollectionView _dateListOnGridView;
+        #endregion
+        #region Constructor
         public MenuViewModel()
         {
-            UserAvt = Model.userAVT;dbUserScore = new dbUserScore(Model.serverName); ;dbDateProcess = new dbDateProcess(Model.serverName);dbLogin = new dbLogin(Model.serverName);
-            UserFullName = Model.userFullname;BasicInfo = dbLogin.GetBasicInfoByUserLoginName(Model.userLoginName);
+            UserAvt = Model.userAVT; dbUserScore = new dbUserScore(Model.serverName); ; dbDateProcess = new dbDateProcess(Model.serverName); dbLogin = new dbLogin(Model.serverName);
+            UserFullName = Model.userFullname; BasicInfo = dbLogin.GetBasicInfoByUserLoginName(Model.userLoginName);
             GetScore(); GetChampionList(); GetDateProcess();
             ClickUserTile = new DelegateCommand(Click_UserTile);
             ClickStudyTile = new DelegateCommand(Click_StudyTile);
@@ -102,8 +112,10 @@ namespace SoBasicEnglish.ViewModels
             ChangePassword = new RelayCommand<UIElementCollection>(CheckIfCanChangePass, Submit_ChangePassword);
             CancelChangePass = new DelegateCommand(Cancel_ChangePass);
             ChooeDateProcess = new RelayCommand<object>(ChooseDateToStudy);
+            SelectIimage = new DelegateCommand(Browse);
         }
-
+        #endregion
+        #region Commands
         private void  ChooseDateToStudy(object obj)
         {
             DateProcess temp = obj as DateProcess;
@@ -229,15 +241,6 @@ namespace SoBasicEnglish.ViewModels
             else
                 OpenChampionFlyout = true;
         }
-
-        private void Click_StudyTile()
-        {
-            if (OpenDateFlyout)
-                OpenDateFlyout = false;
-            else
-                OpenDateFlyout = true;
-        }
-
         private void Click_UserTile()
         {
             if (OpenUserFlyout)
@@ -245,6 +248,15 @@ namespace SoBasicEnglish.ViewModels
             else
                 OpenUserFlyout = true;
         }
+        private void Click_StudyTile()
+        {
+            if (OpenDateFlyout)
+                OpenDateFlyout = false;
+            else
+                OpenDateFlyout = true;
+        }
+        #endregion
+        #region Function
         private void GetChampionList()
         {
             UserChampionList.Clear();
@@ -254,7 +266,7 @@ namespace SoBasicEnglish.ViewModels
             {
                 UserChampionList.Add(new User { UserLoginName = i["loginName"].ToString(), UserScore = Int32.Parse(i["levelScore"].ToString()), UserAvatar = (byte[])i["userAvatar"], UserName = i["userName"].ToString(), UserLevel = Int32.Parse(i["userLevel"].ToString()) });
             }
-           
+
         }
         public void GetDateProcess()
         {
@@ -271,12 +283,38 @@ namespace SoBasicEnglish.ViewModels
         private void GetScore()
         {
             int level = dbUserScore.GetLevelByUserLoginName(Model.userLoginName); int userScore = dbUserScore.GetLevelScoreByUserLoginName(Model.userLoginName);
-            UserLevel = level.ToString(); UserScore= userScore.ToString();
+            UserLevel = level.ToString(); UserScore = userScore.ToString();
             int currentScoreToGain = dbUserScore.GetScoreToGainByLevel(level);
             int nextScoreToGain = dbUserScore.GetScoreToGainByLevel(level + 1);
             double percent = Math.Round(((double)nextScoreToGain - (double)currentScoreToGain) / 100.0, 1);
             var leverUpScore = (double)userScore - (double)currentScoreToGain;
             WidthOfProgress = leverUpScore / percent;
         }
+        void Browse()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = true;
+            //  openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            if (openFileDialog.ShowDialog() != null)
+            {
+
+                BitmapImage a = new BitmapImage(new Uri(openFileDialog.FileName));
+                var bm = new Bitmap(SoBasicEnglish.Properties.Resources.customer);
+                MemoryStream memStream = new MemoryStream();
+                JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(a));
+                encoder.Save(memStream);
+                System.Drawing.Image img = System.Drawing.Image.FromStream(memStream);
+
+                memStream = Model.compress(img);
+                UserAvt = memStream.ToArray(); memStream.Close();
+            };
+
+        }
+        #endregion
+
+
+
     }
 }

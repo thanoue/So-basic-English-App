@@ -173,7 +173,7 @@
                 </Grid>
             </Border>
         </Controls:Flyout>
-        <!--<Grid>
+        <Grid>
             <simpleChildWindow:ChildWindow x:Name="child01"
 		                               Title="TestChild 1"		   
                                        ShowTitleBar="False"
@@ -207,7 +207,7 @@
                 </Grid>
             </simpleChildWindow:ChildWindow>
         </Grid>
-        <Grid>
+        <!--<Grid>
             <simpleChildWindow:ChildWindow 
 		                               Title="TestChild 1"		   
                                        ShowTitleBar="False"

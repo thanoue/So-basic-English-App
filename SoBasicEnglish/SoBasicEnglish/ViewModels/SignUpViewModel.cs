@@ -79,7 +79,7 @@ namespace SoBasicEnglish.ViewModels
             SignUpCommand = new RelayCommand<UIElementCollection>((p) =>true, SignUp);
             ClosingWindow = new DelegateCommand(Closing);
             SelectIimage = new DelegateCommand(Browse);
-            this.CloseWindowCommand = new RelayCommand<Window>(this.CloseWindow);
+            CloseWindowCommand = new RelayCommand<Window>(this.CloseWindow);
             MemoryStream ms = new MemoryStream();
             //    Image a;
             //  a.Source= new BitmapImage(new Uri(@"Images/Avt/customer.png"));

@@ -11,14 +11,26 @@ using SoBasicEnglish.Views;
 using Prism.Mvvm;
 using Prism.Commands;
 using System;
+using System.Net.Mail;
 
 namespace SoBasicEnglish.ViewModels
 {
     public class LoginViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        public ICommand Login { get; set; }
+        public ICommand CLickNo { get; set; }
+        public ICommand ShowSignUpCommand { get; set; }
+        public ICommand ShowMenuCommand
+        {
+            get;
+            set;
+        }
         dbLogin dbLogin;
         private bool openDiaglog = false;
+        private bool _isOpenError = false;
+        private string _errorMessage = "";
+        public string ErrorMessage { get => _errorMessage; set { _errorMessage = value; NotifyPropertyChanged("ErrorMessage"); } }
         public bool OpenDiaglog
         {
             get { return openDiaglog; }
@@ -28,6 +40,10 @@ namespace SoBasicEnglish.ViewModels
                 NotifyPropertyChanged("OpenDiaglog");
             }
         }
+        private bool _openErrorDialog = false;
+        public bool OpenErrorDialog { get => _openErrorDialog; set { _openErrorDialog = value; NotifyPropertyChanged("OpenErrorDialog"); } }
+
+        public bool IsOpenError { get => _isOpenError; set { _isOpenError = value; NotifyPropertyChanged("IsOpenError"); } }
 
         public void NotifyPropertyChanged(string propName)
         {
@@ -101,7 +117,6 @@ namespace SoBasicEnglish.ViewModels
                         }
                     }
 
-
                 }
                 conn.Open();
                 conn.Close();
@@ -113,42 +128,49 @@ namespace SoBasicEnglish.ViewModels
                         Model.role = dbLogin.GetRoleByUserLoginName(loginName);
                         Model.userFullname = userName; Model.userLoginName = loginName;
                         Model.userPassword = passWord;
-             
-                       Model.userAVT = dbLogin.GetUserAVT(loginName);
-                            //Menu mc = new Menu();
-                            OpenDiaglog = true;
-                            conn.Open();
+
+                        Model.userAVT = dbLogin.GetUserAVT(loginName);
+                        //Menu mc = new Menu();
+                        conn.Open();
                         conn.Close();
-                     
+                        OpenDiaglog = true;
+
+
                     }
                     else
-                        DisplayMessageBox("thất bại!!");
+                    {
+                        IsOpenError = true;
+                        ErrorMessage = "Check your password again!";
+                    }
+                        
                 }
 
             }
-            catch (System.Exception ex)
+            catch (System.Exception )
             {
 
-                MessageBox.Show(ex.ToString());
+                IsOpenError = true;
+                ErrorMessage = "System Error";
             }
-        }
-        public void DisplayMessageBox(object message)
-        {
-            MessageBox.Show((string)message);
-        }
+        }      
         public void Close(object message)
         {
+            if(OpenErrorDialog)
+                OpenErrorDialog = false;
+            else
             OpenDiaglog = false;
+          
         }
-        public ICommand Login { get; set; }
-        public ICommand CLickNo { get; set; }      
-        public ICommand ShowSignUpCommand { get; set; }
-        public ICommand ShowMenuCommand
+        private void GuiThu(string diachigui, string matkhau, string diachinhan, string tieude, string noidung)
         {
-            get;
-            set;
+            MailMessage mail = new MailMessage(diachigui, diachinhan, tieude, noidung);
+            SmtpClient client = new SmtpClient("smtp.gmail.com");
+            client.Port = 587;
+            client.Credentials = new System.Net.NetworkCredential(diachigui, matkhau);
+            client.EnableSsl = true;
+            client.Send(mail);
+            MessageBox.Show("Check your Email to get your own password!!!");
         }
-
 
     }
 }

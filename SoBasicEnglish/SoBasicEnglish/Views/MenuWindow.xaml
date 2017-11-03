@@ -127,7 +127,7 @@
                                 <Controls:Tile.Effect>
                                     <DropShadowEffect ShadowDepth="6" BlurRadius="7"></DropShadowEffect>
                                 </Controls:Tile.Effect>
-                                <Image Source="..\Images/Assets/User Unlocked-02-WF.png" Height="79" Width="72" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" IsEnabled="False"  />
+                                <Image Source="..\Images/Assets/User Unlocked-02-WF.png" Height="50" Width="50" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" IsEnabled="False"  />
                             </Controls:Tile>
                         </Grid>
                     </Grid>
@@ -433,7 +433,7 @@
                                     <ImageBrush x:Name="imgAVT" ImageSource="{Binding UserAvt}"/>
                                 </Ellipse.Fill>
                             </Ellipse>
-                            <Controls:Tile Grid.Row="1" x:Name="btnAVT"  RenderTransformOrigin="0.495,0.902" Margin="91,172.8,81,-181.6" Height="Auto" Width="Auto">
+                            <Controls:Tile Grid.Row="1" x:Name="btnAVT" Command="{Binding SelectIimage}"  RenderTransformOrigin="0.495,0.902" Margin="91,172.8,81,-181.6" Height="Auto" Width="Auto">
                                 <Controls:Tile.Effect>
                                     <DropShadowEffect ShadowDepth="6" BlurRadius="7"></DropShadowEffect>
                                 </Controls:Tile.Effect>
