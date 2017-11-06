@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:SoBasicEnglish.Views"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        xmlns:ViewModels="clr-namespace:SoBasicEnglish.ViewModels" x:Class="SoBasicEnglish.Views.EditorWindow"                         
+        xmlns:ViewModels="clr-namespace:SoBasicEnglish.ViewModels"
+    xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
+    x:Class="SoBasicEnglish.Views.EditorWindow"                         
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         
@@ -46,36 +48,36 @@
                     <Button Margin="30 10 0 0" x:Name="btnDeleteLesson" Background="Brown" Width="55" Height="55" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource MetroCircleButtonStyle}"  >
                         <Image Source="..\Images/Assets/Garbage-Closed.png" Height="40" Width="30"/>
                     </Button>
-                    <Button x:Name="btnAddLesson"  Background="Green" Margin="10 10 0 0 " Width="55" Height="55" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                    <Button x:Name="btnAddLesson" Command="{Binding Click_StartCreatingLeson}"  Background="Green" Margin="10 10 0 0 " Width="55" Height="55" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource MetroCircleButtonStyle}"  >
                         <Image Source="..\Images/Assets/Circle Add -01.png" Height="40" Width="30" RenderTransformOrigin="0.5,0.62"/>
                     </Button>
                 </StackPanel>
             </StackPanel>
-            <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1">
+            <Border IsEnabled="{Binding CreatingLesson}" Grid.Column="1" BorderBrush="Black" BorderThickness="1">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height=".1*"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Border Margin="10 5 10 0" BorderBrush="LightBlue" BorderThickness="1.5">
-                        <StackPanel x:Name="spLessonName" IsEnabled="False" Orientation="Horizontal">
-                            <ComboBox x:Name="cbLevel" ItemsSource="{Binding Levels}" SelectedIndex="0" Width="230" BorderBrush="LightBlue"  BorderThickness="2" Margin="120 10 0 10">
+                        <StackPanel x:Name="spLessonName" Orientation="Horizontal">
+                            <ComboBox SelectedIndex="{Binding CbLessonTypeSelectedIndex,Mode=TwoWay}"  x:Name="cbLevel" ItemsSource="{Binding Levels}"  Width="230" BorderBrush="LightBlue"  BorderThickness="2" Margin="10 10 0 10">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Margin="5 0 0 0"  FontSize="25"  Text="{Binding levelValue}" />
+                                            <TextBlock Margin="5 0 0 0"  FontSize="25"  Text="{Binding LevelValue}" />
                                         </StackPanel>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
-                            <TextBox BorderBrush="Black" BorderThickness="1.5" Height="auto" Text="{Binding LessonName}" MinWidth="100" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Lesson name..." FontSize="23" VerticalAlignment="Center" Margin="30 10" Width="auto"/>
+                            <TextBox  BorderBrush="Black" BorderThickness="1.5" Height="auto" Text="{Binding LessonName}" MinWidth="100" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Lesson name..." FontSize="20" MaxWidth="600" VerticalAlignment="Center" Margin="10 10 10 10" Width="auto"/>
                             <Button
                                 Command="{Binding Command}" 
                                          CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                                Margin="30 0 0 0 " VerticalAlignment="Center"  x:Name="btnSubmitEditing"  Background="Brown"  Width="55" Height="55" HorizontalAlignment="Left"  Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                Margin="0 0 0 0 " VerticalAlignment="Center"  x:Name="btnSubmitEditing"  Background="Brown"  Width="55" Height="55" HorizontalAlignment="Left"  Style="{DynamicResource MetroCircleButtonStyle}"  >
                                 <Image Source="..\Images/Assets/Edit_04.png" Height="40" Width="30"/>
                             </Button>
-                            <Button Margin="0 0" VerticalAlignment="Center"  x:Name="btnSubmitNewLesson"  Background="Green"  Width="55" Height="55" HorizontalAlignment="Left"  Style="{DynamicResource MetroCircleButtonStyle}"  >
+                            <Button Command="{Binding Click_SubmitCreatingLesson}"  Margin="0 0" VerticalAlignment="Center"  x:Name="btnSubmitNewLesson"  Background="Green"  Width="55" Height="55" HorizontalAlignment="Left"  Style="{DynamicResource MetroCircleButtonStyle}"  >
                                 <Image Source="..\Images/Assets/Circle Add -01.png" Height="40" Width="30" RenderTransformOrigin="0.5,0.62"/>
                             </Button>
                             <Button Margin="0 0" VerticalAlignment="Center"   x:Name="btnCancelNewLesson"  Background="Red"  Width="55" Height="55" HorizontalAlignment="Left"  Style="{DynamicResource MetroCircleButtonStyle}"  >
@@ -109,7 +111,7 @@
                                             </Button>
                                         </StackPanel>
                                     </Grid>
-                                    <ListView Margin="10" Grid.Column="1" ItemsSource="{Binding GettingReadyQuestionList, Mode=TwoWay}" x:Name="lvGetReadyQuestionList">
+                                    <ListView Margin="10" Grid.Column="1" SelectedIndex="{Binding SelectedIndexOfList, Mode=TwoWay}" ItemsSource="{Binding GettingReadyQuestionList, Mode=TwoWay}" x:Name="lvGetReadyQuestionList">
                                         <ListView.ItemTemplate>
                                             <DataTemplate>
                                                 <Grid Height="190" >
@@ -192,7 +194,7 @@
                             </Border>
 
                         </TabItem>
-                        <TabItem Header="KeyWords" >
+                        <TabItem Header="KeyWords" Margin="-0.2,0,-0.2,0.4" >
                             <TabControl x:Name="tcKeyWords" Controls:TabControlHelper.IsUnderlined="True"    
                                         TabStripPlacement="Left"
                                         SelectedIndex="{Binding TcKeyWordSelectedInDex, Mode=OneWayToSource}"
@@ -221,7 +223,7 @@
                                                     </Button>
                                                 </StackPanel>
                                                 <Grid Grid.Column="1">
-                                                    <ListView BorderBrush="Black" SelectedIndex="{Binding SelectedIndexOfKeyWord, Mode=TwoWay}" ItemsSource="{Binding KeyWordsList, Mode=TwoWay}"  BorderThickness="1"  x:Name="lvKeyWordsList" Margin="0 10 0 10">
+                                                    <ListView BorderBrush="Black" SelectedIndex="{Binding SelectedIndexOfList, Mode=TwoWay}" ItemsSource="{Binding KeyWordsList, Mode=TwoWay}"  BorderThickness="1"  x:Name="lvKeyWordsList" Margin="0 10 0 10">
                                                         <ListView.ItemTemplate>
                                                             <DataTemplate>
 
@@ -244,12 +246,10 @@
                                                                                                        Command="{Binding ElementName=lvKeyWordsList,Path=DataContext.GotFocus_HowToReadKeyWord}"      
                                                                                                         CommandParameter="{Binding}"
                                                                                               />
-                                                                                               
+
                                                                                             </i:EventTrigger>
                                                                                         </i:Interaction.Triggers>
                                                                                     </TextBox>
-                                                                                    <!-- Command="{Binding Command}" 
-                                         CommandParameter="{Binding RelativeSource={RelativeSource Self}}"-->
                                                                                 </StackPanel>
                                                                                 <TextBox Controls:TextBoxHelper.ClearTextButton="True"  Controls:TextBoxHelper.WatermarkAlignment="Right" Controls:TextBoxHelper.Watermark="The vietnamese meaning..." Width="500" HorizontalAlignment="Left" MinWidth="50" Height="40" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="1" Text="{Binding VieWord, Mode=TwoWay}" FontSize="20"/>
                                                                                 <TextBox Margin="0 5 0 0 " Controls:TextBoxHelper.ClearTextButton="True"  Controls:TextBoxHelper.WatermarkAlignment="Right" Controls:TextBoxHelper.Watermark="Word Type..." Width="200" HorizontalAlignment="Left" MinWidth="50" Height="30" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="1" Text="{Binding TypeOfWord, Mode=TwoWay}" FontSize="15"/>
@@ -258,10 +258,11 @@
                                                                         </Border>
                                                                         <Grid Grid.Column="0">
                                                                             <Image Margin="5 0 35 10" Height="170" Width="150" Grid.Column="0" Source="{Binding PictureOfWord}"/>
-                                                                            <Button MinWidth="{Binding Index}" 
-                                                                                   
+                                                                            <Button MinWidth="{Binding Index}"                                                                                    
+                                                                                   Command="{Binding ElementName=lvKeyWordsList,Path=DataContext.Click_ChooseKeyWordImage}"      
+                                                                                     CommandParameter="{Binding}"
                                                                                     Margin="155,0,-0.4,168" VerticalAlignment="Center"  Background="Green"  Width="35" Height="35" HorizontalAlignment="Left"  Style="{DynamicResource MetroCircleButtonStyle}"  >
-                                                                                <Image Source="..\Images/Assets/Media-End.png" Height="22" Width="22"/>
+                                                                                <Image Source="..\Images/Assets/Media-End.png" Height="15" Width="15"/>
                                                                             </Button>
                                                                         </Grid>
 
@@ -284,18 +285,18 @@
                                                 <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
                                             <StackPanel   Orientation="Vertical" >
-                                                <Button  Margin="10 10 0 0" x:Name="btnResetkeyWordEx" Background="YellowGreen" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                                <Button Command="{Binding Click_ResetItem}"  Margin="10 10 0 0" x:Name="btnResetkeyWordEx" Background="YellowGreen" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
                                                     <Image Source="..\Images/Assets/Command-Reset.png" Height="40" Width="30"/>
                                                 </Button>
-                                                <Button Margin="10 0 0 0"   x:Name="btnAddkeyWordEx" Background="Green" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
+                                                <Button Margin="10 0 0 0" Command="{Binding Click_AddItem}"  x:Name="btnAddkeyWordEx" Background="Green" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
                                                     <Image Source="..\Images/Assets/Circle Add -01.png" Height="40" Width="30"/>
                                                 </Button>
-                                                <Button   Margin="10 0 0 0"  x:Name="btnDeletekeyWordEx" Background="Red" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
+                                                <Button   Margin="10 0 0 0"  Command="{Binding Click_DeleteItem}" CommandParameter="{Binding SelectedItem, ElementName=lvKeyWordExList}" x:Name="btnDeletekeyWordEx" Background="Red" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
                                                     <Image Source="..\Images/Assets/Cancel.png" Height="40" Width="30"/>
                                                 </Button>
                                             </StackPanel>
                                             <Grid Grid.Column="1" >
-                                                <ListView Margin="10" BorderBrush="Black" BorderThickness="1" x:Name="lvKeyWordExList" >
+                                                <ListView SelectedIndex="{Binding SelectedIndexOfList, Mode=OneWayToSource}" Margin="10" BorderBrush="Black" ItemsSource="{Binding KeyWordExList}" BorderThickness="1" x:Name="lvKeyWordExList" >
                                                     <ListView.ItemTemplate>
                                                         <DataTemplate>
                                                             <Grid Height="190" >
@@ -338,6 +339,7 @@
                                 x:Name="tcSentence"
                                 Controls:TabControlHelper.IsUnderlined="True"    
                                         TabStripPlacement="Left"
+                                SelectedIndex="{Binding TcSentenceSelectedInDex, Mode=OneWayToSource}"
                                 Controls:TabControlHelper.UnderlineSelectedBrush="Black">
                                 <TabItem Header="Study" >
                                     <Border Margin="10,10,9.6,-12" BorderBrush="Black" BorderThickness="1">
@@ -347,17 +349,17 @@
                                                 <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
                                             <StackPanel Grid.Column="0" Orientation="Vertical">
-                                                <Button Margin="10 10 0 0" x:Name="btnResetSentences" Background="YellowGreen" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                                <Button Command="{Binding Click_ResetItem}" Margin="10 10 0 0" x:Name="btnResetSentences" Background="YellowGreen" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
                                                     <Image Source="..\Images/Assets/Command-Reset.png" Height="40" Width="30"/>
                                                 </Button>
-                                                <Button Margin="10 0 0 0"  x:Name="btnAddSentences" Background="Green" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
-                                                    <Image Source="..\Images/Assets/Circle Add -01.png" Height="40" Width="30"/>
+                                                <Button  Command="{Binding Click_AddItem}" Margin="10 0 0 0"  x:Name="btnAddSentences" Background="Green" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
+                                                    <Image  Source="..\Images/Assets/Circle Add -01.png" Height="40" Width="30"/>
                                                 </Button>
-                                                <Button Margin="10 0 0 0"  x:Name="btnDeletekeySentences" Background="Red" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
+                                                <Button  Command="{Binding Click_DeleteItem}" CommandParameter="{Binding SelectedItem, ElementName=lvSentencesList}" Margin="10 0 0 0"  x:Name="btnDeletekeySentences" Background="Red" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
                                                     <Image Source="..\Images/Assets/Cancel.png" Height="40" Width="30"/>
                                                 </Button>
                                             </StackPanel>
-                                            <ListView  Grid.Column="1" BorderBrush="Black"  Margin="10" BorderThickness="1"  x:Name="lvSentencesList" >
+                                            <ListView SelectedIndex="{Binding SelectedIndexOfList, Mode=TwoWay}" ItemsSource="{Binding SentenceList}" Grid.Column="1" BorderBrush="Black"  Margin="10" BorderThickness="1"  x:Name="lvSentencesList" >
                                                 <ListView.ItemTemplate>
                                                     <DataTemplate>
                                                         <Border  BorderBrush="Black" BorderThickness="1" Margin="5">
@@ -384,18 +386,18 @@
                                                 <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
                                             <StackPanel Orientation="Vertical" Grid.Column="0">
-                                                <Button Margin="10 0 0 0" x:Name="btnResetSentenceEx" Background="YellowGreen" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                                <Button Command="{Binding Click_ResetItem}" Margin="10 0 0 0" x:Name="btnResetSentenceEx" Background="YellowGreen" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
                                                     <Image Source="..\Images/Assets/Command-Reset.png" Height="40" Width="30"/>
                                                 </Button>
-                                                <Button Margin="10 0 0 0"  x:Name="btnAddSentenceEx" Background="Green" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
-                                                    <Image Source="..\Images/Assets/Circle Add -01.png" Height="40" Width="30"/>
+                                                <Button  Command="{Binding Click_AddItem}" Margin="10 0 0 0"  x:Name="btnAddSentenceEx" Background="Green" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
+                                                    <Image  Source="..\Images/Assets/Circle Add -01.png" Height="40" Width="30"/>
                                                 </Button>
-                                                <Button   Margin="10 0 0 0"  x:Name="btnDeleteSentenceEx" Background="Red" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
+                                                <Button Command="{Binding Click_DeleteItem}" CommandParameter="{Binding SelectedItem, ElementName=lvSentenceExList}" Margin="10 0 0 0"     x:Name="btnDeleteSentenceEx" Background="Red" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
                                                     <Image Source="..\Images/Assets/Cancel.png" Height="40" Width="30"/>
                                                 </Button>
                                             </StackPanel>
                                             <Grid Grid.Column="1" >
-                                                <ListView BorderBrush="Black" BorderThickness="1" Margin="10" x:Name="lvSentenceExList" >
+                                                <ListView SelectedIndex="{Binding SelectedIndexOfList, Mode=TwoWay}" ItemsSource="{Binding SentenceExList}"  BorderBrush="Black" BorderThickness="1" Margin="10" x:Name="lvSentenceExList" >
                                                     <ListView.ItemTemplate>
                                                         <DataTemplate>
 
@@ -436,12 +438,13 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width=".2*"/>
-                                    <ColumnDefinition Width=".08*"/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <Grid Grid.Column="0" >
                                     <StackPanel Background="AliceBlue" >
-                                        <Slider Value="0"    x:Name="sliProgress"  Style="{DynamicResource FlatSlider}" Background="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Foreground="#CC2AABE2" BorderBrush="#FF881D1D" OpacityMask="#FF960B0B" VerticalAlignment="Top" Margin="-145,240,-145.4,0" RenderTransformOrigin="0.5,0.5" Height="27" >
+                                        <Slider                                           
+                                            Value="{Binding SliderValue,Mode=TwoWay}" Maximum="{Binding SliderMaxValue}" Minimum="0"     x:Name="sliProgress"  Style="{DynamicResource FlatSlider}" Background="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Foreground="#CC2AABE2" BorderBrush="#FF881D1D" OpacityMask="#FF960B0B" VerticalAlignment="Top" Margin="-161,240,-160.8,0" RenderTransformOrigin="0.5,0.5" Height="27" >
+
                                             <Slider.RenderTransform>
                                                 <TransformGroup>
                                                     <ScaleTransform/>
@@ -452,90 +455,107 @@
                                             </Slider.RenderTransform>
                                         </Slider>
                                         <StackPanel Orientation="Horizontal" Height="65" Margin="0,220,0,0" >
-                                            <Button   Margin="10 0 0 0"  x:Name="btnOpenAudioFile" Background="Red" Width="60" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
-                                                <Image Source="..\Images/Assets/Media-End.png" Height="35" Width="35"/>
+                                            <Button Command="{ Binding Click_ChooseAudioListenFile }"  Margin="10 0 0 0"  x:Name="btnOpenAudioFile" Background="Red" Width="60" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
+                                                <Image Source="..\Images/Assets/Circle Add -01.png" Height="40" Width="40"/>
                                             </Button>
-                                            <Button   Margin="10 0 10 0"    Background="Green" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
-                                                <Image Source="..\Images/Assets/Cirlce Play.png" Height="40" Width="30"/>
+                                            <Button Command="{Binding Click_PlayAudioListenFile}"   Margin="10 0 10 0"    Background="Green" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
+                                                <Image Source="..\Images/Assets/Cirlce Play.png" Height="40" Width="40"/>
                                             </Button>
                                         </StackPanel>
                                         <StackPanel Margin="0 0 0 0" Orientation="Horizontal">
-                                            <Button   Margin="10 0 0 0"    Background="DarkOliveGreen" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
-                                                <Image Source="..\Images/Assets/Circle Pause.png" Height="40" Width="30"/>
+                                            <Button Command="{Binding Click_PauseAudioListenFile}"   Margin="10 0 0 0"    Background="DarkOliveGreen" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
+                                                <Image Source="..\Images/Assets/Circle Pause.png" Height="40" Width="40"/>
                                             </Button>
-                                            <Button   Margin="10 0 0 0"    Background="Black" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
-                                                <Image Source="..\Images/Assets/Circle Stop.png" Height="40" Width="30"/>
+                                            <Button Command="{Binding Click_StopAudioListenFile}"   Margin="10 0 0 0"    Background="Black" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
+                                                <Image Source="..\Images/Assets/Circle Stop.png" Height="40" Width="40"/>
                                             </Button>
                                         </StackPanel>
                                     </StackPanel>
                                 </Grid>
-                                <Grid Grid.Column="1">
-                                    <StackPanel Orientation="Vertical" >
-                                        <Button Margin="0 0 0 0"  x:Name="btnResetListeningQuestion" Background="YellowGreen" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
-                                            <Image Source="..\Images/Assets/Command-Reset.png" Height="40" Width="30"/>
-                                        </Button>
-                                        <Button Margin="0 0 0 0"  x:Name="btnAddListeningQuestion" Background="Green" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
-                                            <Image Source="..\Images/Assets/Circle Add -01.png" Height="40" Width="30"/>
-                                        </Button>
-                                        <Button   Margin="0 0 0 0"   x:Name="btnDeleteListeningQuestion" Background="Red" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
-                                            <Image Source="..\Images/Assets/Cancel.png" Height="40" Width="30"/>
-                                        </Button>
-                                    </StackPanel>
-                                </Grid>
-                                <Grid Grid.Column="2" >
+
+                                <Grid Grid.Column="1" >
                                     <TabControl x:Name="tcListening"
+                                                 SelectedIndex="{Binding TcListenSelectedInDex, Mode=OneWayToSource}"
                                              TabStripPlacement="Left" Controls:TabControlHelper.IsUnderlined="True"
                                                   Controls:TabControlHelper.UnderlineSelectedBrush="Black">
                                         <TabItem Header="Part 1" >
                                             <Border BorderBrush="Black" BorderThickness="1">
-                                                <ListView x:Name="lvListeningQuestionList">
-                                                    <ListView.ItemTemplate>
-                                                        <DataTemplate>
-                                                            <Grid Height="190" >
-                                                                <Border BorderBrush="Black" BorderThickness="1">
-                                                                    <StackPanel Margin="10">
-                                                                        <StackPanel Orientation="Horizontal" >
-                                                                            <TextBox Controls:TextBoxHelper.ClearTextButton="True" Text="{Binding QuestionContent, Mode=TwoWay}"  Controls:TextBoxHelper.Watermark="The content of question" BorderBrush="Black" BorderThickness="1" Margin="10 0 0 0" Width="auto" MinWidth="350" FontSize="20"  FontWeight="Bold" />
-                                                                        </StackPanel>
-                                                                        <StackPanel Margin="90 10 20 0" Orientation="Horizontal" >
-
-                                                                            <StackPanel >
-                                                                                <RadioButton IsChecked="{Binding ChoseA, Mode=TwoWay}"  Margin="0 5 0 0"/>
-                                                                                <RadioButton IsChecked="{Binding ChoseB, Mode=TwoWay}"  Margin="0 13 0 0"/>
-                                                                                <RadioButton IsChecked="{Binding ChoseC, Mode=TwoWay}"  Margin="0 13.5 0 0"/>
-                                                                                <RadioButton IsChecked="{Binding ChoseD, Mode=TwoWay}"  Margin="0 13.5 0 0"/>
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <StackPanel Orientation="Vertical" >
+                                                        <Button Command="{Binding Click_ResetItem}"  Margin="0 0 0 0"  x:Name="btnResetListeningQuestion" Background="YellowGreen" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                                            <Image Source="..\Images/Assets/Command-Reset.png" Height="40" Width="30"/>
+                                                        </Button>
+                                                        <Button Command="{Binding Click_AddItem}" Margin="0 0 0 0"  x:Name="btnAddListeningQuestion" Background="Green" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
+                                                            <Image Source="..\Images/Assets/Circle Add -01.png" Height="40" Width="30"/>
+                                                        </Button>
+                                                        <Button Command="{Binding Click_DeleteItem}" CommandParameter="{Binding SelectedItem, ElementName=lvListeningQuestionList}" Margin="0 0 0 0"   x:Name="btnDeleteListeningQuestion" Background="Red" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
+                                                            <Image Source="..\Images/Assets/Cancel.png" Height="40" Width="30"/>
+                                                        </Button>
+                                                    </StackPanel>
+                                                    <ListView SelectedIndex="{Binding SelectedIndexOfList, Mode=TwoWay}" ItemsSource="{Binding ListeningQuestionList}" x:Name="lvListeningQuestionList">
+                                                        <ListView.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Grid Height="190" >
+                                                                    <Border BorderBrush="Black" BorderThickness="1">
+                                                                        <StackPanel Margin="10">
+                                                                            <StackPanel Orientation="Horizontal" >
+                                                                                <TextBox Controls:TextBoxHelper.ClearTextButton="True" Text="{Binding QuestionContent, Mode=TwoWay}"  Controls:TextBoxHelper.Watermark="The content of question" BorderBrush="Black" BorderThickness="1" Margin="10 0 0 0" Width="auto" MinWidth="350" FontSize="20"  FontWeight="Bold" />
                                                                             </StackPanel>
-                                                                            <StackPanel>
-                                                                                <TextBox Controls:TextBoxHelper.ClearTextButton="True" Margin="0 0 0 5"  Controls:TextBoxHelper.WatermarkAlignment="Right" Controls:TextBoxHelper.Watermark="The A choice" Width="auto" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="1" Text="{Binding AnsA, Mode=TwoWay}" FontSize="12"/>
-                                                                                <TextBox Controls:TextBoxHelper.ClearTextButton="True" Margin="0 0 0 5"  Controls:TextBoxHelper.WatermarkAlignment="Right" Controls:TextBoxHelper.Watermark="The B choice" Width="auto" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="1" Text="{Binding AnsB, Mode=TwoWay}" FontSize="12"/>
-                                                                                <TextBox Controls:TextBoxHelper.ClearTextButton="True" Margin="0 0 0 5"  Controls:TextBoxHelper.WatermarkAlignment="Right" Controls:TextBoxHelper.Watermark="The C choice" Width="auto" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="1" Text="{Binding AnsC, Mode=TwoWay}" FontSize="12"/>
-                                                                                <TextBox Controls:TextBoxHelper.ClearTextButton="True" Margin="0 0 0 5"  Controls:TextBoxHelper.WatermarkAlignment="Right" Controls:TextBoxHelper.Watermark="The D choice" Width="auto" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="1" Text="{Binding AnsD, Mode=TwoWay}" FontSize="12"/>
-                                                                            </StackPanel>
+                                                                            <StackPanel Margin="90 10 20 0" Orientation="Horizontal" >
 
+                                                                                <StackPanel >
+                                                                                    <RadioButton IsChecked="{Binding ChoseA, Mode=TwoWay}"  Margin="0 5 0 0"/>
+                                                                                    <RadioButton IsChecked="{Binding ChoseB, Mode=TwoWay}"  Margin="0 13 0 0"/>
+                                                                                    <RadioButton IsChecked="{Binding ChoseC, Mode=TwoWay}"  Margin="0 13.5 0 0"/>
+                                                                                    <RadioButton IsChecked="{Binding ChoseD, Mode=TwoWay}"  Margin="0 13.5 0 0"/>
+                                                                                </StackPanel>
+                                                                                <StackPanel>
+                                                                                    <TextBox Controls:TextBoxHelper.ClearTextButton="True" Margin="0 0 0 5"  Controls:TextBoxHelper.WatermarkAlignment="Right" Controls:TextBoxHelper.Watermark="The A choice" Width="auto" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="1" Text="{Binding AnsA, Mode=TwoWay}" FontSize="12"/>
+                                                                                    <TextBox Controls:TextBoxHelper.ClearTextButton="True" Margin="0 0 0 5"  Controls:TextBoxHelper.WatermarkAlignment="Right" Controls:TextBoxHelper.Watermark="The B choice" Width="auto" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="1" Text="{Binding AnsB, Mode=TwoWay}" FontSize="12"/>
+                                                                                    <TextBox Controls:TextBoxHelper.ClearTextButton="True" Margin="0 0 0 5"  Controls:TextBoxHelper.WatermarkAlignment="Right" Controls:TextBoxHelper.Watermark="The C choice" Width="auto" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="1" Text="{Binding AnsC, Mode=TwoWay}" FontSize="12"/>
+                                                                                    <TextBox Controls:TextBoxHelper.ClearTextButton="True" Margin="0 0 0 5"  Controls:TextBoxHelper.WatermarkAlignment="Right" Controls:TextBoxHelper.Watermark="The D choice" Width="auto" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="1" Text="{Binding AnsD, Mode=TwoWay}" FontSize="12"/>
+                                                                                </StackPanel>
+
+                                                                            </StackPanel>
                                                                         </StackPanel>
-                                                                    </StackPanel>
-                                                                </Border>
-                                                            </Grid>
-                                                        </DataTemplate>
-                                                    </ListView.ItemTemplate>
-                                                </ListView>
+                                                                    </Border>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </ListView.ItemTemplate>
+                                                    </ListView>
+
+                                                </StackPanel>
                                             </Border>
                                         </TabItem>
                                         <TabItem Header="Part 2" >
                                             <Border BorderBrush="Black" BorderThickness="1">
-                                                <ListView Margin="10 90 10 10" BorderBrush="Black" BorderThickness="1" x:Name="lvListeningPart2List" >
-                                                    <ListView.ItemTemplate>
-                                                        <DataTemplate>
-                                                            <Grid Height="auto"  Margin="20,10,20,20" >
-                                                                <StackPanel Orientation="Horizontal">
-                                                                    <TextBox MinWidth="200" FontSize="25" Text="{Binding Before, Mode=TwoWay}" Width="auto"/>
-                                                                    <TextBox MinWidth="50" Margin="10 0 10 0" Foreground="Red" Height="35" VerticalAlignment="Center" FontSize="20" BorderBrush="Red" Text="{Binding Value, Mode=TwoWay}" BorderThickness="2" Width="auto"  />
-                                                                    <TextBox MinWidth="200" FontSize="25" Width="auto"  Text="{Binding After, Mode=TwoWay}" />
-                                                                </StackPanel>
-                                                            </Grid>
-                                                        </DataTemplate>
-                                                    </ListView.ItemTemplate>
-                                                </ListView>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <StackPanel Orientation="Vertical" >
+                                                        <Button Command="{Binding Click_ResetItem}"  Margin="0 0 0 0"  Background="YellowGreen" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                                            <Image Source="..\Images/Assets/Command-Reset.png" Height="40" Width="30"/>
+                                                        </Button>
+                                                        <Button Command="{Binding Click_AddItem}" Margin="0 0 0 0"  Background="Green" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
+                                                            <Image Source="..\Images/Assets/Circle Add -01.png" Height="40" Width="30"/>
+                                                        </Button>
+                                                        <Button Command="{Binding Click_DeleteItem}" CommandParameter="{Binding SelectedItem, ElementName=lvListeningPart2List}"   Margin="0 0 0 0"   Background="Red" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
+                                                            <Image Source="..\Images/Assets/Cancel.png" Height="40" Width="30"/>
+                                                        </Button>
+                                                    </StackPanel>
+                                                    <ListView SelectedIndex="{Binding SelectedIndexOfList, Mode=TwoWay}"  ItemsSource="{Binding ListeningPart2QuestionList}" Margin="10 10 10 10"  Width="auto" BorderBrush="Black" BorderThickness="1" x:Name="lvListeningPart2List" >
+                                                        <ListView.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Grid Height="auto"  Margin="20,10,20,20" >
+                                                                    <StackPanel Orientation="Horizontal">
+                                                                        <TextBox MinWidth="200" FontSize="25" Text="{Binding Before, Mode=TwoWay}" Width="auto"/>
+                                                                        <TextBox MinWidth="50" Margin="10 0 10 0" Foreground="Red" Height="35" VerticalAlignment="Center" FontSize="20" BorderBrush="Red" Text="{Binding Value, Mode=TwoWay}" BorderThickness="2" Width="auto"  />
+                                                                        <TextBox MinWidth="200" FontSize="25" Width="auto"  Text="{Binding After, Mode=TwoWay}" />
+                                                                    </StackPanel>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </ListView.ItemTemplate>
+                                                    </ListView>
+
+                                                </StackPanel>
                                             </Border>
 
                                         </TabItem>
@@ -554,25 +574,31 @@
                                                 <RowDefinition/>
                                             </Grid.RowDefinitions>
                                             <StackPanel Orientation="Horizontal" >
-                                                <Controls:Tile  Padding="10 "  x:Name="btnOpenWordFile" Margin="10,10,0,0" Width="63" Height="54" VerticalAlignment="Top"  >
+                                                <Controls:Tile Command="{Binding Click_BrowWordFile}"  Padding="10 "  x:Name="btnOpenWordFile" Margin="10,10,0,0" Width="63" Height="54" VerticalAlignment="Top"  >
                                                     <Controls:Tile.Effect>
                                                         <DropShadowEffect ShadowDepth="6" BlurRadius="7"/>
                                                     </Controls:Tile.Effect>
 
                                                     <Image  Source="..\Images/Assets/Media-End.png" Height="36" Width="62" IsEnabled="False"  />
                                                 </Controls:Tile>
-                                                <TextBox x:Name="tbWordFilePath" Margin="15" Width="auto" MinWidth="300" FontSize="20" Text="aaaaaaaaa" TextAlignment="Left" FontStyle="Italic" VerticalAlignment="Center" />
-                                                <Controls:Tile  Padding="10 "  x:Name="btnReviewWordFile" Margin="0,10,0,17.6" Width="60" Height="Auto"  >
+                                                <TextBox IsEnabled="False" x:Name="tbWordFilePath" Margin="15" Width="auto" MinWidth="300" FontSize="15" Text="{Binding WordFilePath}" TextAlignment="Left" FontStyle="Italic" VerticalAlignment="Center" />
+                                                <Controls:Tile  Padding="10 " Command="{Binding Click_ViewWordFile}" CommandParameter="{Binding Path=Text,ElementName=tbWordFilePath}" x:Name="btnReviewWordFile" Margin="0,10,0,17.6" Width="60" Height="Auto"  >
                                                     <Controls:Tile.Effect>
                                                         <DropShadowEffect ShadowDepth="6" BlurRadius="7"/>
                                                     </Controls:Tile.Effect>
 
                                                     <Image  Source="..\Images/Assets/3D Glass - 02-WF.png" Height="36" Width="62" IsEnabled="False"  />
                                                 </Controls:Tile>
+                                                <Controls:ProgressRing  Controls:VisibilityHelper.IsCollapsed="True" Controls:VisibilityHelper.IsVisible="{Binding IsLoadingGrammarFile}" Height="53" Margin="10,10,0,18.6" Width="50" >
+
+                                                </Controls:ProgressRing>
                                             </StackPanel>
                                             <Grid Grid.Row="1">
-                                                <DocumentViewer x:Name="dvGrammar" Margin="10" />
-                                                <Controls:ProgressRing IsActive="{Binding IsloadComplete}" Foreground="{DynamicResource AccentColorBrush}" Height="160"  Width="168" Margin="317,180,318.2,205.6"/>
+                                                <DocumentViewer Document="{Binding DocumentWordFile}" x:Name="dvGrammar" Margin="10" />
+                                                <Controls:MetroProgressBar    Controls:VisibilityHelper.IsCollapsed="False" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"  Controls:VisibilityHelper.IsVisible="True" IsIndeterminate="True"  Height="38" Margin="0,254,10.2,253.6"  />
+                                                <Controls:ProgressRing 
+                                                    Controls:VisibilityHelper.IsCollapsed="True" Controls:VisibilityHelper.IsVisible="{Binding IsActiveLoadingGrammar}" 
+                                                    Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Height="160"  Width="168" Margin="317,180,318.2,205.6"/>
                                             </Grid>
                                         </Grid>
 
@@ -587,19 +613,19 @@
                                             </Grid.ColumnDefinitions>
                                             <Grid Grid.Column="0" >
                                                 <StackPanel Orientation="Vertical" >
-                                                    <Button Margin="0 0 0 0" x:Name="btnResetGrammarQuestion" Background="YellowGreen" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                                    <Button Command="{Binding Click_ResetItem}" Margin="0 0 0 0" x:Name="btnResetGrammarQuestion" Background="YellowGreen" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
                                                         <Image Source="..\Images/Assets/Command-Reset.png" Height="40" Width="30"/>
                                                     </Button>
-                                                    <Button Margin="0 0 0 0"  x:Name="btnAddGrammarQuestion" Background="Green" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
+                                                    <Button  Command="{Binding Click_AddItem}" Margin="0 0 0 0"  x:Name="btnAddGrammarQuestion" Background="Green" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
                                                         <Image Source="..\Images/Assets/Circle Add -01.png" Height="40" Width="30"/>
                                                     </Button>
-                                                    <Button   Margin="0 0 0 0"  x:Name="btnDeleteGrammarQuestion" Background="Red" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
+                                                    <Button Command="{Binding Click_DeleteItem}" CommandParameter="{Binding SelectedItem,ElementName=lvGrammarQuestionList}" Margin="0 0 0 0"  x:Name="btnDeleteGrammarQuestion" Background="Red" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
                                                         <Image Source="..\Images/Assets/Cancel.png" Height="40" Width="30"/>
                                                     </Button>
                                                 </StackPanel>
                                             </Grid>
                                             <Grid Grid.Column="1" >
-                                                <ListView Margin="10" BorderBrush="Black" BorderThickness="1" x:Name="lvGrammarQuestionList">
+                                                <ListView SelectedIndex="{Binding SelectedIndexOfList, Mode=TwoWay}" ItemsSource="{Binding GrammarQuestionList}" Margin="10" BorderBrush="Black" BorderThickness="1" x:Name="lvGrammarQuestionList">
                                                     <ListView.ItemTemplate>
                                                         <DataTemplate>
                                                             <Grid Height="190" >
@@ -641,7 +667,7 @@
             </Border>
 
         </Grid>
-        <Controls:Flyout IsOpen="{Binding Isopen_Symbols}" Visibility="Collapsed" x:Name="PronFlyout"  Header="The Symbols" Foreground="White"  Margin="0,172,0,190.8" Width="320" Height="auto"  >
+        <Controls:Flyout  IsOpen="{Binding Isopen_Symbols}" Visibility="Hidden" x:Name="PronFlyout"  Header="The Symbols" Foreground="White"  Margin="0,172,0,190.8" Width="319" Height="auto"  >
             <Controls:Flyout.Background>
                 <SolidColorBrush Color="Black" Opacity="0.5"/>
             </Controls:Flyout.Background>
@@ -657,5 +683,37 @@
 
 
         </Controls:Flyout>
+        <simpleChildWindow:ChildWindow
+            x:Name="child01"
+		                               Title="TestChild 1"		   
+                                       ShowTitleBar="False"
+                                       ShowCloseButton="False"		                              
+		                               CloseByEscape="False"		   
+                                       CloseOnOverlay="False"          
+                                       IsOpen="{Binding IsCreating,Mode=TwoWay}"    Background="Transparent"
+         >
+            <Grid Background="Transparent" Height="200" Width="600">
+                <Border BorderThickness="0" CornerRadius="50" Margin="40" >
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Color="DarkViolet"  Offset="0"/>
+                            <GradientStop Color="Olive"  Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="12" BlurRadius="5"></DropShadowEffect>
+                    </Border.Effect>
+                    <StackPanel>
+                        <ProgressBar BorderBrush="Transparent"  HorizontalAlignment="Center" VerticalAlignment="Center"  Controls:VisibilityHelper.IsCollapsed="False"  Controls:VisibilityHelper.IsVisible="True" IsIndeterminate="True"  Height="15" Width="450" Margin="0 50 0 0"   >
+                           
+                        </ProgressBar>
+
+                        <TextBlock Text="{Binding StateOfCreating}" Margin="10" FontSize="20"  HorizontalAlignment="Center" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Light" FontStyle="Italic" Foreground="#FFF1F1F0"   />
+                    </StackPanel>
+                </Border>
+
+
+            </Grid>
+        </simpleChildWindow:ChildWindow>
     </Grid>
 </Controls:MetroWindow>

@@ -21,8 +21,7 @@ namespace SoBasicEnglish
         public static byte[] userAVT { get; set; }
         public static int dateProcess { get; set; }
         public static int role { get; set; }
-        public static dbLesson dbLesson;
-      //  public static ObservableCollection<GettingReadyQuestion> GettingreadyQuestionList = new ObservableCollection<GettingReadyQuestion>();
+        public static dbLesson dbLesson = new dbLesson(Model.serverName); public static string err = "";
         public static void GetGettingRedayList(ObservableCollection<GettingReadyQuestion> GettingreadyQuestionList, int turnNumber,string server)
         {
             dbLesson = new dbLesson(server);
@@ -428,6 +427,144 @@ namespace SoBasicEnglish
                 }
 
             }
+        }
+        public static bool InsertGetReadyQuestion( ObservableCollection<GettingReadyQuestion> GettingReadyQuestionList,int DateProcess)
+        {
+            bool result = false;
+            for (int turnNumber = 0; turnNumber < GettingReadyQuestionList.Count; turnNumber++)
+            {
+                GettingReadyQuestion i = GettingReadyQuestionList[turnNumber];
+                string ans = "";
+                if (i.ChoseA)
+                    ans = "A";
+                if (i.ChoseB)
+                    ans = "B";
+                if (i.ChoseC)
+                    ans = "C";
+                if (i.ChoseD)
+                    ans = "D";
+                result = dbLesson.InsertGetReadyQuestion(ref err, DateProcess, turnNumber + 1, i.KeyWord, i.AnsA, i.AnsB, i.AnsC, i.AnsD, ans);
+            }
+            return result;
+        }
+        public static bool InsertKeyWordExes(ObservableCollection<KeyWordEx> KeyWordExList, int DateProcess)
+        {
+            bool result = false;
+            for (int turnNumber = 0; turnNumber < KeyWordExList.Count; turnNumber++)
+            {
+                KeyWordEx i = KeyWordExList[turnNumber];
+                string ans = "";
+                if (i.ChoseA)
+                    ans = "A";
+                if (i.ChoseB)
+                    ans = "B";
+                if (i.ChoseC)
+                    ans = "C";
+                if (i.ChoseD)
+                    ans = "D";
+                result = dbLesson.InsertKeyWordExes(ref err, DateProcess, turnNumber + 1, i.KeyWord, i.AnsA, i.AnsB, i.AnsC, i.AnsD, ans);
+            }
+            return result;
+        }
+        public static bool InsertKeyWord(ObservableCollection<KeyWord> KeyWordsList, int DateProcess)
+        {
+            bool result = false;
+            for (int turnNumber = 0; turnNumber < KeyWordsList.Count; turnNumber++)
+            {
+                KeyWord i = KeyWordsList[turnNumber];
+
+                result = dbLesson.InsertKeyWords(ref err, DateProcess, turnNumber + 1, i.Word, i.HowToReadWord, i.VieWord, i.TypeOfWord, i.ExSentence, i.PictureOfWord);
+            }
+            return result;
+        }
+        public static bool InsertSentences(ObservableCollection<Sentence> SentenceList, int DateProcess)
+        {
+            bool result = false;
+            for (int turnNumber = 0; turnNumber < SentenceList.Count; turnNumber++)
+            {
+                Sentence i = SentenceList[turnNumber];
+
+                result = dbLesson.InsertSentence(ref err, DateProcess, turnNumber + 1, i.KeySentence, i.HowToRead, i.VieMeanOfSentence);
+            }
+            return result;
+        }
+        public static bool InsertSentenceExes(ObservableCollection<SentenceEx> SentenceExList, int DateProcess)
+        {
+            bool result = false;
+            for (int turnNumber = 0; turnNumber < SentenceExList.Count; turnNumber++)
+            {
+                SentenceEx i = SentenceExList[turnNumber];
+                string ans = "";
+                if (i.ChoseA)
+                    ans = "A";
+                if (i.ChoseB)
+                    ans = "B";
+                if (i.ChoseC)
+                    ans = "C";
+                if (i.ChoseD)
+                    ans = "D";
+                result = dbLesson.InsertSentenceExes(ref err, DateProcess, turnNumber + 1, i.KeyWord, i.AnsA, i.AnsB, i.AnsC, i.AnsD, ans);
+            }
+            return result;
+        }
+       public static bool InsertListenAudioFile(byte[] AudioListenFile, int DateProcess)
+        {
+            //bool result = false;
+            return dbLesson.InsertListenAudioFile(ref err, DateProcess, AudioListenFile);
+        }
+        public static bool InsertListeningExes(ObservableCollection<ListeningQuestion> ListeningQuestionList,int DateProcess)
+        {
+            bool result = false;
+            for (int turnNumber = 0; turnNumber < ListeningQuestionList.Count; turnNumber++)
+            {
+                ListeningQuestion i = ListeningQuestionList[turnNumber];
+                string ans = "";
+                if (i.ChoseA)
+                    ans = "A";
+                if (i.ChoseB)
+                    ans = "B";
+                if (i.ChoseC)
+                    ans = "C";
+                if (i.ChoseD)
+                    ans = "D";
+                result = dbLesson.InsertListeningExes(ref err, DateProcess, turnNumber + 1, i.QuestionContent, i.AnsA, i.AnsB, i.AnsC, i.AnsD, ans);
+            }
+            return result;
+        }
+        public static bool InsertListeningPart2Exes(ObservableCollection<ListeningPart2Question> ListeningPart2QuestionList, int DateProcess)
+        {
+            bool result = false;
+            for (int turnNumber = 0; turnNumber < ListeningPart2QuestionList.Count; turnNumber++)
+            {
+                ListeningPart2Question i = ListeningPart2QuestionList[turnNumber];
+
+                result = dbLesson.InsertListeningExPart2(ref err, DateProcess, turnNumber + 1, i.Before, i.After, i.Value);
+            }
+            return result;
+        }
+        public static bool InsertGrammar(int DateProcess,byte[] WordGrammarFile)
+        {
+            //bool result = false;
+            return dbLesson.spInsertGrammar(ref err, DateProcess, WordGrammarFile);
+        }
+        public static bool InsertGrammarExes(ObservableCollection<GrammarQuestion> GrammarQuestionList,int DateProcess)
+        {
+            bool result = false;
+            for (int turnNumber = 0; turnNumber < GrammarQuestionList.Count; turnNumber++)
+            {
+                GrammarQuestion i = GrammarQuestionList[turnNumber];
+                string ans = "";
+                if (i.ChoseA)
+                    ans = "A";
+                if (i.ChoseB)
+                    ans = "B";
+                if (i.ChoseC)
+                    ans = "C";
+                if (i.ChoseD)
+                    ans = "D";
+                result = dbLesson.InsertGrammarExes(ref err, DateProcess, turnNumber + 1, i.KeyWord, i.AnsA, i.AnsB, i.AnsC, i.AnsD, ans);
+            }
+            return result;
         }
         public static MemoryStream compress(Image img)
         {

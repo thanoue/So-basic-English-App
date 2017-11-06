@@ -150,8 +150,12 @@ namespace SoBasicEnglish.ViewModels
         }
         private void GoToEditWinDow()
         {
-            EditorWindow temp = new EditorWindow();
-            temp.ShowDialog();
+            try {
+                EditorWindow temp = new EditorWindow();
+                temp.ShowDialog();
+            }
+            catch (Exception) { }
+           
         }
         private void TimerToCloseError_Tick(object sender, EventArgs e)
         {

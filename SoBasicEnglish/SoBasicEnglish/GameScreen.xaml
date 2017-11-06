@@ -4,9 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SoBasicEnglish"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Title="GameScreen" Height="300" Width="503.168">
     <Grid>
+        <Grid>
+            <!--<Controls:ProgressRing 
+                Controls:VisibilityHelper.IsCollapsed="False" Controls:VisibilityHelper.IsVisible="True" 
+                Foreground="{DynamicResource AccentColorBrush}" Height="100"  Width="100" />-->
+            <Controls:MetroProgressBar  Controls:VisibilityHelper.IsCollapsed="False"  Controls:VisibilityHelper.IsVisible="True" IsIndeterminate="True"  Height="38" Margin="0,132,-0.2,100.4" />
+        </Grid>
         <!--<simpleChildWindow:ChildWindow x:Name="child01"
 		                               Title="TestChild 1"		   
                                        ShowTitleBar="False"
@@ -32,7 +39,7 @@
                 </StackPanel>
             </StackPanel>
         </Grid>-->
-        <Grid Width="460" Height="270" Background="Transparent">
+        <!--<Grid Width="460" Height="270" Background="Transparent">
             <Border  Margin="20" CornerRadius="40">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -61,7 +68,7 @@
 
                 </StackPanel>
             </Border>
-        </Grid>
+        </Grid>-->
        
 
         <!--</simpleChildWindow:ChildWindow>-->

@@ -97,7 +97,6 @@ namespace SoBasicEnglish
                 PropertyChanged(this, new PropertyChangedEventArgs(lessonName));
             }
         }
-
         public class DateProcess
         {
             public int turnNumber { get; set; }
@@ -109,8 +108,7 @@ namespace SoBasicEnglish
         {
             public string levelValue { get; set; }
             public int levelIndex { get; set; }
-        }
-      
+        }      
         public EditorScreen() /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         {
             InitializeComponent(); this.DataContext = this;
@@ -581,11 +579,8 @@ namespace SoBasicEnglish
             }
             catch (Exception)
             {
-            //    MessageBox.Show(ex.ToString());
-            }
-           
-         //   LoadDateData();
-
+            
+            }         
         }
         private void btnReviewWordFile_Click(object sender, RoutedEventArgs e)
         {

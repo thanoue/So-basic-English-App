@@ -64,11 +64,8 @@ namespace SoBasicEnglish
             this.SentenceList = sentenceList;this.SentenceExList = sentenceExList;this.GrammarQuestionList = grammarQuestionList; this.ListeningPart2QuestionList = listeningPart2QuestionList;
             this.ListeningQuestionList = listeningQuestionList;this.GettingReadyQuestionList = gettingReadyQuestionList;this.AudioListenFile = audioListenFile; this.WordGrammarFile = wordGrammarFile;
             valueProgress = 0;ProgressText = "";
-            pbInsert.Maximum = 44;temp = 0; ValueProgress = 0;
-
-        
+            pbInsert.Maximum = 44;temp = 0; ValueProgress = 0;        
         }
-
         private bool InsertGetReadyQuestion()
         {
             bool result = false;
@@ -215,9 +212,7 @@ namespace SoBasicEnglish
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-           
-            
+        {          
             timer = new DispatcherTimer()
             {
                 Interval = TimeSpan.FromSeconds(1)

@@ -147,9 +147,12 @@ namespace SoBasicEnglish.ViewModels
         }
         private void ShowMenu()
         {
-            MenuWindow menu = new MenuWindow();
-            OpenDiaglog = false;
-            menu.ShowDialog();
+            try{
+                MenuWindow menu = new MenuWindow();
+                OpenDiaglog = false;
+                menu.ShowDialog();
+            }
+            catch (Exception) { }
         }
         private void ShowSignUp()
         {
