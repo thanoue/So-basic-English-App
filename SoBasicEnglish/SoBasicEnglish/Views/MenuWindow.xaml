@@ -298,15 +298,16 @@
             <Grid Margin="0 10 0 0">
                 <DataGrid x:Name="gvDate" ItemsSource="{Binding DateListOnGridView}" SelectionMode="Extended" IsReadOnly="True" HeadersVisibility="Row" Background="Transparent" Grid.Row="1" AutoGenerateColumns="False" >
                     <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseUp">
+                        <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction Command="{Binding ChooeDateProcess}" CommandParameter="{Binding SelectedItem,ElementName =gvDate}"  />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                    <DataGrid.Columns >
+                    <DataGrid.Columns>
+                        
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock  Text="{Binding Path =TurnNumber }" ></TextBlock>
+                                    <TextBlock Foreground="Transparent"  Text="{Binding Path =TurnNumber }" ></TextBlock>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

@@ -141,6 +141,26 @@ namespace DataAccessFramework
                 conn.Close();
             return kq;
         }
+        public int GetprocessByUserLoginName(string userLoginName)
+        {
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("select process from NguoiDung where loginName= '" + userLoginName + "'", conn);
+            int kq = 0;
+            try
+            {
+
+                kq = (int)cmd.ExecuteScalar();
+
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+            if (conn.State == ConnectionState.Open)
+                conn.Close();
+            return kq;
+        }
         public int GetRoleByUserLoginName(string userLoginName)
         {
             conn.Open();

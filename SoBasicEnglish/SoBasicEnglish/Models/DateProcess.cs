@@ -18,6 +18,7 @@ namespace SoBasicEnglish
         private int _turnNumber = 0;
         private string _detailInfo = "";
         private string _levelDetail = "";
+        private int _processLevel = 0;
 
         public int TurnNumber
         {
@@ -34,5 +35,7 @@ namespace SoBasicEnglish
         }
 
         public string LevelDetail { get => _levelDetail; set { _levelDetail = value; NotifyPropertyChanged("LevelDetail"); } }
+
+        public int ProcessLevel { get => _processLevel; set { _processLevel = value;NotifyPropertyChanged("ProcessLevel"); } }
     }
 }

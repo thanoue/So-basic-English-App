@@ -46,8 +46,8 @@ namespace SoBasicEnglish.ViewModels
         public bool OpenAboutApp { get => _openAboutApp; set { _openAboutApp = value; NotifyPropertyChanged("OpenAboutApp"); } }
         private bool _openAboutApp = false;
         public event PropertyChangedEventHandler PropertyChanged;       
-        dbUserScore dbUserScore;dbDateProcess dbDateProcess;dbLogin dbLogin;
-        
+        dbUserScore dbUserScore;dbDateProcess dbDateProcess;dbLogin dbLogin; 
+
         private bool _openAboutAuthor = false;
         public bool OpenAboutAuthor { get => _openAboutAuthor; set { _openAboutAuthor = value; NotifyPropertyChanged("OpenAboutAuthor"); } }
         private byte[] _userAvt;
@@ -367,10 +367,12 @@ namespace SoBasicEnglish.ViewModels
         {
             DataTable temp = new DataTable();
             temp = dbDateProcess.DatesprocessList();
+            int process = dbLogin.GetProcessByUserLoginName(Model.userLoginName);
             DateList.Clear();
             foreach (DataRow i in temp.Rows)
             {
-                DateList.Add(new DateProcess { TurnNumber = Convert.ToInt32(i["turnNumber"].ToString()), DetailInfo = i["detailInfo"].ToString(), LevelDetail = i["levelDetail"].ToString() });
+                if(process >= Convert.ToInt32(i["turnNumber"].ToString()))
+                    DateList.Add(new DateProcess { TurnNumber = Convert.ToInt32(i["turnNumber"].ToString()), DetailInfo = i["detailInfo"].ToString(), LevelDetail = i["levelDetail"].ToString() });
             }
             _dateListOnGridView = new ListCollectionView(DateList);
             _dateListOnGridView.GroupDescriptions.Add(new PropertyGroupDescription("LevelDetail"));

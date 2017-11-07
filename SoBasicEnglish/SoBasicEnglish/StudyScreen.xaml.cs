@@ -367,7 +367,7 @@ namespace SoBasicEnglish
         {
             QuesContenBrush = new SolidColorBrush(Colors.Transparent);
             GettingReadyQuestionList.Clear();
-            Model.GetGettingRedayList(GettingReadyQuestionList, Model.dateProcess, Model.serverName);
+            Model.GetGettingReadyList(GettingReadyQuestionList, Model.dateProcess, Model.serverName);
             CurentGetReadyQuestion =GettingReadyQuestionList[0];
             Turn = 1;
             ABr = new SolidColorBrush(Colors.Transparent);

@@ -208,7 +208,7 @@ namespace SoBasicEnglish
                 cbLevel.SelectedIndex = DateProcesses[lvDateList.SelectedIndex].processLevelIndex - 1;
                 tcLesson.IsEnabled = true; spLessonName.IsEnabled = true;
                 GettingReadyQuestionList.Clear();tcLesson.SelectedIndex = 0;
-                Model.GetGettingRedayList(GettingReadyQuestionList,DateProcesses[lvDateList.SelectedIndex].turnNumber,Model.serverName);
+                Model.GetGettingReadyList(GettingReadyQuestionList,DateProcesses[lvDateList.SelectedIndex].turnNumber,Model.serverName);
                 btnDeleteLesson.IsEnabled = true;btnCancelNewLesson.IsEnabled = false;
             }
             catch (Exception )

@@ -21,8 +21,8 @@ namespace SoBasicEnglish
         public static byte[] userAVT { get; set; }
         public static int dateProcess { get; set; }
         public static int role { get; set; }
-        public static dbLesson dbLesson = new dbLesson(Model.serverName); public static string err = "";
-        public static void GetGettingRedayList(ObservableCollection<GettingReadyQuestion> GettingreadyQuestionList, int turnNumber,string server)
+        public static dbLesson dbLesson = new dbLesson(serverName); public static string err = "";
+        public static void GetGettingReadyList(ObservableCollection<GettingReadyQuestion> GettingreadyQuestionList, int turnNumber,string server)
         {
             dbLesson = new dbLesson(server);
             DataTable temp = dbLesson.GetGettingReadyQuestionByLessonId(turnNumber);
@@ -89,10 +89,160 @@ namespace SoBasicEnglish
                
             }
         }
+        public static void GetGettingReadyList_full(ObservableCollection<GettingReadyQuestion> GettingreadyQuestionList, int turnNumber, string server)
+        {
+            dbLesson = new dbLesson(server);
+            DataTable temp = dbLesson.GetGettingReadyQuestionByLessonId_full(turnNumber);
+            foreach (DataRow row in temp.Rows)
+            {
+
+                switch (row["rightAns"].ToString())
+                {
+                    case "A":
+                        GettingreadyQuestionList.Add(new GettingReadyQuestion
+                        {
+                            ChoseA = true,
+                            ChoseB = false,
+                            ChoseC = false,
+                            ChoseD = false,
+                            KeyWord = row["quesContent"].ToString(),
+                            AnsA = row["ansA"].ToString(),
+                            AnsB = row["ansB"].ToString(),
+                            AnsC = row["ansC"].ToString(),
+                            AnsD = row["ansD"].ToString(),
+                            RightAns = 1
+                        });
+                        break;
+                    case "B":
+                        GettingreadyQuestionList.Add(new GettingReadyQuestion
+                        {
+                            ChoseA = false,
+                            ChoseB = true,
+                            ChoseC = false,
+                            ChoseD = false,
+                            KeyWord = row["quesContent"].ToString(),
+                            AnsA = row["ansA"].ToString(),
+                            AnsB = row["ansB"].ToString(),
+                            AnsC = row["ansC"].ToString(),
+                            AnsD = row["ansD"].ToString(),
+                            RightAns = 2
+                        });
+                        break;
+                    case "C":
+                        GettingreadyQuestionList.Add(new GettingReadyQuestion
+                        {
+                            ChoseA = false,
+                            ChoseB = false,
+                            ChoseC = true,
+                            ChoseD = false,
+                            KeyWord = row["quesContent"].ToString(),
+                            AnsA = row["ansA"].ToString(),
+                            AnsB = row["ansB"].ToString(),
+                            AnsC = row["ansC"].ToString(),
+                            AnsD = row["ansD"].ToString(),
+                            RightAns = 3
+                        });
+                        break;
+                    case "D":
+                        GettingreadyQuestionList.Add(new GettingReadyQuestion
+                        {
+                            ChoseA = false,
+                            ChoseB = false,
+                            ChoseC = false,
+                            ChoseD = true,
+                            KeyWord = row["quesContent"].ToString(),
+                            AnsA = row["ansA"].ToString(),
+                            AnsB = row["ansB"].ToString(),
+                            AnsC = row["ansC"].ToString(),
+                            AnsD = row["ansD"].ToString(),
+                            RightAns = 4
+                        });
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        }
         public static void GetKeyWordExListByLessonId(ObservableCollection<KeyWordEx> KeyWordExList, int turnNumber, string server)
         {
             dbLesson = new dbLesson(server);
             DataTable temp = dbLesson.GetKeyWordExListByLessonId(turnNumber);
+            foreach (DataRow row in temp.Rows)
+            {
+
+                switch (row["rightAns"].ToString())
+                {
+                    case "A":
+                        KeyWordExList.Add(new KeyWordEx
+                        {
+                            ChoseA = true,
+                            ChoseB = false,
+                            ChoseC = false,
+                            ChoseD = false,
+                            KeyWord = row["keyWord"].ToString(),
+                            AnsA = row["ansA"].ToString(),
+                            AnsB = row["ansB"].ToString(),
+                            AnsC = row["ansC"].ToString(),
+                            AnsD = row["ansD"].ToString(),
+                            RightAns = 1
+                        });
+                        break;
+                    case "B":
+                        KeyWordExList.Add(new KeyWordEx
+                        {
+                            ChoseA = false,
+                            ChoseB = true,
+                            ChoseC = false,
+                            ChoseD = false,
+                            KeyWord = row["keyWord"].ToString(),
+                            AnsA = row["ansA"].ToString(),
+                            AnsB = row["ansB"].ToString(),
+                            AnsC = row["ansC"].ToString(),
+                            AnsD = row["ansD"].ToString(),
+                            RightAns = 2
+                        });
+                        break;
+                    case "C":
+                        KeyWordExList.Add(new KeyWordEx
+                        {
+                            ChoseA = false,
+                            ChoseB = false,
+                            ChoseC = true,
+                            ChoseD = false,
+                            KeyWord = row["keyWord"].ToString(),
+                            AnsA = row["ansA"].ToString(),
+                            AnsB = row["ansB"].ToString(),
+                            AnsC = row["ansC"].ToString(),
+                            AnsD = row["ansD"].ToString(),
+                            RightAns = 3
+                        });
+                        break;
+                    case "D":
+                        KeyWordExList.Add(new KeyWordEx
+                        {
+                            ChoseA = false,
+                            ChoseB = false,
+                            ChoseC = false,
+                            ChoseD = true,
+                            KeyWord = row["keyWord"].ToString(),
+                            AnsA = row["ansA"].ToString(),
+                            AnsB = row["ansB"].ToString(),
+                            AnsC = row["ansC"].ToString(),
+                            AnsD = row["ansD"].ToString(),
+                            RightAns = 4
+                        });
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        }
+        public static void GetKeyWordExListByLessonId_full(ObservableCollection<KeyWordEx> KeyWordExList, int turnNumber, string server)
+        {
+            dbLesson = new dbLesson(server);
+            DataTable temp = dbLesson.GetKeyWordExListByLessonId_full(turnNumber);
             foreach (DataRow row in temp.Rows)
             {
 
@@ -172,7 +322,7 @@ namespace SoBasicEnglish
             {
                 KeyWordList.Add(new KeyWord
                 {
-                    Index = 0,
+                    Index = Int32.Parse(row["turnNumber"].ToString()) - 1,
                     Word = row["keyWord"].ToString(),
                     VieWord = row["vieWord"].ToString(),
                     HowToReadWord = row["howToReadWord"].ToString(),
@@ -189,14 +339,89 @@ namespace SoBasicEnglish
             DataTable temp = dbLesson.GetSentenceListByLessonId(turnNumber);
             foreach(DataRow i in temp.Rows)
             {
-                SentenceList.Add(new Sentence { Index = 0, KeySentence = i["keySentence"].ToString(), VieMeanOfSentence = i["vieMeanOfSentence"].ToString(), HowToRead = i["howToRead"].ToString() });
+                SentenceList.Add(new Sentence { Index = Int32.Parse(i["turnNumber"].ToString())-1, KeySentence = i["keySentence"].ToString(), VieMeanOfSentence = i["vieMeanOfSentence"].ToString(), HowToRead = i["howToRead"].ToString() });
 
             }
-        }
+        }       
         public static void GetSentenceExListByLessonId(ObservableCollection<SentenceEx> SentenceExList, int turnNumber, string server)
         {
             dbLesson = new dbLesson(server);
             DataTable temp = dbLesson.GetSentenceExListByLessonId(turnNumber);
+            foreach (DataRow row in temp.Rows)
+            {
+
+                switch (row["rightAns"].ToString())
+                {
+                    case "A":
+                        SentenceExList.Add(new SentenceEx
+                        {
+                            ChoseA = true,
+                            ChoseB = false,
+                            ChoseC = false,
+                            ChoseD = false,
+                            KeyWord = row["keySentence"].ToString(),
+                            AnsA = row["ansA"].ToString(),
+                            AnsB = row["ansB"].ToString(),
+                            AnsC = row["ansC"].ToString(),
+                            AnsD = row["ansD"].ToString(),
+                            RightAns = 1
+                        });
+                        break;
+                    case "B":
+                        SentenceExList.Add(new SentenceEx
+                        {
+                            ChoseA = false,
+                            ChoseB = true,
+                            ChoseC = false,
+                            ChoseD = false,
+                            KeyWord = row["keySentence"].ToString(),
+                            AnsA = row["ansA"].ToString(),
+                            AnsB = row["ansB"].ToString(),
+                            AnsC = row["ansC"].ToString(),
+                            AnsD = row["ansD"].ToString(),
+                            RightAns = 2
+                        });
+                        break;
+                    case "C":
+                        SentenceExList.Add(new SentenceEx
+                        {
+                            ChoseA = false,
+                            ChoseB = false,
+                            ChoseC = true,
+                            ChoseD = false,
+                            KeyWord = row["keySentence"].ToString(),
+                            AnsA = row["ansA"].ToString(),
+                            AnsB = row["ansB"].ToString(),
+                            AnsC = row["ansC"].ToString(),
+                            AnsD = row["ansD"].ToString(),
+                            RightAns = 3
+                        });
+                        break;
+                    case "D":
+                        SentenceExList.Add(new SentenceEx
+                        {
+                            ChoseA = false,
+                            ChoseB = false,
+                            ChoseC = false,
+                            ChoseD = true,
+                            KeyWord = row["keySentence"].ToString(),
+                            AnsA = row["ansA"].ToString(),
+                            AnsB = row["ansB"].ToString(),
+                            AnsC = row["ansC"].ToString(),
+                            AnsD = row["ansD"].ToString(),
+                            RightAns = 4
+                        });
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        }
+        public static void GetSentenceExListByLessonId_full(ObservableCollection<SentenceEx> SentenceExList, int turnNumber, string server)
+        {
+            dbLesson = new dbLesson(server);
+            DataTable temp = dbLesson.GetSentenceExListByLessonId_full(turnNumber);
             foreach (DataRow row in temp.Rows)
             {
 
@@ -343,6 +568,81 @@ namespace SoBasicEnglish
 
             }
         }
+        public static void GetListenQuestionByLessonId_full(ObservableCollection<ListeningQuestion> ListenQuestionList, int turnNumber, string server)
+        {
+            dbLesson = new dbLesson(server);
+            DataTable temp = dbLesson.GetListenQuestionByLessonId_full(turnNumber);
+            foreach (DataRow row in temp.Rows)
+            {
+
+                switch (row["rightAns"].ToString())
+                {
+                    case "A":
+                        ListenQuestionList.Add(new ListeningQuestion
+                        {
+                            ChoseA = true,
+                            ChoseB = false,
+                            ChoseC = false,
+                            ChoseD = false,
+                            QuestionContent = row["quesSentence"].ToString(),
+                            AnsA = row["ansA"].ToString(),
+                            AnsB = row["ansB"].ToString(),
+                            AnsC = row["ansC"].ToString(),
+                            AnsD = row["ansD"].ToString(),
+                            RightAns = 1
+                        });
+                        break;
+                    case "B":
+                        ListenQuestionList.Add(new ListeningQuestion
+                        {
+                            ChoseA = false,
+                            ChoseB = true,
+                            ChoseC = false,
+                            ChoseD = false,
+                            QuestionContent = row["quesSentence"].ToString(),
+                            AnsA = row["ansA"].ToString(),
+                            AnsB = row["ansB"].ToString(),
+                            AnsC = row["ansC"].ToString(),
+                            AnsD = row["ansD"].ToString(),
+                            RightAns = 2
+                        });
+                        break;
+                    case "C":
+                        ListenQuestionList.Add(new ListeningQuestion
+                        {
+                            ChoseA = false,
+                            ChoseB = false,
+                            ChoseC = true,
+                            ChoseD = false,
+                            QuestionContent = row["quesSentence"].ToString(),
+                            AnsA = row["ansA"].ToString(),
+                            AnsB = row["ansB"].ToString(),
+                            AnsC = row["ansC"].ToString(),
+                            AnsD = row["ansD"].ToString(),
+                            RightAns = 3
+                        });
+                        break;
+                    case "D":
+                        ListenQuestionList.Add(new ListeningQuestion
+                        {
+                            ChoseA = false,
+                            ChoseB = false,
+                            ChoseC = false,
+                            ChoseD = true,
+                            QuestionContent = row["quesSentence"].ToString(),
+                            AnsA = row["ansA"].ToString(),
+                            AnsB = row["ansB"].ToString(),
+                            AnsC = row["ansC"].ToString(),
+                            AnsD = row["ansD"].ToString(),
+                            RightAns = 4
+                        });
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        }
         public static void GetListenPart2QuestionListById(ObservableCollection<ListeningPart2Question> ListeningPart2QuestionList, int turnNumber, string server)
         {
             dbLesson = new dbLesson(server);
@@ -353,10 +653,95 @@ namespace SoBasicEnglish
 
             }
         }
+        public static void GetListenPart2QuestionListById_full(ObservableCollection<ListeningPart2Question> ListeningPart2QuestionList, int turnNumber, string server)
+        {
+            dbLesson = new dbLesson(server);
+            DataTable temp = dbLesson.GetListenPart2QuestionListById_full(turnNumber);
+            foreach (DataRow i in temp.Rows)
+            {
+                ListeningPart2QuestionList.Add(new ListeningPart2Question { Before = i["beforeText"].ToString(), After = i["afterText"].ToString(), Value = i["Value"].ToString() });
+
+            }
+        }
         public static void GetGrammarQuestionById(ObservableCollection<GrammarQuestion> GrammarQuestionList, int turnNumber, string server)
         {
             dbLesson = new dbLesson(server);
             DataTable temp = dbLesson.GetGrammarQuestionById(turnNumber);
+            foreach (DataRow row in temp.Rows)
+            {
+
+                switch (row["rightAns"].ToString())
+                {
+                    case "A":
+                        GrammarQuestionList.Add(new GrammarQuestion
+                        {
+                            ChoseA = true,
+                            ChoseB = false,
+                            ChoseC = false,
+                            ChoseD = false,
+                            KeyWord = row["quesSentence"].ToString(),
+                            AnsA = row["ansA"].ToString(),
+                            AnsB = row["ansB"].ToString(),
+                            AnsC = row["ansC"].ToString(),
+                            AnsD = row["ansD"].ToString(),
+                            RightAns = 1
+                        });
+                        break;
+                    case "B":
+                        GrammarQuestionList.Add(new GrammarQuestion
+                        {
+                            ChoseA = false,
+                            ChoseB = true,
+                            ChoseC = false,
+                            ChoseD = false,
+                            KeyWord = row["quesSentence"].ToString(),
+                            AnsA = row["ansA"].ToString(),
+                            AnsB = row["ansB"].ToString(),
+                            AnsC = row["ansC"].ToString(),
+                            AnsD = row["ansD"].ToString(),
+                            RightAns = 2
+                        });
+                        break;
+                    case "C":
+                        GrammarQuestionList.Add(new GrammarQuestion
+                        {
+                            ChoseA = false,
+                            ChoseB = false,
+                            ChoseC = true,
+                            ChoseD = false,
+                            KeyWord = row["quesSentence"].ToString(),
+                            AnsA = row["ansA"].ToString(),
+                            AnsB = row["ansB"].ToString(),
+                            AnsC = row["ansC"].ToString(),
+                            AnsD = row["ansD"].ToString(),
+                            RightAns = 3
+                        });
+                        break;
+                    case "D":
+                        GrammarQuestionList.Add(new GrammarQuestion
+                        {
+                            ChoseA = false,
+                            ChoseB = false,
+                            ChoseC = false,
+                            ChoseD = true,
+                            KeyWord = row["quesSentence"].ToString(),
+                            AnsA = row["ansA"].ToString(),
+                            AnsB = row["ansB"].ToString(),
+                            AnsC = row["ansC"].ToString(),
+                            AnsD = row["ansD"].ToString(),
+                            RightAns = 4
+                        });
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        }
+        public static void GetGrammarQuestionById_full(ObservableCollection<GrammarQuestion> GrammarQuestionList, int turnNumber, string server)
+        {
+            dbLesson = new dbLesson(server);
+            DataTable temp = dbLesson.GetGrammarQuestionById_full(turnNumber);
             foreach (DataRow row in temp.Rows)
             {
 

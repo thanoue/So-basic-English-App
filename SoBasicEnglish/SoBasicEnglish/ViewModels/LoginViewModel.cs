@@ -68,6 +68,7 @@ namespace SoBasicEnglish.ViewModels
         #region Constructor
         public LoginViewModel()
         {
+            Model.serverName = @".\";
             dbLogin = new dbLogin(Model.serverName);
             Login = new RelayCommand<UIElementCollection>((p) => true, LoginToSystem);
             CLickNo = new RelayCommand<object>((p) => true, Close);

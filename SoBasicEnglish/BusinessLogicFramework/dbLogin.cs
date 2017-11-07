@@ -24,6 +24,10 @@ namespace BusinessLogicFramework
         {
             return db.GetRoleByUserLoginName(userLoginName);
         } 
+        public int GetProcessByUserLoginName(string userLoginName)
+        {
+            return db.GetprocessByUserLoginName(userLoginName);
+        }
         public string GetUserNameByUserLoginName(string userLoginName)
         {
             return db.GetUserNameByUserLoginName(userLoginName);
