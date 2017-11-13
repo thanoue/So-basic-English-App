@@ -12,8 +12,87 @@ using System.Windows.Media;
 using System.Collections.ObjectModel;
 namespace SoBasicEnglish
 {
-   public static class Model
+    public static class Model
     {
+
+        public static byte[] one { get {
+                MemoryStream ms = new MemoryStream();
+                Properties.Resources.Digital___One.Save(ms, Properties.Resources.Digital___One.RawFormat);
+                return  ms.GetBuffer();
+            }
+        }
+        public static byte[] two
+        {
+            get
+            {
+                MemoryStream ms = new MemoryStream();
+                Properties.Resources.Digital___Two.Save(ms, Properties.Resources.Digital___Two.RawFormat);
+                return ms.GetBuffer();
+            }
+        }
+        public static byte[] three
+        {
+            get
+            {
+                MemoryStream ms = new MemoryStream();
+                Properties.Resources.Digital___Three.Save(ms, Properties.Resources.Digital___Three.RawFormat);
+                return ms.GetBuffer();
+            }
+        }
+        public static byte[] four
+        {
+            get
+            {
+                MemoryStream ms = new MemoryStream();
+                Properties.Resources.Digital___Four.Save(ms, Properties.Resources.Digital___Four.RawFormat);
+                return ms.GetBuffer();
+            }
+        }
+        public static byte[] five
+        {
+            get
+            {
+                MemoryStream ms = new MemoryStream();
+                Properties.Resources.Digital___Five.Save(ms, Properties.Resources.Digital___Five.RawFormat);
+                return ms.GetBuffer();
+            }
+        }
+        public static byte[] six
+        {
+            get
+            {
+                MemoryStream ms = new MemoryStream();
+                Properties.Resources.Digital___Six.Save(ms, Properties.Resources.Digital___Six.RawFormat);
+                return ms.GetBuffer();
+            }
+        }
+        public static byte[] eight
+        {
+            get
+            {
+                MemoryStream ms = new MemoryStream();
+                Properties.Resources.Digital___Eight.Save(ms, Properties.Resources.Digital___Eight.RawFormat);
+                return ms.GetBuffer();
+            }
+        }
+        public static byte[] nine
+        {
+            get
+            {
+                MemoryStream ms = new MemoryStream();
+                Properties.Resources.Digital___Nine.Save(ms, Properties.Resources.Digital___Nine.RawFormat);
+                return ms.GetBuffer();
+            }
+        }
+        public static byte[] zero
+        {
+            get
+            {
+                MemoryStream ms = new MemoryStream();
+                Properties.Resources.Digital___Zero.Save(ms, Properties.Resources.Digital___Zero.RawFormat);
+                return ms.GetBuffer();
+            }
+        }
         public static string serverName { get; set; }
         public static string userFullname { get; set; }
         public static string userLoginName { get; set; }
@@ -28,13 +107,12 @@ namespace SoBasicEnglish
             DataTable temp = dbLesson.GetGettingReadyQuestionByLessonId(turnNumber);
             foreach(DataRow row in temp.Rows)
             {
-
                 switch (row["rightAns"].ToString())
                 {
                     case "A":
                         GettingreadyQuestionList.Add(new GettingReadyQuestion
                         {
-                            ChoseA = true,ChoseB = false,ChoseC = false,ChoseD = false,KeyWord = row["quesContent"].ToString(),AnsA = row["ansA"].ToString(),AnsB = row["ansB"].ToString(),AnsC = row["ansC"].ToString(),AnsD = row["ansD"].ToString(),
+                            ChoseA = false,ChoseB = false,ChoseC = false,ChoseD = false,KeyWord = row["quesContent"].ToString(),AnsA = row["ansA"].ToString(),AnsB = row["ansB"].ToString(),AnsC = row["ansC"].ToString(),AnsD = row["ansD"].ToString(),
                             RightAns = 1
                          }); 
                         break;
@@ -42,7 +120,7 @@ namespace SoBasicEnglish
                         GettingreadyQuestionList.Add(new GettingReadyQuestion
                         {
                             ChoseA = false,
-                            ChoseB = true,
+                            ChoseB = false,
                             ChoseC = false,
                             ChoseD = false,
                             KeyWord = row["quesContent"].ToString(),
@@ -58,7 +136,7 @@ namespace SoBasicEnglish
                         {
                             ChoseA = false,
                             ChoseB = false,
-                            ChoseC = true,
+                            ChoseC = false,
                             ChoseD = false,
                             KeyWord = row["quesContent"].ToString(),
                             AnsA = row["ansA"].ToString(),
@@ -74,7 +152,7 @@ namespace SoBasicEnglish
                             ChoseA = false,
                             ChoseB = false,
                             ChoseC = false,
-                            ChoseD = true,
+                            ChoseD = false,
                             KeyWord = row["quesContent"].ToString(),
                             AnsA = row["ansA"].ToString(),
                             AnsB = row["ansB"].ToString(),

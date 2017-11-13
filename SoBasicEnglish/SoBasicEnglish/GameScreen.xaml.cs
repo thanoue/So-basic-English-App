@@ -17,7 +17,7 @@ namespace SoBasicEnglish
     /// <summary>
     /// Interaction logic for GameScreen.xaml
     /// </summary>
-    public partial class GameScreen : Window
+    public partial class GameScreen 
     {
         public GameScreen()
         {

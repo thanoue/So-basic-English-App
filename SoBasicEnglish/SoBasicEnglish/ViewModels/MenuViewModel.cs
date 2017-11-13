@@ -41,8 +41,10 @@ namespace SoBasicEnglish.ViewModels
         public ICommand ClickAboutAuthor { get; set; }
         public ICommand ClickSetting { get; set; }
         public ICommand ClickEditing { get; set; }
+        public ICommand  Click_ToTheExam { get; set; }
         #endregion
         #region Object
+        private int _gvDateProcessSelectedIndex = -1;
         public bool OpenAboutApp { get => _openAboutApp; set { _openAboutApp = value; NotifyPropertyChanged("OpenAboutApp"); } }
         private bool _openAboutApp = false;
         public event PropertyChangedEventHandler PropertyChanged;       
@@ -101,6 +103,9 @@ namespace SoBasicEnglish.ViewModels
             } }
         private ObservableCollection<DateProcess> _dateList = new ObservableCollection<DateProcess>();
         public ObservableCollection<DateProcess> DateList { get => _dateList; set { _dateList = value; NotifyPropertyChanged("DateList"); } }
+
+        public int GvDateProcessSelectedIndex { get => _gvDateProcessSelectedIndex; set { _gvDateProcessSelectedIndex = value; NotifyPropertyChanged("GvDateProcessSelectedIndex"); } }
+
         //public List<DateProcess> dateList = new List<DateProcess>();
         private ListCollectionView _dateListOnGridView;
         DispatcherTimer timerToCloseNotify;
@@ -128,6 +133,7 @@ namespace SoBasicEnglish.ViewModels
             SelectIimage = new DelegateCommand(Browse);
             FlipSelectionChanged = new DelegateCommand(Flip_SelectionChanged);
             Click_AboutApp = new DelegateCommand(OpenAboutAppMiniWindow);
+            Click_ToTheExam = new DelegateCommand(ToTheExam);
             timerToCloseNotify = new DispatcherTimer();
             timerToCloseNotify.Tick += TimerToCloseNotify_Tick;
             timerToCloseNotify.Interval = new TimeSpan(0, 0, 4);
@@ -135,6 +141,11 @@ namespace SoBasicEnglish.ViewModels
             TimerToCloseError = new DispatcherTimer();
             TimerToCloseError.Tick += TimerToCloseError_Tick;
             TimerToCloseError.Interval = new TimeSpan(0, 0, 2);
+        }
+
+        private void ToTheExam()
+        {
+            ExamWindow a = new ExamWindow();a.ShowDialog();
         }
         #endregion
         #region Commands
@@ -173,6 +184,7 @@ namespace SoBasicEnglish.ViewModels
             UserRoleWindow tem = new UserRoleWindow();
             tem.ShowDialog();
         }
+
         private void Click_AboutAuthor()
         {
             OpenAboutAuthor = true;
@@ -207,7 +219,9 @@ namespace SoBasicEnglish.ViewModels
         private void  ChooseDateToStudy(object obj)
         {
             DateProcess temp = obj as DateProcess;
-            MessageBox.Show(temp.TurnNumber.ToString());
+            //MessageBox.Show(temp.TurnNumber.ToString());
+            Model.dateProcess = temp.TurnNumber;
+            StudyWindow a = new StudyWindow();a.ShowDialog(); 
         }
 
         private void Cancel_ChangePass()

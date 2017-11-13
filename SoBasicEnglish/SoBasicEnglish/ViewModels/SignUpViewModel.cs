@@ -75,8 +75,6 @@ namespace SoBasicEnglish.ViewModels
             SelectIimage = new DelegateCommand(Browse);
             CloseWindowCommand = new RelayCommand<Window>(this.CloseWindow);
             MemoryStream ms = new MemoryStream();
-            //    Image a;
-            //  a.Source= new BitmapImage(new Uri(@"Images/Avt/customer.png"));
             Properties.Resources.customer.Save(ms, Properties.Resources.customer.RawFormat);
             UserAvt = ms.GetBuffer();
             ms.Close();dbLogin = new dbLogin(Model.serverName);

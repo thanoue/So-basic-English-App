@@ -121,6 +121,36 @@
   <data name="customer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\customer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Digital___Eight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Digital - Eight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Digital___Five" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Digital - Five.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Digital___Four" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Digital - Four.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Digital___Nine" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Digital - Nine.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Digital___One" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Digital - One.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Digital___Seven" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Digital - Seven.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Digital___Six" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Digital - Six.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Digital___Three" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Digital - Three.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Digital___Two" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Digital - Two.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Digital___Zero" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Digital - Zero.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="z783147575155_c63412a4906445e279a3d529e379b9a7" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\z783147575155_c63412a4906445e279a3d529e379b9a7.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

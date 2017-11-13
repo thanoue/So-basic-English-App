@@ -1,0 +1,325 @@
+﻿<Controls:MetroWindow x:Class="SoBasicEnglish.Views.ExamWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SoBasicEnglish.Views"
+        mc:Ignorable="d"
+       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+       Title="ExamScreen" Height="826" Width="1239.96" WindowStartupLocation="CenterScreen"
+        GlowBrush="DarkCyan"
+        ResizeMode="CanResizeWithGrip"
+        xmlns:ViewModels="clr-namespace:SoBasicEnglish.ViewModels"
+        WindowTransitionsEnabled="False">
+    <Window.DataContext>
+        <ViewModels:ExamViewModel></ViewModels:ExamViewModel>
+    </Window.DataContext>
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="SaddleBrown" Opacity="0.4" ></SolidColorBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition/>
+
+        </Grid.ColumnDefinitions>
+        <ScrollViewer VerticalAlignment="Top" Grid.Column="0" MinWidth="600" Width="auto" Height="787" Margin="0,0,17.2,0">
+            <StackPanel Margin="0 0 30 0"  >
+                <GroupBox VerticalAlignment="Top" Margin="5" Header="Key words"  Height="454">
+
+                    <ListView Margin="05 0 05 0">
+                        <ListViewItem MinWidth="450">
+                            <Grid Height="135" Margin="0 0 5 0" >
+                                <Border Margin="0" BorderBrush="Black" BorderThickness="1">
+                                    <StackPanel Margin="5">
+                                        <StackPanel Orientation="Horizontal" >
+                                            <TextBlock Foreground="DarkGreen" VerticalAlignment="Top" Text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"   Margin="10 0 0 0" Width="415" MinWidth="350" FontSize="20"  FontWeight="Bold" Height="25" ></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="20 0 20 0" Orientation="Horizontal" >
+                                            <StackPanel >
+                                                <RadioButton IsChecked="{Binding ChoseA,Mode=TwoWay}"  Margin="0 3 0 0"></RadioButton>
+                                                <RadioButton IsChecked="{Binding ChoseB,Mode=TwoWay}"  Margin="0 6 0 0"></RadioButton>
+                                                <RadioButton IsChecked="{Binding ChoseC,Mode=TwoWay}"  Margin="0 7 0 0"></RadioButton>
+                                                <RadioButton IsChecked="{Binding ChoseD,Mode=TwoWay}"  Margin="0 7 0 0"></RadioButton>
+                                            </StackPanel>
+                                            <StackPanel Width="361">
+                                                <TextBlock Background="{Binding BgA}"  Margin="0,0,-0.2,5" Width="361" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="aaaaaaaaaaa" FontSize="15"></TextBlock>
+                                                <TextBlock Background="{Binding BgB}"  Margin="0,0,-0.2,5"  Width="361" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="aaaaaaaaaaa" FontSize="15"></TextBlock>
+                                                <TextBlock Background="{Binding BgC}"  Margin="0,0,-0.2,5"  Width="361" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="aaaaaaaaaaa" FontSize="15"></TextBlock>
+                                                <TextBlock Background="{Binding BgD}"  Margin="0,0,-0.2,5"  Width="361" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="aaaaaaaaaaa" FontSize="15"></TextBlock>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+
+                        </ListViewItem>
+                        <ListViewItem  MinWidth="450">
+                            <Grid Height="135" Margin="0 0 5 0" >
+                                <Border Margin="0" BorderBrush="Black" BorderThickness="1">
+                                    <StackPanel Margin="5">
+                                        <StackPanel Orientation="Horizontal" >
+                                            <TextBlock Foreground="DarkGreen" VerticalAlignment="Top" Text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"   Margin="10 0 0 0" Width="415" MinWidth="350" FontSize="20"  FontWeight="Bold" Height="25" ></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="20 0 20 0" Orientation="Horizontal" >
+                                            <StackPanel >
+                                                <RadioButton IsChecked="{Binding ChoseA,Mode=TwoWay}"  Margin="0 3 0 0"></RadioButton>
+                                                <RadioButton IsChecked="{Binding ChoseB,Mode=TwoWay}"  Margin="0 6 0 0"></RadioButton>
+                                                <RadioButton IsChecked="{Binding ChoseC,Mode=TwoWay}"  Margin="0 7 0 0"></RadioButton>
+                                                <RadioButton IsChecked="{Binding ChoseD,Mode=TwoWay}"  Margin="0 7 0 0"></RadioButton>
+                                            </StackPanel>
+                                            <StackPanel Width="361">
+                                                <TextBlock Background="{Binding BgA}"  Margin="0,0,-0.2,5" Width="361" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="aaaaaaaaaaa" FontSize="15"></TextBlock>
+                                                <TextBlock Background="{Binding BgB}"  Margin="0,0,-0.2,5"  Width="361" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="aaaaaaaaaaa" FontSize="15"></TextBlock>
+                                                <TextBlock Background="{Binding BgC}"  Margin="0,0,-0.2,5"  Width="361" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="aaaaaaaaaaa" FontSize="15"></TextBlock>
+                                                <TextBlock Background="{Binding BgD}"  Margin="0,0,-0.2,5"  Width="361" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="aaaaaaaaaaa" FontSize="15"></TextBlock>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+
+                        </ListViewItem>
+                        <ListViewItem MinWidth="450">
+                            <Grid Height="135" Margin="0 0 5 0" >
+                                <Border Margin="0" BorderBrush="Black" BorderThickness="1">
+                                    <StackPanel Margin="5">
+                                        <StackPanel Orientation="Horizontal" >
+                                            <TextBlock Foreground="DarkGreen" VerticalAlignment="Top" Text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"   Margin="10 0 0 0" Width="415" MinWidth="350" FontSize="20"  FontWeight="Bold" Height="25" ></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="20 0 20 0" Orientation="Horizontal" >
+                                            <StackPanel >
+                                                <RadioButton IsChecked="{Binding ChoseA,Mode=TwoWay}"  Margin="0 3 0 0"></RadioButton>
+                                                <RadioButton IsChecked="{Binding ChoseB,Mode=TwoWay}"  Margin="0 6 0 0"></RadioButton>
+                                                <RadioButton IsChecked="{Binding ChoseC,Mode=TwoWay}"  Margin="0 7 0 0"></RadioButton>
+                                                <RadioButton IsChecked="{Binding ChoseD,Mode=TwoWay}"  Margin="0 7 0 0"></RadioButton>
+                                            </StackPanel>
+                                            <StackPanel Width="361">
+                                                <TextBlock Background="{Binding BgA}"  Margin="0,0,-0.2,5" Width="361" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="aaaaaaaaaaa" FontSize="15"></TextBlock>
+                                                <TextBlock Background="{Binding BgB}"  Margin="0,0,-0.2,5"  Width="361" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="aaaaaaaaaaa" FontSize="15"></TextBlock>
+                                                <TextBlock Background="{Binding BgC}"  Margin="0,0,-0.2,5"  Width="361" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="aaaaaaaaaaa" FontSize="15"></TextBlock>
+                                                <TextBlock Background="{Binding BgD}"  Margin="0,0,-0.2,5"  Width="361" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="aaaaaaaaaaa" FontSize="15"></TextBlock>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+
+                        </ListViewItem>
+                        <ListViewItem MinWidth="450">
+                            <Grid Height="135" Margin="0 0 5 0" >
+                                <Border Margin="0" BorderBrush="Black" BorderThickness="1">
+                                    <StackPanel Margin="5">
+                                        <StackPanel Orientation="Horizontal" >
+                                            <TextBlock Foreground="DarkGreen" VerticalAlignment="Top" Text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"   Margin="10 0 0 0" Width="415" MinWidth="350" FontSize="20"  FontWeight="Bold" Height="25" ></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="20 0 20 0" Orientation="Horizontal" >
+                                            <StackPanel >
+                                                <RadioButton IsChecked="{Binding ChoseA,Mode=TwoWay}"  Margin="0 3 0 0"></RadioButton>
+                                                <RadioButton IsChecked="{Binding ChoseB,Mode=TwoWay}"  Margin="0 6 0 0"></RadioButton>
+                                                <RadioButton IsChecked="{Binding ChoseC,Mode=TwoWay}"  Margin="0 7 0 0"></RadioButton>
+                                                <RadioButton IsChecked="{Binding ChoseD,Mode=TwoWay}"  Margin="0 7 0 0"></RadioButton>
+                                            </StackPanel>
+                                            <StackPanel Width="361">
+                                                <TextBlock Background="{Binding BgA}"  Margin="0,0,-0.2,5" Width="361" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="aaaaaaaaaaa" FontSize="15"></TextBlock>
+                                                <TextBlock Background="{Binding BgB}"  Margin="0,0,-0.2,5"  Width="361" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="aaaaaaaaaaa" FontSize="15"></TextBlock>
+                                                <TextBlock Background="{Binding BgC}"  Margin="0,0,-0.2,5"  Width="361" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="aaaaaaaaaaa" FontSize="15"></TextBlock>
+                                                <TextBlock Background="{Binding BgD}"  Margin="0,0,-0.2,5"  Width="361" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="aaaaaaaaaaa" FontSize="15"></TextBlock>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+
+                        </ListViewItem>
+
+                    </ListView>
+
+                </GroupBox>
+                <Border Background="Beige" Margin="5 10 5 0" Height="688" BorderBrush="Black" BorderThickness="1" >
+                    <Grid>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height=".12*"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Border Grid.Row="0" HorizontalAlignment="Center" Background="Bisque" CornerRadius="25" BorderBrush="LightBlue" BorderThickness="4" Margin="114,10,105.8,614.4" Width="537" Grid.RowSpan="2">
+                                <StackPanel VerticalAlignment="Bottom" Margin="25,0,27.8,6.4" Background="Bisque" Orientation="Horizontal" Height="42">
+
+                                    <Button Margin="0 0 0 0"   Background="Green" Width="45"  Height="45" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                        <Image Source="..\Images/Assets/Speaker.png" Height="20" Width="20"/>
+                                    </Button>
+                                    <Slider  VerticalAlignment="Center" Value="20" x:Name="sliProgress" IsEnabled="False"  Style="{DynamicResource FlatSlider}" Background="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Foreground="#CC2AABE2" BorderBrush="#FF881D1D" OpacityMask="#FF960B0B"  Height="10" Margin="10,17,0,14.6" MinWidth="420" Width="auto" />
+                                </StackPanel>
+                            </Border>
+                            <ScrollViewer Margin="0,0.6,-0.2,9.8" Grid.Row="1" >
+                                <StackPanel>
+                                    <ListView Background="Transparent" Margin="50 10 50 0">
+                                        <ListViewItem MinWidth="400" Width="auto">
+                                            <Grid Height="135" Margin="0 0 5 0" >
+                                                <Border Margin="0" BorderBrush="Black" BorderThickness="1">
+                                                    <StackPanel Margin="5">
+                                                        <StackPanel Orientation="Horizontal" >
+                                                            <TextBlock Foreground="DarkGreen" VerticalAlignment="Top" Text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"   Margin="10 0 0 0" Width="415" MinWidth="350" FontSize="20"  FontWeight="Bold" Height="25" ></TextBlock>
+                                                        </StackPanel>
+                                                        <StackPanel Margin="20 0 20 0" Orientation="Horizontal" >
+                                                            <StackPanel >
+                                                                <RadioButton IsChecked="{Binding ChoseA,Mode=TwoWay}"  Margin="0 3 0 0"></RadioButton>
+                                                                <RadioButton IsChecked="{Binding ChoseB,Mode=TwoWay}"  Margin="0 6 0 0"></RadioButton>
+                                                                <RadioButton IsChecked="{Binding ChoseC,Mode=TwoWay}"  Margin="0 7 0 0"></RadioButton>
+                                                                <RadioButton IsChecked="{Binding ChoseD,Mode=TwoWay}"  Margin="0 7 0 0"></RadioButton>
+                                                            </StackPanel>
+                                                            <StackPanel Width="361">
+                                                                <TextBlock Background="{Binding BgA}"  Margin="0,0,-0.2,5" Width="361" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="aaaaaaaaaaa" FontSize="15"></TextBlock>
+                                                                <TextBlock Background="{Binding BgB}"  Margin="0,0,-0.2,5"  Width="361" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="aaaaaaaaaaa" FontSize="15"></TextBlock>
+                                                                <TextBlock Background="{Binding BgC}"  Margin="0,0,-0.2,5"  Width="361" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="aaaaaaaaaaa" FontSize="15"></TextBlock>
+                                                                <TextBlock Background="{Binding BgD}"  Margin="0,0,-0.2,5"  Width="361" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="aaaaaaaaaaa" FontSize="15"></TextBlock>
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                </Border>
+                                            </Grid>
+
+                                        </ListViewItem>
+                                        <ListViewItem MinWidth="400" Width="auto">
+                                            <Grid Height="135" Margin="0 0 5 0" >
+                                                <Border Margin="0" BorderBrush="Black" BorderThickness="1">
+                                                    <StackPanel Margin="5">
+                                                        <StackPanel Orientation="Horizontal" >
+                                                            <TextBlock Foreground="DarkGreen" VerticalAlignment="Top" Text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"   Margin="10 0 0 0" Width="415" MinWidth="350" FontSize="20"  FontWeight="Bold" Height="25" ></TextBlock>
+                                                        </StackPanel>
+                                                        <StackPanel Margin="20 0 20 0" Orientation="Horizontal" >
+                                                            <StackPanel >
+                                                                <RadioButton IsChecked="{Binding ChoseA,Mode=TwoWay}"  Margin="0 3 0 0"></RadioButton>
+                                                                <RadioButton IsChecked="{Binding ChoseB,Mode=TwoWay}"  Margin="0 6 0 0"></RadioButton>
+                                                                <RadioButton IsChecked="{Binding ChoseC,Mode=TwoWay}"  Margin="0 7 0 0"></RadioButton>
+                                                                <RadioButton IsChecked="{Binding ChoseD,Mode=TwoWay}"  Margin="0 7 0 0"></RadioButton>
+                                                            </StackPanel>
+                                                            <StackPanel Width="361">
+                                                                <TextBlock Background="{Binding BgA}"  Margin="0,0,-0.2,5" Width="361" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="aaaaaaaaaaa" FontSize="15"></TextBlock>
+                                                                <TextBlock Background="{Binding BgB}"  Margin="0,0,-0.2,5"  Width="361" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="aaaaaaaaaaa" FontSize="15"></TextBlock>
+                                                                <TextBlock Background="{Binding BgC}"  Margin="0,0,-0.2,5"  Width="361" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="aaaaaaaaaaa" FontSize="15"></TextBlock>
+                                                                <TextBlock Background="{Binding BgD}"  Margin="0,0,-0.2,5"  Width="361" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="aaaaaaaaaaa" FontSize="15"></TextBlock>
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                </Border>
+                                            </Grid>
+
+                                        </ListViewItem>
+
+                                    </ListView>
+
+                                    <Border Margin="10" BorderBrush="Black" BorderThickness="1" Height="316" Background="AliceBlue" >
+                                        <ListView BorderBrush="Black" BorderThickness="1" Background="Transparent" Margin="10,10.2,10,10"  MinWidth="699" >
+                                            <!--<ListBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                       
+                                                    </DataTemplate>
+                                                </ListBox.ItemTemplate>-->
+                                            <ListViewItem Background="Transparent">
+                                                <Grid Height="auto"  Margin="20,10,0,10" >
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock FontSize="25" Text="ccccccccccccccccc" Width="auto"/>
+                                                        <TextBox Foreground="{Binding ValueBrush}" MinWidth="50" Margin="10 0 0 0"  Height="35" VerticalAlignment="Center" FontSize="20" BorderBrush="Red" Text="{Binding Value, Mode=TwoWay}" BorderThickness="1" Width="auto"  />
+                                                        <TextBlock FontSize="25" Margin="10 0 0 0" Width="auto"  Text="ccccccccccccccccccccccc" />
+                                                    </StackPanel>
+                                                </Grid>
+                                            </ListViewItem>
+                                            <ListViewItem Background="Transparent">
+                                                <Grid Height="auto"  Margin="20,10,0,10" >
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock FontSize="25" Text="ccccccccccccccccc" Width="auto"/>
+                                                        <TextBox Foreground="{Binding ValueBrush}" MinWidth="50" Margin="10 0 0 0"  Height="35" VerticalAlignment="Center" FontSize="20" BorderBrush="Red" Text="{Binding Value, Mode=TwoWay}" BorderThickness="1" Width="auto"  />
+                                                        <TextBlock FontSize="25" Margin="10 0 0 0" Width="auto"  Text="ccccccccccccccccccccccc" />
+                                                    </StackPanel>
+                                                </Grid>
+                                            </ListViewItem>
+                                            <ListViewItem Background="Transparent">
+                                                <Grid Height="auto"  Margin="20,10,0,10" >
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock FontSize="25" Text="ccccccccccccccccc" Width="auto"/>
+                                                        <TextBox Foreground="{Binding ValueBrush}" MinWidth="50" Margin="10 0 0 0"  Height="35" VerticalAlignment="Center" FontSize="20" BorderBrush="Red" Text="{Binding Value, Mode=TwoWay}" BorderThickness="1" Width="auto"  />
+                                                        <TextBlock FontSize="25" Margin="10 0 0 0" Width="auto"  Text="ccccccccccccccccccccccc" />
+                                                    </StackPanel>
+                                                </Grid>
+                                            </ListViewItem>
+                                            <ListViewItem Background="Transparent">
+                                                <Grid Height="auto"  Margin="20,10,0,10" >
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock FontSize="25" Text="ccccccccccccccccc" Width="auto"/>
+                                                        <TextBox Foreground="{Binding ValueBrush}" MinWidth="50" Margin="10 0 0 0"  Height="35" VerticalAlignment="Center" FontSize="20" BorderBrush="Red" Text="{Binding Value, Mode=TwoWay}" BorderThickness="1" Width="auto"  />
+                                                        <TextBlock FontSize="25" Margin="10 0 0 0" Width="auto"  Text="ccccccccccccccccccccccc" />
+                                                    </StackPanel>
+                                                </Grid>
+                                            </ListViewItem>
+                                            <ListViewItem Background="Transparent">
+                                                <Grid Height="auto"  Margin="20,10,0,10" >
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock FontSize="25" Text="ccccccccccccccccc" Width="auto"/>
+                                                        <TextBox Foreground="{Binding ValueBrush}" MinWidth="50" Margin="10 0 0 0"  Height="35" VerticalAlignment="Center" FontSize="20" BorderBrush="Red" Text="{Binding Value, Mode=TwoWay}" BorderThickness="1" Width="auto"  />
+                                                        <TextBlock FontSize="25" Margin="10 0 0 0" Width="auto"  Text="ccccccccccccccccccccccc" />
+                                                    </StackPanel>
+                                                </Grid>
+                                            </ListViewItem>
+                                        </ListView>
+
+                                    </Border>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+                </Border>
+                <Border Height="252" Background="AntiqueWhite" BorderBrush="Black" BorderThickness="1" Margin=" 5 10 5 0">
+                    <StackPanel>
+                        <StackPanel Margin="0 10 0 0" Orientation="Horizontal">
+                            <Border Grid.Row="0" HorizontalAlignment="Left" Background="Khaki" CornerRadius="25" BorderBrush="LightBlue" BorderThickness="4" Margin="70 0 0 0" MinWidth="637" Width="681" Grid.RowSpan="2">
+                                <StackPanel VerticalAlignment="Center" Margin="25,8,0,6.4" Background="Khaki" Orientation="Horizontal" Width="621" MinWidth="400" Height="45" HorizontalAlignment="Left">
+
+                                    <Button Margin="0,0,0,-0.4"   Background="Green" Width="45" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                        <Image Source="..\Images/Assets/Mic-03.png" Height="20" Width="20"/>
+                                    </Button>
+                                    <TextBlock FontFamily="Showcard Gothic" FontSize="30" FontStyle="Italic" FontWeight="Bold" Text="demo" TextAlignment="Center" VerticalAlignment="Center" Width="599" MinWidth="500" Margin="0,-1,0,-1.2" ></TextBlock>
+                                </StackPanel>
+                            </Border>
+                            <Button Margin="20,0,0,-0.4"   Background="BlueViolet" Width="65" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                <Image Source="..\Images/Assets/Totheright.png" Height="25" Width="25"/>
+                            </Button>
+                        </StackPanel>
+
+                        <StackPanel Margin="10" Height="150">
+                            <Border Background="Orchid" CornerRadius="15" BorderBrush="Transparent" BorderThickness="1.5" Margin="10" Height="auto" MinHeight="130" >
+                                <TextBlock Background="Transparent" Foreground="Brown"  TextWrapping="Wrap"   Height="80" Margin="20" FontSize="30" Text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" FontFamily="Showcard Gothic"  >
+
+                                </TextBlock>
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="1" Height="200" Margin=" 5 10"/>
+            </StackPanel>
+        </ScrollViewer>
+        <Border Margin="10" Width="auto" MinWidth="170" Grid.Column="1" BorderBrush="Black" BorderThickness="1" >
+            <StackPanel  Margin="0.2,0.2,-0.6,-1.8">
+                <StackPanel.Background>
+                    <SolidColorBrush Color="SaddleBrown" Opacity="0.75"></SolidColorBrush>
+                </StackPanel.Background>
+                <Border CornerRadius="90" BorderThickness="1" Background="SaddleBrown"  Margin="20" Height="175">
+                    <StackPanel Orientation="Horizontal" Margin="32">
+                        <Image VerticalAlignment="Center" Margin="6 0" Width="50" Source="{Binding BigNumImage}" ></Image>
+                        <Image Width="50" VerticalAlignment="Center" Source="{Binding SmallNumImage}" ></Image>
+                    </StackPanel>
+                </Border>
+                <StackPanel Orientation="Horizontal">
+                    <Button Margin="50 10 0 0" HorizontalAlignment="Left" Background="Brown" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                        <Image Source="..\Images/Assets/Cirlce Play.png" Height="40" Width="30"></Image>
+                    </Button>
+                    <Button Margin="10 10 0 0"  HorizontalAlignment="Left" Background="SaddleBrown" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                        <Image Source="..\Images/Assets/Submit-01.png" Height="40" Width="30"></Image>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</Controls:MetroWindow>

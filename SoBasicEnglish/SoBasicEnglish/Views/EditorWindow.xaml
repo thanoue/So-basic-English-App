@@ -7,7 +7,8 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:ViewModels="clr-namespace:SoBasicEnglish.ViewModels"
-    xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
+    xmlns:xctk="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+    xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit"
     x:Class="SoBasicEnglish.Views.EditorWindow"                         
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
@@ -78,6 +79,7 @@
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
+                           
                             <TextBox  BorderBrush="Black" BorderThickness="1.5" Height="auto" Text="{Binding LessonName}" MinWidth="100" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Lesson name..." FontSize="20" MaxWidth="600" VerticalAlignment="Center" Margin="10 10 10 10" Width="auto"/>
                             <Button
                                 Command="{Binding Click_EditNameOfLesson}"
@@ -148,6 +150,7 @@
                                                                     <RadioButton IsChecked="{Binding ChoseD, Mode=TwoWay}"  Margin="0 13.5 0 0"/>
                                                                 </StackPanel>
                                                                 <StackPanel>
+                                                                    
                                                                     <TextBox Controls:TextBoxHelper.ClearTextButton="True" Margin="0 0 0 5"  Controls:TextBoxHelper.WatermarkAlignment="Right" Controls:TextBoxHelper.Watermark="The A choice" Width="auto" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="1" Text="{Binding AnsA, Mode=TwoWay}" FontSize="12"/>
                                                                     <TextBox Controls:TextBoxHelper.ClearTextButton="True" Margin="0 0 0 5"  Controls:TextBoxHelper.WatermarkAlignment="Right" Controls:TextBoxHelper.Watermark="The B choice" Width="auto" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="1" Text="{Binding AnsB, Mode=TwoWay}" FontSize="12"/>
                                                                     <TextBox Controls:TextBoxHelper.ClearTextButton="True" Margin="0 0 0 5"  Controls:TextBoxHelper.WatermarkAlignment="Right" Controls:TextBoxHelper.Watermark="The C choice" Width="auto" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="1" Text="{Binding AnsC, Mode=TwoWay}" FontSize="12"/>

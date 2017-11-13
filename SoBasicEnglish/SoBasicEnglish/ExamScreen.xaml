@@ -13,6 +13,9 @@
                       >
     <!--790-->
     <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="SaddleBrown" Opacity="0.4" ></SolidColorBrush>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*"/>
             <ColumnDefinition/>
@@ -297,22 +300,23 @@
         </ScrollViewer>
         <Border Margin="10" Width="auto" MinWidth="170" Grid.Column="1" BorderBrush="Black" BorderThickness="1" >
             <StackPanel  Margin="0.2,0.2,-0.6,-1.8">
-                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="10">
-                    <StackPanel>
-                        <Button Margin="0 0 0 0"   Background="Green" Width="61"  Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
-                            <Image Source="Images/Assets/Cirlce Play.png" Height="40" Width="30"></Image>
-                        </Button>
-                    </StackPanel>
-                    <StackPanel>
-                        <Button Margin="0 0 0 0"   Background="Red" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
-                            <Image Source="Images/Assets/Check-01.png" Height="40" Width="30"></Image>
-                        </Button>
-                    </StackPanel>
-
+                <StackPanel.Background>
+                    <SolidColorBrush Color="SaddleBrown" Opacity="0.75"></SolidColorBrush>
+                </StackPanel.Background>
+                <Border CornerRadius="90" BorderThickness="1" Background="SaddleBrown"  Margin="20" Height="175">
+                    <StackPanel Orientation="Horizontal" Margin="32">
+                        <Image VerticalAlignment="Center" Margin="6 0" Width="50" Source="pack://siteoforigin:,,,/Resources/Digital - Zero.png" ></Image>
+                        <Image Width="50" VerticalAlignment="Center" Source="pack://siteoforigin:,,,/Resources/Digital - Zero.png" ></Image>
+                    </StackPanel>                     
+                </Border>
+                <StackPanel Orientation="Horizontal">
+                    <Button Margin="50 10 0 0" HorizontalAlignment="Left" Background="Brown" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                        <Image Source="Images/Assets/Cirlce Play.png" Height="40" Width="30"></Image>
+                    </Button>
+                    <Button Margin="10 10 0 0"  HorizontalAlignment="Left" Background="Orchid" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                        <Image Source="Images/Assets/Submit-01.png" Height="40" Width="30"></Image>
+                    </Button>
                 </StackPanel>
-                <TextBlock HorizontalAlignment="Center" Margin="20 10" Text="12:00" TextAlignment="Center" FontSize="45" FontFamily="Showcard Gothic" >
-
-                </TextBlock>
             </StackPanel>
         </Border>
 

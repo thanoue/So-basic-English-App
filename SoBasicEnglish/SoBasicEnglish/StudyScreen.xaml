@@ -766,8 +766,8 @@
                                                                     </ToggleButton>
                                                                 </StackPanel>
 
-                                                                <!--<local:Rating HorizontalAlignment="Left" Height="30" Width="152" Value="{Binding Rating}" Margin="10,0,0,0"></local:Rating>-->
-                                                                <!--<Slider BasedOn="{StaticResource MetroSlider}" Maximum="5" Value="{Binding Rating}" Margin="10 5 10 0"></Slider>-->
+                                                                <local:Rating HorizontalAlignment="Left" Height="30" Width="152" Value="{Binding Rating}" Margin="10,0,0,0"></local:Rating>
+                                                                
                                                                 <TextBlock Height="auto"  Foreground="Beige" Margin="5 0 10 0" TextWrapping="Wrap" Text="{Binding FeedBack}" Width="auto" MaxWidth="400" ></TextBlock>
                                                             </StackPanel>
                                                         </StackPanel>
