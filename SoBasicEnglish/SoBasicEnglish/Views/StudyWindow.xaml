@@ -225,7 +225,6 @@
                                                             </ToggleButton>
                                                             <TextBlock Foreground="Wheat" FontStyle="Italic" FontSize="20" Margin="160,0,0,5" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="97">Auto next</TextBlock>
                                                         </Grid>
-
                                                     </Grid>
                                                 </Grid>
                                                 <Rectangle Margin="68,65,46,440.2" Fill="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" OpacityMask="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}" Cursor="IBeam" />
@@ -300,87 +299,7 @@
                                                         </Grid>
                                                     </Grid>
                                                 </Grid>
-                                            </Grid>
-                                            <Grid>
-                                                <simpleChildWindow:ChildWindow 
-		                               Title="TestChild 1"		   
-                                       ShowTitleBar="False"
-                                       ShowCloseButton="False"		                              
-		                               CloseByEscape="True"		   
-                                       CloseOnOverlay="True"          
-                                       IsOpen="{Binding IsOpenSucessMenu}"
-		                              >
-                                                    <Grid  Height="263" Width="575">
-                                                        <Grid.Background>
-                                                            <SolidColorBrush Color="SaddleBrown" Opacity="0.7"></SolidColorBrush>
-                                                        </Grid.Background>
-                                                        <StackPanel>
-                                                            <StackPanel Margin="5,80,10.2,0" Orientation="Horizontal" Height="84">
-                                                                <Image Margin="5,5,5,16" Source="..\Images/Assets/Check-01.png" Width="66" />
-                                                                <StackPanel Margin="5">
-                                                                    <TextBlock Foreground="Wheat"  VerticalAlignment="Center" FontSize="27" TextAlignment="Center" Width="489" FontFamily="Showcard Gothic" Height="34" >You've passed this part of lesson.</TextBlock>
-                                                                    <StackPanel Margin="5" Orientation="Horizontal">
-                                                                        <TextBlock FontSize="18" Foreground="Wheat" Margin="5 0" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Light"> Your gained score:</TextBlock>
-                                                                        <TextBlock FontSize="18" Text="{Binding GetReadyGainedScore}" Foreground="WhiteSmoke" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Semibold">
-                                                                        </TextBlock>
-                                                                    </StackPanel>
-                                                                </StackPanel>
-                                                            </StackPanel>
-                                                            <StackPanel  Margin="0 30" Orientation="Vertical" Height="74" >
-                                                                <StackPanel.Background>
-                                                                    <SolidColorBrush Color="SaddleBrown" Opacity="0.4"></SolidColorBrush>
-                                                                </StackPanel.Background>
-                                                                <Button HorizontalAlignment="Right" ToolTip="Go to the Login Page"                            
-                                                                                         Command ="{Binding Click_GoToTheMenuLb}"
-                                                                          Background="SaddleBrown" Width="70" Height="70" Style="{DynamicResource MetroCircleButtonStyle}"  >
-                                                                    <Image Source="..\Images/Assets/Check-01.png" Height="35" Width="35"/>
-                                                                </Button>
-                                                            </StackPanel>
-                                                        </StackPanel>
-                                                    </Grid>
-                                                </simpleChildWindow:ChildWindow>
-                                            </Grid>
-                                            <Grid>
-                                                <simpleChildWindow:ChildWindow 
-		                               Title="TestChild 1"		   
-                                       ShowTitleBar="False"
-                                       ShowCloseButton="False"		                              
-		                               CloseByEscape="True"		   
-                                       CloseOnOverlay="True"          
-                                       IsOpen="{Binding IsOpenFailMenu}"
-                                                    
-		                              >
-                                                    <Grid  Height="263" Width="603">
-                                                        <Grid.Background>
-                                                            <SolidColorBrush Color="Brown" Opacity="0.8"></SolidColorBrush>
-                                                        </Grid.Background>
-                                                        <StackPanel>
-                                                            <StackPanel Margin="5,80,10.2,0" Orientation="Horizontal" Height="84">
-                                                                <Image Margin="5,5,5,16" Source="..\Images/Assets/Warning.png" Width="66" />
-                                                                <StackPanel Margin="5">
-                                                                    <TextBlock Foreground="Wheat"  VerticalAlignment="Center" FontSize="27" TextAlignment="Center" Width="518" FontFamily="Showcard Gothic" Height="34" >You've been Fail this part of lesson.</TextBlock>
-                                                                    <StackPanel Margin="5" Orientation="Horizontal">
-                                                                        <TextBlock FontSize="18" Foreground="Wheat" Margin="5 0" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Light"> Your gained score:</TextBlock>
-                                                                        <TextBlock Text="{Binding GetReadyGainedScore}" FontSize="18" Foreground="WhiteSmoke" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Semibold">                                 
-                                                                        </TextBlock>
-                                                                    </StackPanel>
-                                                                </StackPanel>
-                                                            </StackPanel>
-                                                            <StackPanel  Margin="0 30" Orientation="Vertical" Height="74" >
-                                                                <StackPanel.Background>
-                                                                    <SolidColorBrush Color="SaddleBrown" Opacity="0.6"></SolidColorBrush>
-                                                                </StackPanel.Background>
-                                                                <Button HorizontalAlignment="Right" ToolTip="Go to the Login Page"                            
-                                                                         Command ="{Binding Click_GoToTheMenuLb}"
-                                                                             Background="Brown" Width="70" Height="70" Style="{DynamicResource MetroCircleButtonStyle}"  >
-                                                                    <Image Source="..\Images/Assets/Check-01.png" Height="35" Width="35"/>
-                                                                </Button>
-                                                            </StackPanel>
-                                                        </StackPanel>
-                                                    </Grid>
-
-                                                </simpleChildWindow:ChildWindow>
-                                            </Grid>
+                                            </Grid>                                                                        
                                         </Grid>
                                     </Border>
                                 </Grid>
@@ -390,7 +309,7 @@
                     <TabItem>
                         <!-- Key words tab item aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
                         <Grid Background="Gray">
-                            <StackPanel Margin="36,6,36,0" VerticalAlignment="Top"  Height="571" Width="1000" >
+                            <StackPanel Margin="36,6,36,0" VerticalAlignment="Top"  Height="670" Width="1000" >
                                 <!--<StackPanel.Effect>
                                     <DropShadowEffect ShadowDepth="20" BlurRadius="5"></DropShadowEffect>
                                 </StackPanel.Effect>-->
@@ -418,18 +337,16 @@
                                         </Button>
                                     </StackPanel>
                                 </StackPanel>
-                                <Grid Margin="0 0" Height="497">
+                                <Grid Margin="0 0" Height="599">
                                     <Grid.Background>
                                         <SolidColorBrush Color="SaddleBrown" Opacity="0.35"></SolidColorBrush>
                                     </Grid.Background>
                                     <Controls:MetroAnimatedSingleRowTabControl  Margin="10,0,10,10"
                                         SelectedIndex="{Binding TcKeyWordSelectedIndex,Mode=TwoWay}">
                                         <TabItem Background="Transparent" >
-
                                             <Grid >
-
                                                 <ListView       ItemsSource="{Binding KeyWordsList}"
-                                                                Margin="20"
+                                                                Margin="20,20,20,0"
                                                                 ScrollViewer.VerticalScrollBarVisibility="Visible"
                                                                 x:Name="lvKeywords"       
                                                                 Background="Transparent"
@@ -437,37 +354,49 @@
                                                     <ListView.ItemTemplate>
                                                         <DataTemplate>
                                                             <Border BorderBrush="Black" BorderThickness="1">
-                                                                <Grid Height="170" >
+                                                                <Border.Background>
+                                                                    <SolidColorBrush Color="SaddleBrown" Opacity="0.5"></SolidColorBrush>
+                                                                </Border.Background>
+                                                                <Grid Height="190" >
                                                                     <Grid.ColumnDefinitions>
-                                                                        <ColumnDefinition Width=".27*"/>
+                                                                        <ColumnDefinition Width=".35*"/>
                                                                         <ColumnDefinition/>
                                                                     </Grid.ColumnDefinitions>
                                                                     <Grid Grid.Column="0">
-                                                                        <Image  Source="{Binding PictureOfWord}" Stretch="Fill" >
-                                                                            <Image.Clip>
-                                                                                <EllipseGeometry Center="120,85" RadiusX="80" RadiusY="80" />
-                                                                            </Image.Clip>
+                                                                        <Image Height="170" Width="190" Source="{Binding PictureOfWord}" Stretch="Uniform" >                                                                          
                                                                         </Image>
                                                                     </Grid>
                                                                     <Grid Grid.Column="1">
                                                                         <Grid.RowDefinitions>
-                                                                            <RowDefinition Height="1.35*"/>
-                                                                            <RowDefinition Height="1.2*"/>
+                                                                            <RowDefinition Height="1.3*"/>
+                                                                            <RowDefinition Height="1*"/>
                                                                             <RowDefinition/>
 
                                                                         </Grid.RowDefinitions>
                                                                         <StackPanel Orientation="Horizontal"  Grid.Row="0">
-                                                                            <TextBlock Margin="10 0 0 0" Text="{Binding Word}" FontSize="30" Foreground="Brown" TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" ></TextBlock>
+                                                                            <Button
+                                                                                       Command="{Binding ElementName=lvKeywords,Path=DataContext.Click_ListenKeyWord}"      
+                                                                                     CommandParameter="{Binding}"
+                                                                                      Margin="10 0 0 0 " VerticalAlignment="Center"    Background="Brown"  Width="40" Height="40" HorizontalAlignment="Left"  Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                                                                <Image Source="/SoBasicEnglish;component/Images/Assets/Speaker.png" Height="20" Width="20"/>
+                                                                            </Button>
+                                                                            <TextBlock Margin="10 0 0 0" Text="{Binding Word}" FontSize="30" Foreground="CornflowerBlue" TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" ></TextBlock>
                                                                             <Label Margin="5 0 0 0" VerticalAlignment="Center" FontSize="30" FontStyle="Normal" FontWeight="Bold">/</Label>
-                                                                            <TextBlock Margin="5 0 0 0" Text="{Binding HowToReadWord}" FontSize="30" Foreground="Orchid"  VerticalAlignment="Center" ></TextBlock>
+                                                                            <TextBlock Margin="5 0 0 0" Text="{Binding HowToReadWord}" FontSize="30" Foreground="Wheat"  VerticalAlignment="Center" ></TextBlock>
 
                                                                         </StackPanel>
                                                                         <StackPanel Grid.Row="1">
                                                                             <TextBlock Margin="10 0 0 0" HorizontalAlignment="Left" Text="{Binding VieWord}" FontSize="20" Foreground="Black" TextAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" ></TextBlock>
-                                                                            <TextBlock Margin="30 0 0 0"  HorizontalAlignment="Left" Text="{Binding TypeOfWord}" FontSize="20" Foreground="Brown" TextAlignment="Center" VerticalAlignment="Center" FontStyle="Normal" FontWeight="Bold"  ></TextBlock>
+                                                                            <TextBlock Margin="30 0 0 0"  HorizontalAlignment="Left" Text="{Binding TypeOfWord}" FontSize="20" Foreground="Black" TextAlignment="Center" VerticalAlignment="Center" FontStyle="Normal" FontWeight="Bold"  ></TextBlock>
                                                                         </StackPanel>
-                                                                        <StackPanel Grid.Row="2" >
-                                                                            <TextBlock Margin="10 0 0 0" HorizontalAlignment="Left" Text="{Binding ExSentence}" FontSize="20" Foreground="BlueViolet" TextAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" ></TextBlock>
+                                                                        <StackPanel Grid.Row="2" Orientation="Horizontal" >
+                                                                            <Button
+                                                                                       Command="{Binding ElementName=lvKeywords,Path=DataContext.Click_ListenEXSentenceOfKeyWord}"      
+                                                                                     CommandParameter="{Binding}"
+                                                                                      Margin="30 0 0 0 " VerticalAlignment="Center"    Background="CadetBlue"  Width="40" Height="40" HorizontalAlignment="Left"  Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                                                                <Image Source="/SoBasicEnglish;component/Images/Assets/Speaker.png" Height="20" Width="20"/>
+                                                                            </Button>
+                                                                            <TextBlock Margin="10 0 0 0" HorizontalAlignment="Left" Text="{Binding ExSentence}" FontSize="17" Foreground="Black" TextAlignment="Center" VerticalAlignment="Center" Width="auto" TextWrapping="Wrap" FontStyle="Italic" ></TextBlock>
                                                                         </StackPanel>
                                                                     </Grid>
                                                                 </Grid>
@@ -478,62 +407,60 @@
                                             </Grid>
                                         </TabItem>
                                         <TabItem  Background="Transparent">
-                                            <Grid Margin="40,0,40,38.6">
-                                                <StackPanel>
-                                                    <StackPanel Height="100" Margin="30 50 30 0" Orientation="Horizontal" >
-                                                        <Button VerticalAlignment="Center" Background="Brown" Width="65" Height="65" HorizontalAlignment="Left" Style="{DynamicResource MetroCircleButtonStyle}"   >
-                                                            <Image Source="..\Images/Assets/Speaker.png" Height="40" Width="30"></Image>
+                                            <Border   BorderThickness="0" BorderBrush="Black" Margin="20 0 " >
+                                                <Grid >
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="70"/>
+                                                        <ColumnDefinition/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <StackPanel Grid.Column="0" Width="70">
+                                                        <Button 
+                                                            Command="{Binding Click_StartDoingEX}"
+                                                            Margin="10 20 0 0"   Background="Brown" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                                            <Image Source="..\Images/Assets/Stop Clock-WF.png" Height="40" Width="30"></Image>
                                                         </Button>
-                                                        <StackPanel Orientation="Vertical">
-                                                            <StackPanel Height="50" Orientation="Horizontal" >
-                                                                <Button VerticalAlignment="Top" Margin="10,0,0,-3.4" Background="SaddleBrown" Width="45" Height="45" HorizontalAlignment="Left" Style="{DynamicResource MetroCircleButtonStyle}"   >
-                                                                    <Image Source="..\Images/Assets/Stop Clock-WF.png" Height="20" Width="20"/>
-                                                                </Button>
-                                                                <ToggleButton  
-                                                                                    
-                                                                   Margin="287,10,0,0.6"
-                                                                   Style="{DynamicResource MetroCircleToggleButtonStyle}" Width="47">
-                                                                    <Image Source="..\Images/Assets/Check-02.png" Height="25" Width="36"></Image>
-                                                                </ToggleButton>
-                                                                <TextBlock  Foreground="Wheat" FontStyle="Italic" FontSize="20" Margin="10,0,-52.2,6" VerticalAlignment="Bottom">Show question</TextBlock>
-                                                                <ToggleButton  
-                                                                                    
-                                                                   Margin="87,10,0,0.6"
-                                                                   Style="{DynamicResource MetroCircleToggleButtonStyle}" Width="47">
-                                                                    <Image Source="..\Images/Assets/Check-02.png" Height="25" Width="36"></Image>
-                                                                </ToggleButton>
-                                                                <TextBlock  Foreground="Wheat" FontStyle="Italic" FontSize="20" Margin="10,0,-52.2,6" VerticalAlignment="Bottom">Show question</TextBlock>
-                                                            </StackPanel>
-                                                            <Border Width="750" Height="7" Background="LightBlue" VerticalAlignment="Center" ></Border>
-                                                        </StackPanel>
+                                                        <Button Command="{Binding Click_RestartDoingEX}" Margin="10 10 0 0"  Background="Olive" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                                            <Image Source="..\Images/Assets/Command-Reset.png" Height="40" Width="30"></Image>
+                                                        </Button>
+                                                        <Button Command="{Binding Click_SubmitEX}" Margin="10 10 0 0"  Background="Green" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
+                                                            <Image Source="..\Images/Assets/Submit-01.png" Height="40" Width="30"></Image>
+                                                        </Button>
                                                     </StackPanel>
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Width="300" HorizontalAlignment="Left" FontSize="35" Margin="80 0 0 0" Foreground="Lavender" Text="The Negotiaion" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Black" ></TextBlock>
-                                                    </StackPanel>
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <ListBox  ItemContainerStyle="{StaticResource RoundedList}"  Background="Transparent"  Width="450"   Margin="150 0 0 0" DockPanel.Dock="Top" >
-                                                            <ListBoxItem   Margin="0 10 0 0" Height="50" Background="{Binding ABr}" Width="417">
-                                                                <TextBlock VerticalAlignment="Center" Foreground="Wheat" Text="aaaaaaaaaaaaaaadsd"  FontSize="20"></TextBlock>
-                                                            </ListBoxItem>
-                                                            <ListBoxItem   Margin="0 10 0 0" Height="50" Background="{Binding ABr}" Width="417">
-                                                                <TextBlock VerticalAlignment="Center" Foreground="Wheat" Text="aaaaaaaaaaaaaaadsd"  FontSize="20"></TextBlock>
-                                                            </ListBoxItem>
-                                                            <ListBoxItem   Margin="0 10 0 0" Height="50" Background="{Binding ABr}" Width="417">
-                                                                <TextBlock VerticalAlignment="Center" Foreground="Wheat" Text="aaaaaaaaaaaaaaadsd"  FontSize="20"></TextBlock>
-                                                            </ListBoxItem>
-                                                            <ListBoxItem   Margin="0 10 0 0" Height="50" Background="{Binding ABr}" Width="417">
-                                                                <TextBlock VerticalAlignment="Center" Foreground="Wheat" Text="aaaaaaaaaaaaaaadsd"  FontSize="20"></TextBlock>
-                                                            </ListBoxItem>
-                                                        </ListBox>
-                                                        <Controls:Tile Width="77" Height="169" Margin="21,30,26.2,29.8"  >
-                                                            <Controls:Tile.Effect>
-                                                                <DropShadowEffect ShadowDepth="6" BlurRadius="7"/>
-                                                            </Controls:Tile.Effect>
-                                                            <Image Source="..\Images/Assets/Totheright.png" Height="68" Width="33" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" IsEnabled="False"  />
-                                                        </Controls:Tile>
-                                                    </StackPanel>
-                                                </StackPanel>
-                                            </Grid>
+                                                    <ListView
+                                                        Margin="29.6,10,30,9.6"
+                                                        ItemsSource="{Binding KeyWordExList}" Background="Transparent" Grid.Column="1" BorderBrush="Black" BorderThickness="1" x:Name="lvKeyWordExList" >
+                                                        <ListView.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <ListViewItem>
+                                                                    <Grid Height="190" >
+                                                                        <Border Margin="5" BorderBrush="Black" BorderThickness="1">
+                                                                            <StackPanel Margin="5">
+                                                                                <StackPanel Orientation="Horizontal" >
+                                                                                    <TextBlock Foreground="DarkGreen" Controls:TextBoxHelper.ClearTextButton="True" Text="{Binding KeyWord}"   Margin="10 0 0 0" Width="auto" MinWidth="350" FontSize="30"  FontWeight="Bold" ></TextBlock>
+                                                                                </StackPanel>
+                                                                                <StackPanel Margin="60 0 20 0" Orientation="Horizontal" >
+                                                                                    <StackPanel >
+                                                                                        <RadioButton IsChecked="{Binding ChoseA,Mode=TwoWay}"  Margin="0 5 0 0"></RadioButton>
+                                                                                        <RadioButton IsChecked="{Binding ChoseB,Mode=TwoWay}"  Margin="0 10 0 0"></RadioButton>
+                                                                                        <RadioButton IsChecked="{Binding ChoseC,Mode=TwoWay}"  Margin="0 12 0 0"></RadioButton>
+                                                                                        <RadioButton IsChecked="{Binding ChoseD,Mode=TwoWay}"  Margin="0 12 0 0"></RadioButton>
+                                                                                    </StackPanel>
+                                                                                    <StackPanel>
+                                                                                        <TextBlock Background="{Binding BgA}"  Margin="0 0 0 5" Width="600" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center" Text="{Binding AnsA}" FontSize="18"></TextBlock>
+                                                                                        <TextBlock Background="{Binding BgB}"  Margin="0 0 0 5"  Width="600" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="{Binding AnsB}" FontSize="18"></TextBlock>
+                                                                                        <TextBlock Background="{Binding BgC}"  Margin="0 0 0 5"  Width="600" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="{Binding AnsC}" FontSize="18"></TextBlock>
+                                                                                        <TextBlock Background="{Binding BgD}"  Margin="0 0 0 5"  Width="600" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="{Binding AnsD}" FontSize="18"></TextBlock>
+                                                                                    </StackPanel>
+                                                                                </StackPanel>
+                                                                            </StackPanel>
+                                                                        </Border>
+                                                                    </Grid>
+                                                                </ListViewItem>
+                                                            </DataTemplate>
+                                                        </ListView.ItemTemplate>
+                                                    </ListView>
+                                                </Grid>
+                                            </Border>
                                         </TabItem>
                                     </Controls:MetroAnimatedSingleRowTabControl>
                                 </Grid>
@@ -619,7 +546,7 @@
                                                         <Button Margin="10 20 0 0"   Background="Brown" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
                                                             <Image Source="..\Images/Assets/Stop Clock-WF.png" Height="40" Width="30"></Image>
                                                         </Button>
-                                                        <Button Margin="10 10 0 0"  Background="YellowGreen" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                                        <Button Margin="10 10 0 0"  Background="Olive" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
                                                             <Image Source="..\Images/Assets/Command-Reset.png" Height="40" Width="30"></Image>
                                                         </Button>
                                                         <Button Margin="10 10 0 0"  Background="Green" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
@@ -727,7 +654,6 @@
                                             </Border>
                                         </TabItem>
                                     </Controls:MetroAnimatedSingleRowTabControl>
-
                                 </Grid>
                             </StackPanel>
                         </Grid>
@@ -995,8 +921,89 @@
                         </Grid>
                     </TabItem>
                 </Controls:MetroAnimatedSingleRowTabControl>
-            </Grid>
+                <Grid>
+                    <Grid>
+                        <simpleChildWindow:ChildWindow 
+		                               Title="TestChild 1"		   
+                                       ShowTitleBar="False"
+                                       ShowCloseButton="False"		                              
+		                               CloseByEscape="True"		   
+                                       CloseOnOverlay="True"          
+                                                       IsOpen="{Binding IsOpenSucessMenu}"
+		                              >
+                            <Grid  Height="263" Width="575">
+                                <Grid.Background>
+                                    <SolidColorBrush Color="SaddleBrown" Opacity="0.7"></SolidColorBrush>
+                                </Grid.Background>
+                                <StackPanel>
+                                    <StackPanel Margin="5,80,10.2,0" Orientation="Horizontal" Height="84">
+                                        <Image Margin="5,5,5,16" Source="..\Images/Assets/Check-01.png" Width="66" />
+                                        <StackPanel Margin="5">
+                                            <TextBlock Foreground="Wheat"  VerticalAlignment="Center" FontSize="27" TextAlignment="Center" Width="489" FontFamily="Showcard Gothic" Height="34" >You've passed this part of lesson.</TextBlock>
+                                            <StackPanel Margin="5" Orientation="Horizontal">
+                                                <TextBlock FontSize="18" Foreground="Wheat" Margin="5 0" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Light"> Your gained score:</TextBlock>
+                                                <TextBlock FontSize="18" Text="{Binding GainedScore}" Foreground="WhiteSmoke" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Semibold">
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel  Margin="0 30" Orientation="Vertical" Height="74" >
+                                        <StackPanel.Background>
+                                            <SolidColorBrush Color="SaddleBrown" Opacity="0.4"></SolidColorBrush>
+                                        </StackPanel.Background>
+                                        <Button HorizontalAlignment="Right" ToolTip="Go to the Login Page"                            
+                                                                                         Command ="{Binding Click_CloseArlet}"
+                                                                          Background="SaddleBrown" Width="70" Height="70" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                            <Image Source="..\Images/Assets/Check-01.png" Height="35" Width="35"/>
+                                        </Button>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </simpleChildWindow:ChildWindow>
+                    </Grid>
+                </Grid>
+                <Grid>
+                    <simpleChildWindow:ChildWindow 
+		                               Title="TestChild 1"		   
+                                       ShowTitleBar="False"
+                                       ShowCloseButton="False"		                              
+		                               CloseByEscape="True"		   
+                                       CloseOnOverlay="True"          
+                                       IsOpen="{Binding IsOpenFailMenu}"
+                                                    
+		                              >
+                        <Grid  Height="263" Width="603">
+                            <Grid.Background>
+                                <SolidColorBrush Color="Brown" Opacity="0.8"></SolidColorBrush>
+                            </Grid.Background>
+                            <StackPanel>
+                                <StackPanel Margin="5,80,10.2,0" Orientation="Horizontal" Height="84">
+                                    <Image Margin="5,5,5,16" Source="..\Images/Assets/Warning.png" Width="66" />
+                                    <StackPanel Margin="5">
+                                        <TextBlock Foreground="Wheat"  VerticalAlignment="Center" FontSize="27" TextAlignment="Center" Width="518" FontFamily="Showcard Gothic" Height="34" >You've been Fail this part of lesson.</TextBlock>
+                                        <StackPanel Margin="5" Orientation="Horizontal">
+                                            <TextBlock FontSize="18" Foreground="Wheat" Margin="5 0" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Light"> Your gained score:</TextBlock>
+                                            <TextBlock Text="{Binding GainedScore}" FontSize="18" Foreground="WhiteSmoke" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Semibold">
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel  Margin="0 30" Orientation="Vertical" Height="74" >
+                                    <StackPanel.Background>
+                                        <SolidColorBrush Color="SaddleBrown" Opacity="0.6"></SolidColorBrush>
+                                    </StackPanel.Background>
+                                    <Button HorizontalAlignment="Right" ToolTip="Go to the Login Page"                            
+                                                                         Command ="{Binding Click_CloseArlet}"
+                                                                             Background="Brown" Width="70" Height="70" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                        <Image Source="..\Images/Assets/Check-01.png" Height="35" Width="35"/>
+                                    </Button>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
 
+                    </simpleChildWindow:ChildWindow>
+                </Grid>
+            </Grid>
         </Grid>
         <!--<Controls:Flyout Visibility="Collapsed"   x:Name="flUser" IsOpen="{Binding IsOpenLessonMenu,Mode=TwoWay}" Foreground="White" Position="Right" Header="Lesson menu" Width="232" Margin="0,131,0,0">
             <Controls:Flyout.Background>

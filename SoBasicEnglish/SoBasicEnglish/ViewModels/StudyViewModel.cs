@@ -37,7 +37,6 @@ namespace SoBasicEnglish.ViewModels
             if (this.PropertyChanged != null)
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
-
         #region Command objects
         public ICommand SelectionChanged_lbMenuLesson { get; set; }
         public ICommand Click_GoToTheMenuLb { get; set; }
@@ -51,9 +50,15 @@ namespace SoBasicEnglish.ViewModels
         public ICommand Check_ToggleBtnShowQuestion { get; set; }
         public ICommand lbGetReadyQuesListSelectionChanged { get; set; }
         public ICommand Check_ToggleBtnAutoNextQuestion { get; set; }
+        public ICommand Click_ListenKeyWord { get; set; }
+        public ICommand Click_ListenEXSentenceOfKeyWord { get; set; }
+        public ICommand Click_StartDoingEX { get; set; }
+        public ICommand Click_RestartDoingEX { get; set; }
+        public ICommand Click_SubmitEX { get; set; }
+        public ICommand Click_CloseArlet { get; set; }
         #endregion
         #region objects
-        DispatcherTimer TimeToNextQuestion;private bool CheckAutoNext = false;
+        DispatcherTimer TimeToNextQuestion;private bool CheckAutoNext = false; private int KeyWordExGainedScore = 0; private int GetReadyGainedScore = 0;
         #region colors
         private SolidColorBrush _aBr = new SolidColorBrush(Colors.Transparent), _bBr = new SolidColorBrush(Colors.Transparent), _cBr = new SolidColorBrush(Colors.Transparent), _dBr = new SolidColorBrush(Colors.Transparent), _quesContenBrush =new SolidColorBrush(Colors.Transparent);
         public SolidColorBrush QuesContenBrush { get => _quesContenBrush; set { _quesContenBrush = value; NotifyPropertyChanged("QuesContenBrush"); } }
@@ -62,14 +67,14 @@ namespace SoBasicEnglish.ViewModels
         public SolidColorBrush CBr { get => _cBr; set { _cBr = value; NotifyPropertyChanged("CBr"); } }
         public SolidColorBrush DBr { get => _dBr; set { _dBr = value; NotifyPropertyChanged("DBr"); } }
         #endregion
+        public int GainedScore { get => _gainedScore; set { _gainedScore = value; NotifyPropertyChanged("GainedScore"); } }
+        private int _gainedScore = 0;
         public bool IsOpenFailMenu { get => _isOpenFailMenu; set { _isOpenFailMenu = value; NotifyPropertyChanged("IsOpenFailMenu"); } }
         private bool _isOpenFailMenu = false;
         public bool IsOpenSucessMenu { get => _isOpenSucessMenu; set { _isOpenSucessMenu = value; NotifyPropertyChanged("IsOpenSucessMenu"); } }
         private bool _isOpenSucessMenu = false;
         public int TcLessonSelectedIndex { get => _tcLessonSelectedIndex; set { _tcLessonSelectedIndex = value; NotifyPropertyChanged("TcLessonSelectedIndex"); } }
         private int _tcLessonSelectedIndex = 0;
-        public int GetReadyGainedScore { get => _getReadyGainedScore; set => _getReadyGainedScore = value; }
-        private int _getReadyGainedScore = 0;
         public int Turn { get => _turn; set { _turn = value; NotifyPropertyChanged("Turn"); } }
         private int _turn = 0;
         public int LbLessonMenuSelectedIndex { get => _lbLessonMenuSelectedIndex; set { _lbLessonMenuSelectedIndex = value; NotifyPropertyChanged("LbLessonMenuSelectedIndex"); } }
@@ -92,7 +97,7 @@ namespace SoBasicEnglish.ViewModels
         private SolidColorBrush _oralTestButtonColor = new SolidColorBrush(Colors.Transparent);
         public GettingReadyQuestion CurentGetReadyQuestion { get => _curentGetReadyQuestion; set { _curentGetReadyQuestion = value; NotifyPropertyChanged("CurentGetReadyQuestion"); } }
         private GettingReadyQuestion _curentGetReadyQuestion = new GettingReadyQuestion();
-        #region List objects
+        #region List objects       
         public ObservableCollection<KeyWord> KeyWordsList { get => _keyWordsList; set { _keyWordsList = value; NotifyPropertyChanged("KeyWordsList"); } }
         private ObservableCollection<KeyWord> _keyWordsList = new ObservableCollection<KeyWord>();
         public ObservableCollection<Sentence> SentenceList { get => _sentenceList; set { _sentenceList = value; NotifyPropertyChanged("SentenceList"); } }
@@ -104,9 +109,10 @@ namespace SoBasicEnglish.ViewModels
         public ObservableCollection<ListeningPart2Question> ListeningPart2QuestionList { get => _listeningPart2QuestionList; set { _listeningPart2QuestionList = value; NotifyPropertyChanged("ListeningPart2QuestionList"); } }
         private ObservableCollection<ListeningPart2Question> _listeningPart2QuestionList = new ObservableCollection<ListeningPart2Question>();
         public ObservableCollection<GettingReadyQuestion> GettingReadyQuestionList { get => _gettingReadyQuestionList; set { _gettingReadyQuestionList = value; NotifyPropertyChanged("GettingReadyQuestionList"); } }
-
-
         private ObservableCollection<GettingReadyQuestion> _gettingReadyQuestionList = new ObservableCollection<GettingReadyQuestion>();
+        public ObservableCollection<KeyWordEx> KeyWordExList { get => _keyWordExList; set { _keyWordExList = value; NotifyPropertyChanged("KeyWordExList"); } }
+
+        private ObservableCollection<KeyWordEx> _keyWordExList = new ObservableCollection<KeyWordEx>();
         #endregion
         #endregion
         #region constructor
@@ -122,15 +128,112 @@ namespace SoBasicEnglish.ViewModels
             Click_GotoNextGetReadyQuestion = new RelayCommand<object>(CheckIfCanNextQuestion,GotoNextGetReadyQuestion);
             Check_ToggleBtnShowQuestion = new DelegateCommand(CheckBtnShowQuestion);
             lbGetReadyQuesListSelectionChanged = new DelegateCommand(Change);
+            Click_ListenKeyWord = new RelayCommand<object>((p) => true, ListenKeyWord);
             Check_ToggleBtnAutoNextQuestion = new DelegateCommand(CheckBtnAutoNextQuestion);
-            TimeToNextQuestion = new DispatcherTimer
+            Click_ListenEXSentenceOfKeyWord = new RelayCommand<object>((p) => true, ListenEXSentenceOfKeyWord);
+            Click_StartDoingEX = new RelayCommand<object>((p) => !DoingEx, StartDoingEX);
+            Click_RestartDoingEX = new RelayCommand<object>((p) => DoingEx, RestartDoingEX);
+            Click_SubmitEX = new RelayCommand<object>((p) => DoingEx, SubmitEX); Click_CloseArlet = new DelegateCommand(CLoseArlet);
+             TimeToNextQuestion = new DispatcherTimer
             {
                 Interval = TimeSpan.FromSeconds(1.5)               
             }; TimeToNextQuestion.Tick += TimeToNextQuestion_Tick;
 
         }
+        private void CLoseArlet()
+        {
+            if (TcLessonSelectedIndex == 1)
+            {
+                IsOpenFailMenu = false; IsOpenSucessMenu = false;
+                TcLessonSelectedIndex = 0; LbLessonMenuSelectedIndex = -1;
+            }
+           
+        }
         #endregion
         #region commad functions
+        private void StartDoingEX(object obj)
+        {
+            if (TcLessonSelectedIndex == 2)
+            {
+                DoingEx = true;
+                KeyWordExList.Clear();
+                Model.GetKeyWordExListByLessonId(KeyWordExList, Model.dateProcess, Model.serverName);
+            }
+        }
+        private void SubmitEX(object obj)
+        {
+            if (TcLessonSelectedIndex == 2)
+            {
+                KeyWordExGainedScore = 0;
+                for (int i = 0; i < KeyWordExList.Count; i++)
+                {
+                    if ((KeyWordExList[i].ChoseA && KeyWordExList[i].RightAns == 1) || (KeyWordExList[i].ChoseB && KeyWordExList[i].RightAns == 2) || (KeyWordExList[i].ChoseC && KeyWordExList[i].RightAns == 3) || (KeyWordExList[i].ChoseD && KeyWordExList[i].RightAns == 4))
+                    {
+                        KeyWordExGainedScore += 10;
+                    }
+
+                    switch (KeyWordExList[i].RightAns)
+                    {
+                        case 1:
+                            if (KeyWordExList[i].ChoseA)
+                                KeyWordExList[i].BgA = new SolidColorBrush(Colors.PaleGreen);
+                            else
+                                KeyWordExList[i].BgA = new SolidColorBrush(Colors.Orchid);
+                            break;
+                        case 2:
+                            if (KeyWordExList[i].ChoseB)
+                                KeyWordExList[i].BgB = new SolidColorBrush(Colors.PaleGreen);
+                            else
+                                KeyWordExList[i].BgB = new SolidColorBrush(Colors.Orchid);
+                            break;
+                        case 3:
+                            if (KeyWordExList[i].ChoseC)
+                                KeyWordExList[i].BgC = new SolidColorBrush(Colors.PaleGreen);
+                            else
+                                KeyWordExList[i].BgC = new SolidColorBrush(Colors.Orchid);
+                            break;
+                        case 4:
+                            if (KeyWordExList[i].ChoseD)
+                                KeyWordExList[i].BgD = new SolidColorBrush(Colors.PaleGreen);
+                            else
+                                KeyWordExList[i].BgD = new SolidColorBrush(Colors.Orchid);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                GainedScore = KeyWordExGainedScore;
+                if (GainedScore >= (KeyWordExList.Count * 10) / 2)
+                {
+                    IsOpenSucessMenu = true;
+                }
+                else
+                    IsOpenFailMenu = true;
+                DoingEx = false;
+            }
+
+        }
+        private void RestartDoingEX(object obj)
+        {
+            if (TcLessonSelectedIndex == 2)
+            {
+                for(int i = 0; i < KeyWordExList.Count; i++)
+                {
+                    KeyWordExList[i].ChoseA = false; KeyWordExList[i].ChoseB = false; KeyWordExList[i].ChoseC = false; KeyWordExList[i].ChoseD = false;
+                }
+            }
+
+        }
+        private void ListenEXSentenceOfKeyWord(object obj)
+        {
+            var temp = obj as KeyWord;
+            SpeechFromText(temp.ExSentence);
+        }
+        private void ListenKeyWord(object obj)
+        {
+            var temp = obj as KeyWord;
+            SpeechFromText(temp.Word);
+        }
         private void CheckBtnAutoNextQuestion()
         {
             if (CheckAutoNext)
@@ -141,11 +244,11 @@ namespace SoBasicEnglish.ViewModels
             {
                 DoingEx = true;
                 //add first data question
-                GetGetReadyQuestionList();
+                // GetGetReadyQuestionList();
+
                 SpeechFromText(CurentGetReadyQuestion.KeyWord);
             }
         }
-
         private void Change()
         {
            
@@ -173,12 +276,17 @@ namespace SoBasicEnglish.ViewModels
                 else
                 {
                     DoingEx = false;
+                    //ABr = new SolidColorBrush(Colors.Transparent);
+                    //BBr = new SolidColorBrush(Colors.Transparent);
+                    //CBr = new SolidColorBrush(Colors.Transparent);
+                    //DBr = new SolidColorBrush(Colors.Transparent);
                     TimeToNextQuestion.Start();                    
                 }
             }
         }
         private void TimeToNextQuestion_Tick(object sender, EventArgs e)
         {
+
             if (Turn < GettingReadyQuestionList.Count)
             {
                 Turn += 1;
@@ -192,16 +300,14 @@ namespace SoBasicEnglish.ViewModels
             }
             else
             {
+                
                 ABr = new SolidColorBrush(Colors.Transparent);
                 BBr = new SolidColorBrush(Colors.Transparent);
                 CBr = new SolidColorBrush(Colors.Transparent);
-                DBr = new SolidColorBrush(Colors.Transparent);
-                GetTheGetReadyGainedScore();
-                TimeToNextQuestion.Stop();
-
-            }
-            
-
+                DBr = new SolidColorBrush(Colors.Transparent);                
+                CurentGetReadyQuestion.ChoseA = false; CurentGetReadyQuestion.ChoseB = false; CurentGetReadyQuestion.ChoseC = false; CurentGetReadyQuestion.ChoseD = false;
+                GetTheGetReadyGainedScore(); TimeToNextQuestion.Stop();
+            }           
         }
         public bool CheckIfCanNextQuestion(object p) {
 
@@ -223,8 +329,6 @@ namespace SoBasicEnglish.ViewModels
             if (!DoingEx)
             {
                 DoingEx = true;
-                //add first data question
-                GetGetReadyQuestionList();
                 SpeechFromText(CurentGetReadyQuestion.KeyWord);
             }
             else
@@ -251,6 +355,10 @@ namespace SoBasicEnglish.ViewModels
                 else
                 {
                     DoingEx = false;
+                    //ABr = new SolidColorBrush(Colors.Transparent);
+                    //BBr = new SolidColorBrush(Colors.Transparent);
+                    //CBr = new SolidColorBrush(Colors.Transparent);
+                    //DBr = new SolidColorBrush(Colors.Transparent);
                     TimeToNextQuestion.Start();
                     
                 }
@@ -258,6 +366,7 @@ namespace SoBasicEnglish.ViewModels
         }
         private void GetTheGetReadyGainedScore()
         {
+            GetReadyGainedScore = 0;
             foreach (GettingReadyQuestion i in GettingReadyQuestionList)
             {
                 if ((i.ChoseA && i.RightAns == 1) || (i.ChoseB && i.RightAns == 2) || (i.ChoseC && i.RightAns == 3) || (i.ChoseD && i.RightAns == 4))
@@ -265,7 +374,8 @@ namespace SoBasicEnglish.ViewModels
                     GetReadyGainedScore += 10;
                 }
             }
-            if (GetReadyGainedScore >= (GettingReadyQuestionList.Count * 10) / 2)
+            GainedScore = GetReadyGainedScore;
+            if (GainedScore >= (GettingReadyQuestionList.Count * 10) / 2)
             {
                 IsOpenSucessMenu = true;
                 SpeechFromText("SuccessFull");
@@ -364,10 +474,11 @@ namespace SoBasicEnglish.ViewModels
                 {
                     case 0:
                         TcLessonSelectedIndex = 1;
-
+                        GetGetReadyQuestionList();
                         break;
                     case 1:
                         TcLessonSelectedIndex = 2;
+                        LoadKeyWorData();
                         break;
                     case 2:
                         TcLessonSelectedIndex = 3;
@@ -384,33 +495,35 @@ namespace SoBasicEnglish.ViewModels
                 }              
 
             }               
-        }
+        }     
         private void GoToTheLessonMenu(object obj)
         {
             TcLessonSelectedIndex = 0;
             TcKeyWordSelectedIndex = 0;TcSentenceSelectedIndex = 0; TcListenSelectedIndex = 0;
-            LbLessonMenuSelectedIndex = -1;         
-            if (IsOpenSucessMenu)
-            {
-                IsOpenSucessMenu = false;
-            }
-            else
-            {
-                if (IsOpenFailMenu)
-                {
-                    IsOpenFailMenu = false;
-                    GetReadyGainedScore = 0;
-                }
-            }
+            LbLessonMenuSelectedIndex = -1; IsOpenSucessMenu = false; IsOpenFailMenu = false;
             PracticeButtonColor = new SolidColorBrush(Colors.Transparent);
             StudyButtonColor = new SolidColorBrush(Colors.Transparent);
             OralTestButtonColor = new SolidColorBrush(Colors.Transparent);
         }
         #endregion
         #region functions
+        private void LoadKeyWorData()
+        {
+            if (KeyWordsList.Count == 0)
+            {
+                KeyWordsList.Clear();
+                Model.GetKeyWordList(KeyWordsList, Model.dateProcess, Model.serverName);
+            }
+
+        }
         private void GetGetReadyQuestionList()
         {
-            GettingReadyQuestionList.Clear();
+          
+                GettingReadyQuestionList.Clear();
+            ABr = new SolidColorBrush(Colors.Transparent);
+            BBr = new SolidColorBrush(Colors.Transparent);
+            CBr = new SolidColorBrush(Colors.Transparent);
+            DBr = new SolidColorBrush(Colors.Transparent);
             Model.GetGettingReadyList(GettingReadyQuestionList, Model.dateProcess, Model.serverName);
             CurentGetReadyQuestion = GettingReadyQuestionList[0];
             Turn = 1;
@@ -435,8 +548,6 @@ namespace SoBasicEnglish.ViewModels
 
             });
             t1.Start(promptBuilder);
-
-            //  t1.Abort();
 
 
         }

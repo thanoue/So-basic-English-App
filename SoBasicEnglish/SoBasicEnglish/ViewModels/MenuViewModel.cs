@@ -218,10 +218,15 @@ namespace SoBasicEnglish.ViewModels
         }
         private void  ChooseDateToStudy(object obj)
         {
-            DateProcess temp = obj as DateProcess;
-            //MessageBox.Show(temp.TurnNumber.ToString());
-            Model.dateProcess = temp.TurnNumber;
-            StudyWindow a = new StudyWindow();a.ShowDialog(); 
+            if (GvDateProcessSelectedIndex != -1)
+            {
+                DateProcess temp = obj as DateProcess;
+                //MessageBox.Show(temp.TurnNumber.ToString());
+                Model.dateProcess = temp.TurnNumber;
+                StudyWindow a = new StudyWindow(); a.ShowDialog();
+                GvDateProcessSelectedIndex = -1;
+            }
+          
         }
 
         private void Cancel_ChangePass()

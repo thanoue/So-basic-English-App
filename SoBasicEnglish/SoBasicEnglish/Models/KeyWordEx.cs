@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace SoBasicEnglish
 {
@@ -157,6 +158,46 @@ namespace SoBasicEnglish
         {
             if (this.PropertyChanged != null)
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+        }
+        private SolidColorBrush bgA;
+        public SolidColorBrush BgA
+        {
+            get { return bgA; }
+            set
+            {
+                bgA = value;
+                NotifyPropertyChanged("BgA");
+            }
+        }
+        private SolidColorBrush bgB = new SolidColorBrush(Colors.Transparent);
+        public SolidColorBrush BgB
+        {
+            get { return bgB; }
+            set
+            {
+                bgB = value;
+                NotifyPropertyChanged("BgB");
+            }
+        }
+        private SolidColorBrush bgC = new SolidColorBrush(Colors.Transparent);
+        public SolidColorBrush BgC
+        {
+            get { return bgC; }
+            set
+            {
+                bgC = value;
+                NotifyPropertyChanged("BgC");
+            }
+        }
+        private SolidColorBrush bgD = new SolidColorBrush(Colors.Transparent);
+        public SolidColorBrush BgD
+        {
+            get { return bgD; }
+            set
+            {
+                bgD = value;
+                NotifyPropertyChanged("BgD");
+            }
         }
     }
 }
