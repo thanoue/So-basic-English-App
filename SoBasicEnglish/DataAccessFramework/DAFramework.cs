@@ -80,7 +80,6 @@ namespace DataAccessFramework
                 conn.Close();
             return kq;
         }
-
         public int GetLevelScoreByUserLoginName(string userLoginName)
         {
             conn.Open();
@@ -106,6 +105,26 @@ namespace DataAccessFramework
             conn.Open();
 
             SqlCommand cmd = new SqlCommand("select basicInfo from NguoiDung where loginName= '" + userLoginName + "'", conn);
+            string kq = "";
+            try
+            {
+
+                kq = (string)cmd.ExecuteScalar();
+
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+            if (conn.State == ConnectionState.Open)
+                conn.Close();
+            return kq;
+        }
+        public string GetLessonNoteByUserLoginName_Date(string userLoginName,int dateprocess)
+        {
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("select contentOfNote from GhiChu_BaiHoc_NguoiDung where userLoginName= '" + userLoginName + "' and  dateProcess = '"+dateprocess+"'  ", conn);
             string kq = "";
             try
             {

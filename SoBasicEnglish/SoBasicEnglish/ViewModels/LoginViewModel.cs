@@ -14,6 +14,9 @@ using System;
 using System.Net.Mail;
 using System.Windows.Threading;
 using System.Threading;
+using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Data;
 
 namespace SoBasicEnglish.ViewModels
 {
@@ -82,12 +85,37 @@ namespace SoBasicEnglish.ViewModels
         }
         #endregion
         #region Functions
+        private void ShowNotify()
+        {
+            NotifyIcon trayIcon = new NotifyIcon();
+            List<string> NotiList = new List<string>();
+            trayIcon = new NotifyIcon();
+            NotiList.Clear();
+            dbUserNotify dbUserNotify = new dbUserNotify(Model.serverName);
+            var temp = dbUserNotify.GetNotAnsweredyetNotify(Model.userLoginName);
+           
+            new Thread(() =>
+            {
+                foreach (DataRow t in temp.Rows)
+                {
+
+                    trayIcon.Icon = Properties.Resources.ROFL_01_WF;
+                    trayIcon.BalloonTipText = t["contentOfNotify"].ToString();
+                    trayIcon.Visible = true;
+                    trayIcon.BalloonTipTitle = "Your Message";
+                    trayIcon.ShowBalloonTip(2000);
+                 //   Thread.Sleep(2000);
+                }
+            }
+            ).Start();
+
+        }
         private void ForgetPassword(UIElementCollection obj)
         {
             string Email = ""; string UserName = "";
             foreach(var i in obj)
             {
-                TextBox temp = i as TextBox;
+                System.Windows.Controls.TextBox temp = i as System.Windows.Controls.TextBox;
                 if (temp != null)
                 {
                     switch (temp.Name)
@@ -110,13 +138,12 @@ namespace SoBasicEnglish.ViewModels
                 GuiThu("khoikhaguitar.vl@gmail.com", "khoikha123", Email, "[So Basic English App] Get Your Own Password here!!!", "Your password is : " + pass + "");
             }
         }
-
         private bool CanClickForgetPassword(UIElementCollection obj)
         {
             string Email = ""; string UserName = "";
             foreach (var i in obj)
             {
-                TextBox temp = i as TextBox;
+                System.Windows.Controls.TextBox temp = i as System.Windows.Controls.TextBox;
                 if (temp != null)
                 {
                     switch (temp.Name)
@@ -135,8 +162,6 @@ namespace SoBasicEnglish.ViewModels
             }
             return !String.IsNullOrWhiteSpace(Email) && !String.IsNullOrWhiteSpace(UserName);
         }
-
-
         private void TimerToCloseNotify_Tick(object sender, EventArgs e)
         {
             if (IsOpenError)
@@ -149,6 +174,7 @@ namespace SoBasicEnglish.ViewModels
         private void ShowMenu()
         {
             try{
+                ShowNotify();
                 MenuWindow menu = new MenuWindow();
                 OpenDiaglog = false;
                 menu.ShowDialog();
@@ -169,7 +195,7 @@ namespace SoBasicEnglish.ViewModels
             {
                 foreach (var i in p)
                 {
-                    TextBox temp = i as TextBox;
+                    System.Windows.Controls.TextBox temp = i as System.Windows.Controls.TextBox;
                     if (temp == null)
                     {
                         PasswordBox pass = i as PasswordBox;
@@ -220,14 +246,11 @@ namespace SoBasicEnglish.ViewModels
                         conn.Open();
                         conn.Close();
                         OpenDiaglog = true;
-
-
                     }
                     else
                     {
                         ErrorMessage = "Your password or login name is not match !!";
-                        IsOpenError = true;
-                      
+                        IsOpenError = true;                      
                         timerToCloseNotify.Start();
                     }
 
@@ -237,8 +260,7 @@ namespace SoBasicEnglish.ViewModels
             catch (System.Exception)
             {
                 ErrorMessage = "System Error";
-                IsOpenError = true;
-                
+                IsOpenError = true;                
                 timerToCloseNotify.Start();
             }
         }

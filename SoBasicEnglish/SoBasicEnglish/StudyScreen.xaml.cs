@@ -274,7 +274,6 @@ namespace SoBasicEnglish
             }
             
         }
-
         int tempOfTimer =0;
         static void SpeechFromText(string text)
         {

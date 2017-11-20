@@ -171,6 +171,16 @@ namespace SoBasicEnglish.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon ROFL_01_WF {
+            get {
+                object obj = ResourceManager.GetObject("ROFL_01_WF", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap z783147575155_c63412a4906445e279a3d529e379b9a7 {

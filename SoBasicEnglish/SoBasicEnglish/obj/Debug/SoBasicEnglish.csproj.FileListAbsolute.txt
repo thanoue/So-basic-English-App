@@ -183,3 +183,10 @@ D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\SoBasicEnglish\bin\D
 D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\SoBasicEnglish\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
 D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\SoBasicEnglish\obj\Debug\Views\ExamWindow.g.cs
 D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\SoBasicEnglish\obj\Debug\Views\ExamWindow.baml
+D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\SoBasicEnglish\bin\Debug\Microsoft.ReportViewer.WinForms.dll
+D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\SoBasicEnglish\bin\Debug\Microsoft.ReportViewer.Common.dll
+D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\SoBasicEnglish\bin\Debug\Microsoft.Build.Utilities.v3.5.dll
+D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\SoBasicEnglish\bin\Debug\ADODB.dll
+D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\SoBasicEnglish\bin\Debug\Microsoft.ReportViewer.WinForms.xml
+D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\SoBasicEnglish\bin\Debug\Microsoft.Build.Utilities.v3.5.xml
+D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\SoBasicEnglish\obj\Debug\SoBasicEnglish_Content.g.cs

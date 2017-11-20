@@ -7,8 +7,40 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
         mc:Ignorable="d"
-        Title="GameScreen" Height="374.4" Width="757.563">
+        xmlns:ma="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Title="GameScreen" Height="537.9" Width="757.563">
+    <Window.Resources>
+        <Style x:Key="MetroValidationPopup"
+           TargetType="{x:Type Controls:CustomValidationPopup}">
+            <Setter Property="HorizontalAlignment"
+                Value="Right" />
+            <Setter Property="HorizontalOffset"
+                Value="0" />
+            <Setter Property="VerticalOffset"
+                Value="0" />
+            <Setter Property="PopupAnimation"
+                Value="Fade" />
+            <Setter Property="Placement"
+                Value="Right" />
+        </Style>
+    </Window.Resources>
+
     <Grid>
+
+        <Controls:CustomValidationPopup  Height="111" VerticalAlignment="Top" Margin="0,27,0,0">
+            <Grid>
+                <TextBox BorderBrush="Black" BorderThickness="1" Text="ádd" Width="750" VerticalAlignment="Top" Height="86" Margin="0,0,0,0">
+
+                </TextBox>
+            </Grid>
+
+        </Controls:CustomValidationPopup>
+
+
+        <xctk:MultiLineTextEditor Height="30" Text="{Binding Demotexxt}" Margin="0,196,0,401">
+
+        </xctk:MultiLineTextEditor>
         <!--<Grid>
             -->
         <!--<Controls:ProgressRing 
@@ -17,7 +49,7 @@
         <!--
             <Controls:MetroProgressBar  Controls:VisibilityHelper.IsCollapsed="False"  Controls:VisibilityHelper.IsVisible="True" IsIndeterminate="True"  Height="38" Margin="0,132,-0.2,100.4" />
         </Grid>-->
-        <simpleChildWindow:ChildWindow 
+        <!--<simpleChildWindow:ChildWindow 
 		                               Title="TestChild 1"		   
                                        ShowTitleBar="False"
                                        ShowCloseButton="False"		                              
@@ -57,6 +89,6 @@
             </Grid>
         
 
-        </simpleChildWindow:ChildWindow>
+        </simpleChildWindow:ChildWindow>-->
     </Grid>
 </Controls:MetroWindow>

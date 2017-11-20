@@ -22,6 +22,8 @@ namespace SoBasicEnglish
         public GameScreen()
         {
             InitializeComponent();
+
         }
+        public string Demotexxt { get; set; }
     }
 }

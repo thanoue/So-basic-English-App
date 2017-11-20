@@ -433,7 +433,7 @@ namespace SoBasicEnglish
                     case "A":
                         SentenceExList.Add(new SentenceEx
                         {
-                            ChoseA = true,
+                            ChoseA = false,
                             ChoseB = false,
                             ChoseC = false,
                             ChoseD = false,
@@ -449,7 +449,7 @@ namespace SoBasicEnglish
                         SentenceExList.Add(new SentenceEx
                         {
                             ChoseA = false,
-                            ChoseB = true,
+                            ChoseB = false,
                             ChoseC = false,
                             ChoseD = false,
                             KeyWord = row["keySentence"].ToString(),
@@ -465,7 +465,7 @@ namespace SoBasicEnglish
                         {
                             ChoseA = false,
                             ChoseB = false,
-                            ChoseC = true,
+                            ChoseC = false,
                             ChoseD = false,
                             KeyWord = row["keySentence"].ToString(),
                             AnsA = row["ansA"].ToString(),
@@ -481,7 +481,7 @@ namespace SoBasicEnglish
                             ChoseA = false,
                             ChoseB = false,
                             ChoseC = false,
-                            ChoseD = true,
+                            ChoseD = false,
                             KeyWord = row["keySentence"].ToString(),
                             AnsA = row["ansA"].ToString(),
                             AnsB = row["ansB"].ToString(),
@@ -583,7 +583,7 @@ namespace SoBasicEnglish
                     case "A":
                         ListenQuestionList.Add(new ListeningQuestion
                         {
-                            ChoseA = true,
+                            ChoseA = false,
                             ChoseB = false,
                             ChoseC = false,
                             ChoseD = false,
@@ -599,7 +599,7 @@ namespace SoBasicEnglish
                         ListenQuestionList.Add(new ListeningQuestion
                         {
                             ChoseA = false,
-                            ChoseB = true,
+                            ChoseB = false,
                             ChoseC = false,
                             ChoseD = false,
                             QuestionContent = row["quesSentence"].ToString(),
@@ -615,7 +615,7 @@ namespace SoBasicEnglish
                         {
                             ChoseA = false,
                             ChoseB = false,
-                            ChoseC = true,
+                            ChoseC = false,
                             ChoseD = false,
                             QuestionContent = row["quesSentence"].ToString(),
                             AnsA = row["ansA"].ToString(),
@@ -631,7 +631,7 @@ namespace SoBasicEnglish
                             ChoseA = false,
                             ChoseB = false,
                             ChoseC = false,
-                            ChoseD = true,
+                            ChoseD = false,
                             QuestionContent = row["quesSentence"].ToString(),
                             AnsA = row["ansA"].ToString(),
                             AnsB = row["ansB"].ToString(),
@@ -753,7 +753,7 @@ namespace SoBasicEnglish
                     case "A":
                         GrammarQuestionList.Add(new GrammarQuestion
                         {
-                            ChoseA = true,
+                            ChoseA = false,
                             ChoseB = false,
                             ChoseC = false,
                             ChoseD = false,
@@ -769,7 +769,7 @@ namespace SoBasicEnglish
                         GrammarQuestionList.Add(new GrammarQuestion
                         {
                             ChoseA = false,
-                            ChoseB = true,
+                            ChoseB = false,
                             ChoseC = false,
                             ChoseD = false,
                             KeyWord = row["quesSentence"].ToString(),
@@ -785,7 +785,7 @@ namespace SoBasicEnglish
                         {
                             ChoseA = false,
                             ChoseB = false,
-                            ChoseC = true,
+                            ChoseC = false,
                             ChoseD = false,
                             KeyWord = row["quesSentence"].ToString(),
                             AnsA = row["ansA"].ToString(),
@@ -801,7 +801,7 @@ namespace SoBasicEnglish
                             ChoseA = false,
                             ChoseB = false,
                             ChoseC = false,
-                            ChoseD = true,
+                            ChoseD = false,
                             KeyWord = row["quesSentence"].ToString(),
                             AnsA = row["ansA"].ToString(),
                             AnsB = row["ansB"].ToString(),

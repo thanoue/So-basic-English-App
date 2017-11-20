@@ -170,7 +170,6 @@
                     </Grid.RowDefinitions>
                     <Grid>
                         <Grid >
-
                             <Image  Source="{Binding UserAvt}" Stretch="Fill" >
                                 <Image.Clip>
                                     <EllipseGeometry Center="80,72" RadiusX="66" RadiusY="66" />
@@ -427,8 +426,7 @@
                                        ShowTitleBar="False"
                                        ShowCloseButton="False"		                              
 		                               CloseByEscape="False"		   
-                                       CloseOnOverlay="False"
-                                       
+                                       CloseOnOverlay="False"                                       
                                        IsOpen="{Binding OpenEditUserInFo,Mode=TwoWay}">
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="593" >
                     <Grid.Background>

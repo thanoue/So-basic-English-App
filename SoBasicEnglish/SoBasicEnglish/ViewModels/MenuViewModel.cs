@@ -222,18 +222,23 @@ namespace SoBasicEnglish.ViewModels
             {
                 DateProcess temp = obj as DateProcess;
                 //MessageBox.Show(temp.TurnNumber.ToString());
-                Model.dateProcess = temp.TurnNumber;
-                StudyWindow a = new StudyWindow(); a.ShowDialog();
-                GvDateProcessSelectedIndex = -1;
-            }
-          
-        }
+                try
+                {
+                    Model.dateProcess = temp.TurnNumber;
+                    StudyWindow a = new StudyWindow(); a.ShowDialog();
+                    GvDateProcessSelectedIndex = -1;
 
+                }
+                catch (Exception ) {
+                   
+                }
+               
+            }          
+        }
         private void Cancel_ChangePass()
         {
             OpenChangePassWord = false;
         }
-
         private void Submit_ChangePassword(UIElementCollection obj)
         {
             string oldPass = "";string newPass = "";string confPass = "";

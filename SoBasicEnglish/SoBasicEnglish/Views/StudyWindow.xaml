@@ -10,10 +10,10 @@
         xmlns:ViewModels="clr-namespace:SoBasicEnglish.ViewModels"
         WindowStartupLocation="CenterScreen"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                      xmlns:xctk="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
-                      xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit"
-                      
-                      Title="StudyWindow" Height="825.8" Width="1118">
+                     
+                      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                      WindowState="Normal"
+                      Title="StudyWindow" Height="820"  Width="1118">
     <Window.DataContext>
         <ViewModels:StudyViewModel></ViewModels:StudyViewModel>
     </Window.DataContext>
@@ -50,21 +50,26 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Grid>
+        <Grid Background="Gray">
             <Grid.RowDefinitions>
                 <RowDefinition Height=".09*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,0.2"  >
+                <!--<StackPanel.DataContext>
+                    <ViewModels:LessonQuestionViewModel>
+                    </ViewModels:LessonQuestionViewModel>
+                </StackPanel.DataContext>-->
                 <StackPanel.Background>
                     <SolidColorBrush Color="SaddleBrown" Opacity="0.8"></SolidColorBrush>
                 </StackPanel.Background>
                 <TextBlock Width="auto"  Margin="450 0 0 0" VerticalAlignment="Center" FontSize="30" MinWidth="100" FontFamily="/SoBasicEnglish;component/Fonts/#VNI-Jamai">
                     Name of the lesson
-                </TextBlock>                
-                <Button
-                    Command="{Binding Click_GoToTheLessonMenu}"
-                    Margin="250 0 0 0 " VerticalAlignment="Center"    Background="SaddleBrown"  Width="60" Height="60" HorizontalAlignment="Left"  Style="{DynamicResource MetroCircleButtonStyle}"  >
+                </TextBlock>
+                <Button DataContext="{Binding LessonQuestionDataContext}"
+                    Command="{Binding Click_ShowLessonQuestionMenu}"
+                    Margin="250 0 0 0 " VerticalAlignment="Center"    Background="SaddleBrown"  Width="60" Height="60" HorizontalAlignment="Left"  Style="{DynamicResource MetroCircleButtonStyle}">
+                   
                     <Image Source="/SoBasicEnglish;component/Images/Assets/Help - 02.png" Height="40" Width="30"/>
                 </Button>
                 <Button
@@ -79,17 +84,17 @@
                 </Button>-->
             </StackPanel>
             <Grid Grid.Row="1">
-                <Controls:MetroAnimatedSingleRowTabControl Margin="20" SelectedIndex="{Binding TcLessonSelectedIndex }">
+                <Controls:MetroAnimatedSingleRowTabControl Margin="20,0,20,0" Background="Gray" SelectedIndex="{Binding TcLessonSelectedIndex }">
                     <!--tab control aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
                     <TabItem>
                         <!--menuaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
-                        <Grid Background="Gray">
+                        <Grid Background="Transparent">
                             <Grid Width="700" Height="600" >
                                 <Grid.Background>
                                     <SolidColorBrush Color="SaddleBrown" Opacity="0.5"></SolidColorBrush>
                                 </Grid.Background>
                                 <Grid.Effect>
-                                    <DropShadowEffect ShadowDepth="12" BlurRadius="5"></DropShadowEffect>
+                                    <DropShadowEffect ShadowDepth="25" BlurRadius="7"></DropShadowEffect>
                                 </Grid.Effect>
                                 <StackPanel>
                                     <ListBox SelectedIndex="{Binding LbLessonMenuSelectedIndex,Mode=TwoWay}" Margin="20" Background="Transparent">
@@ -201,11 +206,11 @@
                                                                 <i:Interaction.Triggers>
                                                                     <i:EventTrigger EventName="Click">
                                                                         <i:InvokeCommandAction
-                                                                            Command="{Binding Check_ToggleBtnShowQuestion}">                                                                           
-                                                                        </i:InvokeCommandAction>                               
-                                                                    </i:EventTrigger>                                                                    
+                                                                            Command="{Binding Check_ToggleBtnShowQuestion}">
+                                                                        </i:InvokeCommandAction>
+                                                                    </i:EventTrigger>
                                                                 </i:Interaction.Triggers>
-                                                                
+
                                                                 <Image Source="..\Images/Assets/Check-02.png" Height="25" Width="36"></Image>
                                                             </ToggleButton>
                                                             <TextBlock  Foreground="Wheat" FontStyle="Italic" FontSize="20" Margin="220,0,-52.2,6" VerticalAlignment="Bottom">Show question</TextBlock>
@@ -299,7 +304,7 @@
                                                         </Grid>
                                                     </Grid>
                                                 </Grid>
-                                            </Grid>                                                                        
+                                            </Grid>
                                         </Grid>
                                     </Border>
                                 </Grid>
@@ -363,7 +368,7 @@
                                                                         <ColumnDefinition/>
                                                                     </Grid.ColumnDefinitions>
                                                                     <Grid Grid.Column="0">
-                                                                        <Image Height="170" Width="190" Source="{Binding PictureOfWord}" Stretch="Uniform" >                                                                          
+                                                                        <Image Height="170" Width="190" Source="{Binding PictureOfWord}" Stretch="Uniform" >
                                                                         </Image>
                                                                     </Grid>
                                                                     <Grid Grid.Column="1">
@@ -470,7 +475,7 @@
                     <TabItem>
                         <!-- Sentences item aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
                         <Grid Background="Gray">
-                            <StackPanel Margin="0 6 0 0" VerticalAlignment="Top"  Height="650" Width="1000" >
+                            <StackPanel Margin="36,6,36,0" VerticalAlignment="Top"  Height="672" Width="1000" >
                                 <StackPanel >
                                     <StackPanel Height="60" VerticalAlignment="Top" Orientation="Horizontal"   >
                                         <StackPanel.Background>
@@ -499,7 +504,7 @@
                                         </Button>
                                     </StackPanel>
                                 </StackPanel>
-                                <Grid Margin="0 0" Height="570" >
+                                <Grid Margin="0 0" Height="600" >
                                     <Grid.Background>
                                         <SolidColorBrush Color="SaddleBrown" Opacity="0.35"></SolidColorBrush>
                                     </Grid.Background>
@@ -509,7 +514,7 @@
                                                                      ScrollViewer.VerticalScrollBarVisibility="Visible" 
                                                                 x:Name="lvSentences"
                                                        Background="Transparent"
-                                                       Margin="20"
+                                                       Margin="20,20,20,5.2"
                                                                 HorizontalAlignment="Stretch"  >
                                                 <ListView.ItemTemplate>
                                                     <DataTemplate>
@@ -518,7 +523,10 @@
                                                                 <Border BorderBrush="Black" BorderThickness="1.5">
                                                                     <StackPanel >
                                                                         <StackPanel Margin="10 10 0 0" Orientation="Horizontal">
-                                                                            <Button Margin="10 0 0 0" Background="Brown"  MinWidth="{Binding Index}" Width="35" Height="35" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                                                            <Button Margin="10 0 0 0" Background="Brown" 
+                                                                                    Command="{Binding ElementName=lvSentences,Path=DataContext.Click_ListenSentence}"      
+                                                                                     CommandParameter="{Binding}"
+                                                                                    MinWidth="{Binding Index}" Width="35" Height="35" Style="{DynamicResource MetroCircleButtonStyle}"  >
                                                                                 <Image Height="15" Width="15" Source="/SoBasicEnglish;component/Images/Assets/Speaker.png"></Image>
                                                                             </Button>
                                                                             <TextBlock  Margin="5 0 0 0 " Text="{Binding KeySentence}" FontSize="30" Foreground="LightSeaGreen" TextAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Width="auto" Height="auto"  ></TextBlock>
@@ -535,27 +543,27 @@
                                             </ListView>
                                         </TabItem>
                                         <TabItem>
-                                            <Border   BorderThickness="0" BorderBrush="Black" Margin="20 0 " >
-
+                                            <Border   BorderThickness="0"  Margin="20 0 " >
                                                 <Grid >
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="70"/>
                                                         <ColumnDefinition/>
                                                     </Grid.ColumnDefinitions>
                                                     <StackPanel Grid.Column="0" Width="70">
-                                                        <Button Margin="10 20 0 0"   Background="Brown" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                                        <Button
+                                                            Command="{Binding Click_StartDoingEX}"
+                                                            Margin="10 20 0 0"   Background="Brown" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
                                                             <Image Source="..\Images/Assets/Stop Clock-WF.png" Height="40" Width="30"></Image>
                                                         </Button>
-                                                        <Button Margin="10 10 0 0"  Background="Olive" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                                        <Button Command="{Binding Click_RestartDoingEX}" Margin="10 10 0 0"  Background="Olive" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
                                                             <Image Source="..\Images/Assets/Command-Reset.png" Height="40" Width="30"></Image>
                                                         </Button>
-                                                        <Button Margin="10 10 0 0"  Background="Green" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
+                                                        <Button Command="{Binding Click_SubmitEX}" Margin="10 10 0 0"  Background="Green" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
                                                             <Image Source="..\Images/Assets/Submit-01.png" Height="40" Width="30"></Image>
                                                         </Button>
-
                                                     </StackPanel>
                                                     <ListView
-                                                        Margin="30"
+                                                        Margin="29.6,30,30,10.2"
                                                         ItemsSource="{Binding SentenceExList}" Background="Transparent" Grid.Column="1" BorderBrush="Black" BorderThickness="1" x:Name="lvSentenceExList" >
                                                         <ListView.ItemTemplate>
                                                             <DataTemplate>
@@ -598,19 +606,19 @@
                                                             <SolidColorBrush Color="SaddleBrown" Opacity="0.55"></SolidColorBrush>
                                                         </Border.Background>
                                                         <StackPanel Margin="10">
-                                                            <Border Grid.Row="0" HorizontalAlignment="Center"  CornerRadius="25" BorderBrush="Wheat" BorderThickness="4" MinWidth="637" Width="auto" Grid.RowSpan="2">
+                                                            <Border HorizontalAlignment="Center" Height="50"  CornerRadius="25" BorderBrush="Wheat" BorderThickness="4" MinWidth="637" Width="auto" Grid.RowSpan="2">
                                                                 <StackPanel VerticalAlignment="Center" Margin="25,0,10,0" Background="Transparent" Orientation="Horizontal" Width="auto" MinWidth="400" Height="33" HorizontalAlignment="Left">
-                                                                    <Button Margin="0,0,0,-0.4"   Background="Green" Width="35" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                                                    <Button Margin="0,0,0,-0.4" Command="{Binding Click_StartToSpeech}"  Background="{Binding BVoiceRecBtn}" Width="35" Style="{DynamicResource MetroCircleButtonStyle}"  >
                                                                         <Image Source="..\Images/Assets/Mic-03.png" Height="15" Width="15"/>
                                                                     </Button>
-                                                                    <TextBlock FontFamily="Showcard Gothic" FontSize="15" FontStyle="Italic" Foreground="Wheat"  Text="demo" TextAlignment="Center" VerticalAlignment="Center" Width="auto" MinWidth="500" Margin="0,10,0,9.8" ></TextBlock>
+                                                                    <TextBlock  Height="28" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Medium" FontSize="20" FontStyle="Italic" Foreground="{Binding BResultOfSpeech}"  Text="{Binding VoiceOfUserOraltest}" TextAlignment="Center" VerticalAlignment="Center" Width="auto" MinWidth="500" Margin="0,0,0,4.8" ></TextBlock>
                                                                 </StackPanel>
                                                             </Border>
                                                             <Border Margin="10" Height="45" CornerRadius="20" >
                                                                 <Border.Background>
                                                                     <SolidColorBrush Color="SaddleBrown" Opacity="1" ></SolidColorBrush>
                                                                 </Border.Background>
-                                                                <ItemsControl Margin="5" x:Name="SentenceWrap">
+                                                                <ItemsControl ItemsSource="{Binding OralWordList}" HorizontalAlignment="Center" Margin="5" x:Name="SentenceWrap">
                                                                     <ItemsControl.ItemsPanel>
                                                                         <ItemsPanelTemplate>
                                                                             <WrapPanel IsItemsHost="True"  />
@@ -620,30 +628,40 @@
                                                             </Border>
                                                         </StackPanel>
                                                     </Border>
-                                                    <Grid>
-                                                        <ListView Margin="10,10,9.6,10" ItemsSource="{Binding SentenceList}"
-                                                                     ScrollViewer.VerticalScrollBarVisibility="Visible"                                                                
+                                                    <Grid Height="453" Margin="0,0,0.4,0">
+                                                        <ListView Margin="10,10,9,0" ItemsSource="{Binding SentenceList}"
+                                                                     ScrollViewer.VerticalScrollBarVisibility="Visible"      
+                                                              x:Name="lvSentenceOrals"
                                                        Background="Transparent"
                                                                 HorizontalAlignment="Stretch"  >
+                                                            <i:Interaction.Triggers>
+                                                                <i:EventTrigger EventName="SelectionChanged">
+                                                                    <i:InvokeCommandAction
+                                                                            Command="{Binding SelectionChanged_lvSentenceOralList}" CommandParameter="{Binding SelectedItem,ElementName=lvSentenceOrals}">
+                                                                    </i:InvokeCommandAction>
+                                                                </i:EventTrigger>
+                                                            </i:Interaction.Triggers>
                                                             <ListView.ItemTemplate>
                                                                 <DataTemplate>
-                                                                    <ListViewItem>
-                                                                        <Grid Height="120">
-                                                                            <Border BorderBrush="Black" BorderThickness="1.5">
-                                                                                <StackPanel >
-                                                                                    <StackPanel Margin="10 10 0 0" Orientation="Horizontal">
-                                                                                        <Button Margin="10 0 0 0" Background="Brown"  MinWidth="{Binding Index}" Width="35" Height="35" Style="{DynamicResource MetroCircleButtonStyle}"  >
-                                                                                            <Image Height="15" Width="15" Source="/SoBasicEnglish;component/Images/Assets/Speaker.png"></Image>
-                                                                                        </Button>
-                                                                                        <TextBlock  Margin="5 0 0 0 " Text="{Binding KeySentence}" FontSize="30" Foreground="LightSeaGreen" TextAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Width="auto" Height="auto"  ></TextBlock>
-                                                                                    </StackPanel>
-                                                                                    <TextBlock Margin="10 0 0 0" HorizontalAlignment="Left" Text="{Binding HowToRead}" FontSize="20" Foreground="Black" TextAlignment="Left" VerticalAlignment="Center" Width="auto" Height="auto" ></TextBlock>
-                                                                                    <TextBlock Margin="10 0 0 0" HorizontalAlignment="Left" Text="{Binding VieMeanOfSentence}" FontSize="20" Foreground="BlueViolet" TextAlignment="Center" VerticalAlignment="Center" FontStyle="Italic"  Width="auto" Height="auto" ></TextBlock>
-                                                                                </StackPanel>
-                                                                            </Border>
-                                                                        </Grid>
 
-                                                                    </ListViewItem>
+                                                                    <Grid Height="120">
+                                                                        <Border BorderBrush="Black" BorderThickness="1.5">
+                                                                            <StackPanel >
+                                                                                <StackPanel Margin="10 10 0 0" Orientation="Horizontal">
+                                                                                    <Button
+                                                                                            Command="{Binding ElementName=lvSentenceOrals,Path=DataContext.Click_ListenSentence}"      
+                                                                                     CommandParameter="{Binding}"
+                                                                                            Margin="10 0 0 0" Background="Brown"  MinWidth="{Binding Index}" Width="35" Height="35" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                                                                        <Image Height="15" Width="15" Source="/SoBasicEnglish;component/Images/Assets/Speaker.png"></Image>
+                                                                                    </Button>
+                                                                                    <TextBlock  Margin="5 0 0 0 " Text="{Binding KeySentence}" FontSize="30" Foreground="LightSeaGreen" TextAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Width="auto" Height="auto"  ></TextBlock>
+                                                                                </StackPanel>
+                                                                                <TextBlock Margin="10 0 0 0" HorizontalAlignment="Left" Text="{Binding HowToRead}" FontSize="20" Foreground="Black" TextAlignment="Left" VerticalAlignment="Center" Width="auto" Height="auto" ></TextBlock>
+                                                                                <TextBlock Margin="10 0 0 0" HorizontalAlignment="Left" Text="{Binding VieMeanOfSentence}" FontSize="20" Foreground="BlueViolet" TextAlignment="Center" VerticalAlignment="Center" FontStyle="Italic"  Width="auto" Height="auto" ></TextBlock>
+                                                                            </StackPanel>
+                                                                        </Border>
+                                                                    </Grid>
+
                                                                 </DataTemplate>
                                                             </ListView.ItemTemplate>
                                                         </ListView>
@@ -686,110 +704,103 @@
                                         </Button>
                                     </StackPanel>
                                 </StackPanel>
-                                <Grid  Height="616">
+                                <Grid  Height="601">
                                     <Grid.Background>
                                         <SolidColorBrush Color="SaddleBrown" Opacity="0.4"></SolidColorBrush>
                                     </Grid.Background>
-                                    <StackPanel>
+                                    <StackPanel Margin="0,0,0,10">
                                         <Border Margin="40 10" CornerRadius="20" BorderBrush="Wheat" BorderThickness="1">
                                             <!--<Border.Background>
                                                 <SolidColorBrush Color="SaddleBrown" Opacity="0.25"></SolidColorBrush>
                                             </Border.Background>-->
                                             <StackPanel Orientation="Horizontal">
                                                 <Button
-                                                Command="{Binding Click_GoToTheMenuLb}"
+                                                Command="{Binding Click_PlayTheAudio}"
                                                  Margin="0 0 0 0 " VerticalAlignment="Center"    Background="SaddleBrown"  Width="55" Height="55" HorizontalAlignment="Left"  Style="{DynamicResource MetroCircleButtonStyle}"  >
                                                     <Image Source="..\Images/Assets/Head Phone-04-WF.png" Height="40" Width="30"/>
                                                 </Button>
-                                                <Slider Style="{DynamicResource FlatSlider}" VerticalAlignment="Center"  Maximum="100" Value="50" Width="852"></Slider>
+                                                <Slider Value="{Binding ListenSliderValue,Mode=OneWay}" Maximum="{Binding ListenSliderMaxValue}" Minimum="0" Style="{DynamicResource FlatSlider}" VerticalAlignment="Center"  Width="852"></Slider>
                                             </StackPanel>
                                         </Border>
-                                        <Controls:MetroAnimatedSingleRowTabControl SelectedIndex="{Binding TcListenSelectedIndex}" Height="536">
-                                            <TabItem Background="Transparent">
-                                                <Grid >
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="91.2"/>
-                                                        <ColumnDefinition/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <StackPanel Grid.Column="0" Margin="1,0,1.2,0.2">
-                                                        <Button Margin="20 20 0 0"   Background="Brown" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
-                                                            <Image Source="..\Images/Assets/Stop Clock-WF.png" Height="40" Width="30"></Image>
-                                                        </Button>
-                                                        <Button Margin="20 20 0 0" x:Name="btnResetListenSentenceEx"   Background="YellowGreen" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
-                                                            <Image Source="..\Images/Assets/Command-Reset.png" Height="40" Width="30"></Image>
-                                                        </Button>
-                                                        <Button Margin="20 20 0 0"  x:Name="btnSubmitListenSentenceEx"   Background="Green" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
-                                                            <Image Source="..\Images/Assets/Submit-01.png" Height="40" Width="30"></Image>
-                                                        </Button>
-                                                    </StackPanel>
-                                                    <Grid Margin="10.8,10,10,10.2" Grid.Column="1">
-                                                        <ListView Background="Transparent" Margin="10,10,39.6,10.2" ItemsSource="{Binding ListeningQuestionList}"   x:Name="lvListeningExList" >
+                                        <StackPanel Orientation="Horizontal" Height="523">
+                                            <StackPanel Margin="20" Grid.Column="0" Width="70">
+                                                <Button 
+                                                            Command="{Binding Click_StartDoingEX}"
+                                                            Margin="10 20 0 0"   Background="Brown" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                                    <Image Source="..\Images/Assets/Stop Clock-WF.png" Height="40" Width="30"></Image>
+                                                </Button>
+                                                <Button Command="{Binding Click_RestartDoingEX}" Margin="10 10 0 0"  Background="Olive" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                                    <Image Source="..\Images/Assets/Command-Reset.png" Height="40" Width="30"></Image>
+                                                </Button>
+                                                <Button Command="{Binding Click_SubmitEX}" Margin="10 10 0 0"  Background="Green" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
+                                                    <Image Source="..\Images/Assets/Submit-01.png" Height="40" Width="30"></Image>
+                                                </Button>
+                                            </StackPanel>
+                                            <Controls:MetroAnimatedSingleRowTabControl SelectedIndex="{Binding TcListenSelectedIndex}" Height="536">
+                                                <TabItem Background="Transparent">
+                                                    <Grid >
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="0"/>
+                                                            <ColumnDefinition/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid Margin="10.8,0,10,10.2" Grid.Column="1">
+                                                            <ListView Background="Transparent" Margin="10,10,39.6,10.2" ItemsSource="{Binding ListeningQuestionList}"   x:Name="lvListeningExList" >
+                                                                <ListView.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <ListViewItem>
+                                                                            <Grid Height="190" >
+                                                                                <Border Margin="5" BorderBrush="Black" BorderThickness="1">
+                                                                                    <StackPanel Margin="5">
+                                                                                        <StackPanel Orientation="Horizontal" >
+                                                                                            <TextBlock Foreground="DarkGreen" Controls:TextBoxHelper.ClearTextButton="True" Text="{Binding QuestionContent}"   Margin="10 0 0 0" Width="auto" MinWidth="350" FontSize="30"  FontWeight="Bold" ></TextBlock>
+                                                                                        </StackPanel>
+                                                                                        <StackPanel Margin="60 0 20 0" Orientation="Horizontal" >
+                                                                                            <StackPanel >
+                                                                                                <RadioButton IsChecked="{Binding ChoseA,Mode=TwoWay}"  Margin="0 5 0 0"></RadioButton>
+                                                                                                <RadioButton IsChecked="{Binding ChoseB,Mode=TwoWay}"  Margin="0 10 0 0"></RadioButton>
+                                                                                                <RadioButton IsChecked="{Binding ChoseC,Mode=TwoWay}"  Margin="0 12 0 0"></RadioButton>
+                                                                                                <RadioButton IsChecked="{Binding ChoseD,Mode=TwoWay}"  Margin="0 12 0 0"></RadioButton>
+                                                                                            </StackPanel>
+                                                                                            <StackPanel>
+                                                                                                <TextBlock Background="{Binding BgA}"  Margin="0 0 0 5" Width="600" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center" Text="{Binding AnsA}" FontSize="18"></TextBlock>
+                                                                                                <TextBlock Background="{Binding BgB}"  Margin="0 0 0 5"  Width="600" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="{Binding AnsB}" FontSize="18"></TextBlock>
+                                                                                                <TextBlock Background="{Binding BgC}"  Margin="0 0 0 5"  Width="600" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="{Binding AnsC}" FontSize="18"></TextBlock>
+                                                                                                <TextBlock Background="{Binding BgD}"  Margin="0 0 0 5"  Width="600" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="{Binding AnsD}" FontSize="18"></TextBlock>
+                                                                                            </StackPanel>
+                                                                                        </StackPanel>
+                                                                                    </StackPanel>
+                                                                                </Border>
+                                                                            </Grid>
+
+                                                                        </ListViewItem>
+                                                                    </DataTemplate>
+                                                                </ListView.ItemTemplate>
+                                                            </ListView>
+
+                                                        </Grid>
+                                                    </Grid>
+                                                </TabItem>
+                                                <TabItem Background="Transparent">
+                                                    <StackPanel Orientation="Horizontal" Margin="10">
+                                                        <ListView ItemsSource="{Binding ListeningPart2QuestionList}" x:Name="lvListenPart2QuestionList"   Background="Transparent" Margin="10,10,10,10"  Width="auto" MinWidth="700" >
                                                             <ListView.ItemTemplate>
                                                                 <DataTemplate>
-                                                                    <ListViewItem>
-                                                                        <Grid Height="190" >
-                                                                            <Border Margin="5" BorderBrush="Black" BorderThickness="1">
-                                                                                <StackPanel Margin="5">
-                                                                                    <StackPanel Orientation="Horizontal" >
-                                                                                        <TextBlock Foreground="DarkGreen" Controls:TextBoxHelper.ClearTextButton="True" Text="{Binding QuestionContent}"   Margin="10 0 0 0" Width="auto" MinWidth="350" FontSize="30"  FontWeight="Bold" ></TextBlock>
-                                                                                    </StackPanel>
-                                                                                    <StackPanel Margin="60 0 20 0" Orientation="Horizontal" >
-                                                                                        <StackPanel >
-                                                                                            <RadioButton IsChecked="{Binding ChoseA,Mode=TwoWay}"  Margin="0 5 0 0"></RadioButton>
-                                                                                            <RadioButton IsChecked="{Binding ChoseB,Mode=TwoWay}"  Margin="0 10 0 0"></RadioButton>
-                                                                                            <RadioButton IsChecked="{Binding ChoseC,Mode=TwoWay}"  Margin="0 12 0 0"></RadioButton>
-                                                                                            <RadioButton IsChecked="{Binding ChoseD,Mode=TwoWay}"  Margin="0 12 0 0"></RadioButton>
-                                                                                        </StackPanel>
-                                                                                        <StackPanel>
-                                                                                            <TextBlock Background="{Binding BgA}"  Margin="0 0 0 5" Width="600" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center" Text="{Binding AnsA}" FontSize="18"></TextBlock>
-                                                                                            <TextBlock Background="{Binding BgB}"  Margin="0 0 0 5"  Width="600" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="{Binding AnsB}" FontSize="18"></TextBlock>
-                                                                                            <TextBlock Background="{Binding BgC}"  Margin="0 0 0 5"  Width="600" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="{Binding AnsC}" FontSize="18"></TextBlock>
-                                                                                            <TextBlock Background="{Binding BgD}"  Margin="0 0 0 5"  Width="600" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center"  Text="{Binding AnsD}" FontSize="18"></TextBlock>
-                                                                                        </StackPanel>
-                                                                                    </StackPanel>
-                                                                                </StackPanel>
-                                                                            </Border>
+                                                                    <ListViewItem Background="Transparent">
+                                                                        <Grid Height="auto"  Margin="20,10,0,10" >
+                                                                            <StackPanel Orientation="Horizontal">
+                                                                                <TextBlock FontSize="25" Text="{Binding Before}" Width="auto"/>
+                                                                                <TextBox Foreground="{Binding ValueBrush}" MinWidth="50" Margin="10 0 0 0"  Height="35" VerticalAlignment="Center" FontSize="20" BorderBrush="Red" Text="{Binding Value, Mode=TwoWay}" BorderThickness="1" Width="auto"  />
+                                                                                <TextBlock FontSize="25" Margin="10 0 0 0" Width="auto"  Text="{Binding After}" />
+                                                                            </StackPanel>
                                                                         </Grid>
-
                                                                     </ListViewItem>
                                                                 </DataTemplate>
                                                             </ListView.ItemTemplate>
                                                         </ListView>
-
-                                                    </Grid>
-                                                </Grid>
-                                            </TabItem>
-                                            <TabItem Background="Transparent">
-                                                <StackPanel Orientation="Horizontal" Margin="10">
-                                                    <StackPanel>
-                                                        <Button Margin="20 20 0 0"   Background="Brown" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
-                                                            <Image Source="..\Images/Assets/Stop Clock-WF.png" Height="40" Width="30"></Image>
-                                                        </Button>
-                                                        <Button Margin="20 20 0 0"    Background="YellowGreen" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
-                                                            <Image Source="..\Images/Assets/Command-Reset.png" Height="40" Width="30"></Image>
-                                                        </Button>
-                                                        <Button Margin="20 20 0 0"    Background="Green" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
-                                                            <Image Source="..\Images/Assets/Submit-01.png" Height="40" Width="30"></Image>
-                                                        </Button>
                                                     </StackPanel>
-                                                    <ListView ItemsSource="{Binding ListeningPart2QuestionList}" x:Name="lvListenPart2QuestionList"   Background="Transparent" Margin="10,10,10,10"  Width="auto" MinWidth="700" >
-                                                        <ListBox.ItemTemplate>
-                                                            <DataTemplate>
-                                                                <ListViewItem Background="Transparent">
-                                                                    <Grid Height="auto"  Margin="20,10,0,10" >
-                                                                        <StackPanel Orientation="Horizontal">
-                                                                            <TextBlock FontSize="25" Text="{Binding Before}" Width="auto"/>
-                                                                            <TextBox Foreground="{Binding ValueBrush}" MinWidth="50" Margin="10 0 0 0"  Height="35" VerticalAlignment="Center" FontSize="20" BorderBrush="Red" Text="{Binding Value, Mode=TwoWay}" BorderThickness="1" Width="auto"  />
-                                                                            <TextBlock FontSize="25" Margin="10 0 0 0" Width="auto"  Text="{Binding After}" />
-                                                                        </StackPanel>
-                                                                    </Grid>
-                                                                </ListViewItem>
-                                                            </DataTemplate>
-                                                        </ListBox.ItemTemplate>
-                                                    </ListView>
-                                                </StackPanel>
-                                            </TabItem>
-                                        </Controls:MetroAnimatedSingleRowTabControl>
+                                                </TabItem>
+                                            </Controls:MetroAnimatedSingleRowTabControl>
+                                        </StackPanel>
                                     </StackPanel>
                                 </Grid>
 
@@ -812,7 +823,7 @@
                                                  Margin="0 0 0 0 " VerticalAlignment="Center"    Background="SaddleBrown"  Width="55" Height="55" HorizontalAlignment="Left"  Style="{DynamicResource MetroCircleButtonStyle}"  >
                                         <Image Source="..\Images/Assets/totheLeft.png" Height="40" Width="30"/>
                                     </Button>
-                                    <TextBlock FontSize="30" Margin="335 0 0 0" VerticalAlignment="Center" Text="Common Sentences" Foreground="Wheat" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Thin"></TextBlock>
+                                    <TextBlock FontSize="30" Margin="335 0 0 0" VerticalAlignment="Center" Text="Daily Grammar" Foreground="Wheat" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Thin"></TextBlock>
                                     <Button
                                                 Command="{Binding Click_GoToStudyTabItem}"
                                                  Margin="200 0 0 0 " VerticalAlignment="Center"    Background="{Binding StudyButtonColor}"  Width="55" Height="55" HorizontalAlignment="Left"  Style="{DynamicResource MetroCircleButtonStyle}"  >
@@ -830,7 +841,7 @@
                                         <TabItem Background="Transparent">
                                             <Grid>
                                                 <GroupBox  Margin="0 10" Header="Your Today Grammar">
-                                                    <DocumentViewer x:Name="dvGrammar" Height="530" Margin="0">
+                                                    <DocumentViewer Document="{Binding DocumentWordFile}" x:Name="dvGrammar" Height="530" Margin="0">
 
                                                     </DocumentViewer>
                                                 </GroupBox>
@@ -844,17 +855,21 @@
                                                         <ColumnDefinition/>
                                                     </Grid.ColumnDefinitions>
                                                     <StackPanel Grid.Column="0" Width="70">
-                                                        <Button Margin="10 20 0 0"   Background="Brown" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                                        <Button Command="{Binding Click_StartDoingEX}" Margin="10 20 0 0"   Background="Brown" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
                                                             <Image Source="..\Images/Assets/Stop Clock-WF.png" Height="40" Width="30"></Image>
                                                         </Button>
-                                                        <Button Margin="10 10 0 0" x:Name="btnResetGrammarEx"  Background="YellowGreen" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                                        <Button
+                                                            Command="{Binding Click_RestartDoingEX}"
+                                                            Margin="10 10 0 0" x:Name="btnResetGrammarEx"  Background="YellowGreen" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
                                                             <Image Source="..\Images/Assets/Command-Reset.png" Height="40" Width="30"></Image>
                                                         </Button>
-                                                        <Button Margin="10 10 0 0"  x:Name="btnSubmitGrammarEx"  Background="Green" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
+                                                        <Button 
+                                                            Command="{Binding Click_SubmitEX}"
+                                                            Margin="10 10 0 0"  x:Name="btnSubmitGrammarEx"  Background="Green" Width="61" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"   >
                                                             <Image Source="..\Images/Assets/Submit-01.png" Height="40" Width="30"></Image>
                                                         </Button>
                                                     </StackPanel>
-                                                    <ListView Background="Transparent" Grid.Column="1" BorderBrush="Black" BorderThickness="0" Margin="20" x:Name="lvGrammarExList" >
+                                                    <ListView Background="Transparent" ItemsSource="{Binding GrammarQuestionList}" Grid.Column="1" BorderBrush="Black" BorderThickness="0" Margin="20" x:Name="lvGrammarExList" >
                                                         <ListView.ItemTemplate>
                                                             <DataTemplate>
                                                                 <ListViewItem>
@@ -862,7 +877,7 @@
                                                                         <Border Margin="5" BorderBrush="Black" BorderThickness="1">
                                                                             <StackPanel Margin="5">
                                                                                 <StackPanel Orientation="Horizontal" >
-                                                                                    <TextBlock Foreground="DarkGreen" Controls:TextBoxHelper.ClearTextButton="True" Text="{Binding KeyWord}"   Margin="10 0 0 0" Width="auto" MinWidth="350" FontSize="30"  FontWeight="Bold" ></TextBlock>
+                                                                                    <TextBlock Foreground="DarkGreen"  Text="{Binding KeyWord}"   Margin="10 0 0 0" Width="auto" MinWidth="350" FontSize="30"  FontWeight="Bold" ></TextBlock>
                                                                                 </StackPanel>
                                                                                 <StackPanel Margin="60 0 20 0" Orientation="Horizontal" >
                                                                                     <StackPanel >
@@ -904,19 +919,43 @@
                                             <SolidColorBrush Color="SaddleBrown" Opacity="0.55"></SolidColorBrush>
                                         </StackPanel.Background>
                                         <Button
-                                Command="{Binding Click_GoToTheMenuLb}"
-                                Margin="0 0 0 0 " VerticalAlignment="Center"    Background="SaddleBrown"  Width="55" Height="55" HorizontalAlignment="Left"  Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                                     Command="{Binding Click_GoToTheMenuLb}"
+                                                    Margin="0 0 0 0 " VerticalAlignment="Center"    Background="SaddleBrown"  Width="55" Height="55" HorizontalAlignment="Left"  Style="{DynamicResource MetroCircleButtonStyle}"  >
                                             <Image Source="..\Images/Assets/totheLeft.png" Height="40" Width="30"/>
                                         </Button>
                                         <TextBlock FontSize="30" Margin="360 0 0 0" VerticalAlignment="Center" Text="Lesson note" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Thin" Foreground="Wheat"></TextBlock>
 
                                     </StackPanel>
                                 </StackPanel>
-                                <Grid Height="auto" MinHeight="450">
-                                    <Grid.Background>
+                                <StackPanel Height="586" MinHeight="450">
+                                    <StackPanel.Background>
                                         <SolidColorBrush Color="SaddleBrown" Opacity="0.4"></SolidColorBrush>
-                                    </Grid.Background>
-                                </Grid>
+                                    </StackPanel.Background>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border  Margin="20 30 0 0" Width="881" BorderBrush="SaddleBrown" BorderThickness="1" CornerRadius="50" Height="518">
+                                            <Border.Background>
+                                                <SolidColorBrush Color="SaddleBrown" Opacity="0.3"></SolidColorBrush>
+                                            </Border.Background>
+                                            <xctk:RichTextBox BorderThickness="0" Background="Transparent" Height="auto" FontSize="20" Margin="52,20" MinHeight="150" x:Name="_richTextBox"  Padding="10"
+                                     Text="{Binding NoteOfLesson }" 
+                                     ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                                <xctk:RichTextBoxFormatBarManager.FormatBar>
+                                                    <xctk:RichTextBoxFormatBar />
+                                                </xctk:RichTextBoxFormatBarManager.FormatBar>
+                                                <xctk:RichTextBox.TextFormatter>
+                                                    <xctk:PlainTextFormatter />
+                                                </xctk:RichTextBox.TextFormatter>
+                                            </xctk:RichTextBox>
+                                        </Border>
+                                        <Button
+                                                     Command="{Binding Click_EidtTheNoteOfLesson,Mode=TwoWay}"
+                                                    Margin="5 0 0 0 "  VerticalAlignment="Bottom"    Background="SaddleBrown"  Width="90" Height="90" HorizontalAlignment="Left"  Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                            <Image Source="..\Images/Assets/Edit_04.png" Height="50" Width="50"/>
+                                        </Button>
+                                    </StackPanel>
+
+
+                                </StackPanel>
                             </StackPanel>
                         </Grid>
                     </TabItem>
@@ -1000,137 +1039,117 @@
                                 </StackPanel>
                             </StackPanel>
                         </Grid>
-
                     </simpleChildWindow:ChildWindow>
                 </Grid>
             </Grid>
         </Grid>
-        <!--<Controls:Flyout Visibility="Collapsed"   x:Name="flUser" IsOpen="{Binding IsOpenLessonMenu,Mode=TwoWay}" Foreground="White" Position="Right" Header="Lesson menu" Width="232" Margin="0,131,0,0">
-            <Controls:Flyout.Background>
-                <SolidColorBrush Color="Black" Opacity="0.85"></SolidColorBrush>
-            </Controls:Flyout.Background>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height=".7*"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid Height="auto" Margin="30 10 30 1" Background="Transparent" >
+        <Grid>
+            <Controls:Flyout IsOpen="{Binding IsOpenMessage}" Visibility="Collapsed"  BorderThickness="0"  Foreground="black" Position="Right" TitleVisibility="Hidden" CloseButtonVisibility="Hidden" HorizontalContentAlignment="Right" Canvas.Left="245" Canvas.Top="10" Margin="722,0,5,666" RenderTransformOrigin="0.5,0.5" >
+                <Controls:Flyout.Background>
+                    <SolidColorBrush Color="Transparent" Opacity="0.7"></SolidColorBrush>
+                </Controls:Flyout.Background>
+                <Border Width="auto" CornerRadius="40" BorderBrush="Navy" BorderThickness="0"  Height="106" Margin="-60,0,-1,0" RenderTransformOrigin="0.5,0.5" >
+                    <Border.Background>
+                        <SolidColorBrush Color="OliveDrab" Opacity="0.8"></SolidColorBrush>
+                    </Border.Background>
+                    <Grid Width="auto" Margin="10.2,9.2,9.4,9.6">
+                        <StackPanel Width="auto" Orientation="Horizontal" Margin="0,0,-0.6,-0.2" >
+                            <Image VerticalAlignment="Center" Source="/SoBasicEnglish;component/Images/Assets/Check-01.png" Width="45" />
+                            <TextBlock FontWeight="Bold" Width="368" Foreground="AntiqueWhite"  Margin="5,28,0,29" VerticalAlignment="Center" FontSize="23" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Semibold" TextWrapping="Wrap" Height="auto" Text="{Binding ContentOfMessage}"></TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Controls:Flyout>
+        </Grid>
+        <Grid DataContext="{Binding LessonQuestionDataContext,Mode=TwoWay}">           
+            <Controls:Flyout IsOpen="{Binding IsOpenQuestion,Mode=OneWay}" Visibility="Collapsed" BorderThickness="2" x:Name="flChampions"   Foreground="black" Margin="170,0" Position="Top" TitleVisibility="Collapsed" CloseButtonVisibility="Collapsed" Height="789">
+                <Controls:Flyout.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#FF507050" Offset="0"/>
+                        <GradientStop Color="#FF200000" Offset="1"/>
+                    </LinearGradientBrush>
+                </Controls:Flyout.Background>
+                <Grid >
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="4.5*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition/>
-                        <RowDefinition/>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height=".1*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid>
-                        <Grid >
-                            <Image  Source="..\Images/feature-landing_tcm32-288767.jpg" Stretch="Fill" >
-                                <Image.Clip>
-                                    <EllipseGeometry Center="80,72" RadiusX="66" RadiusY="66" />
-                                </Image.Clip>
-                            </Image>
-                        </Grid>
-                    </Grid>
-                    <TextBlock TextAlignment="Center" x:Name="lbUserName"  FontSize="15" Foreground="White"  Text="{Binding UserFullName}" VerticalAlignment="Center"  HorizontalAlignment="Center" Height="29" Margin="10,3.6,9.8,0.2" Grid.Row="1" Width="141"/>
-                    <Grid Grid.Row="2" Margin="0 0 0 0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Grid Margin="0 0 0 5"  Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                            <Label x:Name="lbUserLevel" VerticalAlignment="Top" TextElement.FontStyle="Italic"  Foreground="White" FontSize="15" Width="auto" Content="{Binding UserLevel}" Height="27" Margin="0,0,-0.2,0" />
-
-                        </Grid>
-                        <Border Grid.Column="0" Width="102" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center"
-                                     BorderBrush="Green" BorderThickness="1" CornerRadius="15">
-                            <Border x:Name="pcLevel" Width="{Binding WidthOfProgress}" Height="25" BorderThickness="0" CornerRadius="15"
-                            HorizontalAlignment="Left" VerticalAlignment="Center">
-                                <Border.Background>
-                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
-                                        <GradientStop Color="SandyBrown" Offset="0.2"></GradientStop>
-                                        <GradientStop Color="LightGray" Offset="0.4"></GradientStop>
-
-                                    </LinearGradientBrush>
-                                </Border.Background>
-                            </Border>
+                        <Border BorderBrush="Azure" BorderThickness="1" Margin="10">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height=".17*" />
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Horizontal" Grid.Row="0" >
+                                    <Border BorderBrush="Wheat" Height="auto" BorderThickness="1.4" CornerRadius="20"   Margin="40 10 0 0" Width="640" >
+                                        <TextBox x:Name="txtContentOfQuestion" Text="{Binding ContentOfQuestion,Mode=OneWayToSource}" TextWrapping="Wrap" Height="auto"  BorderThickness="0" Controls:TextBoxHelper.Watermark="ask here..." Foreground="Wheat" Background="Transparent" FontSize="15" Margin="25,5,25,5"  />
+                                    </Border>
+                                    <Button
+                                     Command="{Binding Click_InsertQuestion}" 
+                                     Margin="5 0 0 0 "    Background="SaddleBrown"  Width="50" Height="50" HorizontalAlignment="Left"  Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                        <Image Source="/SoBasicEnglish;component/Images/Assets/Help - 02.png" Height="25" Width="25"/>
+                                    </Button>
+                                </StackPanel>
+                                <Grid Grid.Row="1" >
+                                    <ListView  ItemsSource="{Binding LessonQuestionList}" Margin="10" Background="Transparent" >
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <ListViewItem> 
+                                                <StackPanel  Background="Transparent"  Height="240" Orientation="Horizontal">
+                                                        <Border Width="10" Background="SaddleBrown" >
+                                                        </Border>
+                                                        <StackPanel Background="Transparent" Margin="5">
+                                                            <StackPanel  Height="auto">
+                                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
+                                                                    <Ellipse Height="25" Width="25">
+                                                                        <Ellipse.Fill>
+                                                                            <ImageBrush x:Name="imgAVT" ImageSource="{Binding UserAvt}" />
+                                                                        </Ellipse.Fill>
+                                                                    </Ellipse>
+                                                                    <TextBlock VerticalAlignment="Center" Text="{Binding UserName}" FontSize="15" Margin="5 0 0 0" Foreground="Wheat" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Heavy"></TextBlock>
+                                                                    <TextBlock VerticalAlignment="Center" FontStyle="Oblique"  Text="{Binding TimeOfAsk}" Margin="5 0 0 0" Foreground="White" FontSize="10" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Light" ></TextBlock>
+                                                                </StackPanel>
+                                                                <Border Opacity="0.5" CornerRadius="20" Margin="20 5 0 0" Width="649" Height="65" BorderBrush="Wheat" BorderThickness="1" >
+                                                                    <TextBlock Margin="9,5,22,5" FontSize="12" Foreground="Wheat" TextWrapping="Wrap" Text="{Binding ContentOfQuestion}"></TextBlock>
+                                                                </Border>
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <Image Height="40" VerticalAlignment="Center" Margin="30 0 0 0" Source="/SoBasicEnglish;component/Images/Assets/Out.png"  ></Image>
+                                                                    <Border CornerRadius="20" Opacity="0.4" Background="SaddleBrown" Width="578" Height="114" Margin="0 14 0 3">
+                                                                        <TextBlock Margin="10" Text="{Binding AnswerOfQuestion}" Foreground="Wheat" FontSize="15" TextWrapping="Wrap" ></TextBlock>
+                                                                    </Border>
+                                                                </StackPanel>
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                </ListViewItem>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>                                     
+                                    </ListView>
+                                </Grid>
+                            </Grid>
                         </Border>
                     </Grid>
-                    <Grid Grid.Row="3">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="Score : " TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="15"/>
-                        <TextBlock x:Name="lbUserLevelScore" Grid.Column="1" Text="{Binding UserScore}" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
+                    <Controls:Tile 
+                        Command="{Binding CloseLessonQuestion}"
+                        Margin="0,10,0,9.8" Background="Transparent" x:Name="btnCloseChampions" Height="Auto" Width="Auto" Grid.Row="1">
+                        <Image Source="..\Images/Assets/Up arrow.png" Height="56" Width="78" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" IsEnabled="False" VerticalAlignment="Center"  />
+                    </Controls:Tile>
+                </Grid>
+            </Controls:Flyout>
+            <Controls:Flyout Background="Transparent" IsOpen="{Binding IsOpenNotify}" Visibility="Collapsed"  BorderThickness="0"  Foreground="black" Position="Right" TitleVisibility="Hidden" CloseButtonVisibility="Hidden" HorizontalContentAlignment="Right" Canvas.Left="245" Canvas.Top="10" Margin="722,0,5,666" RenderTransformOrigin="0.5,0.5" >
+               <Border Width="auto" CornerRadius="40" BorderBrush="Navy" BorderThickness="0"  Height="106" Margin="-60,0,-1,0" RenderTransformOrigin="0.5,0.5" >
+                    <Border.Background>
+                        <SolidColorBrush Color="SaddleBrown" Opacity="0.7"></SolidColorBrush>
+                    </Border.Background>
+                    <Grid Width="auto" Margin="10.2,9.2,9.4,9.6">
+                        <StackPanel Width="auto" Orientation="Horizontal" Margin="0,0,-0.6,-0.2" >
+                            <Image VerticalAlignment="Center" Source="/SoBasicEnglish;component/Images/Assets/Check-01.png" Width="45" />
+                            <TextBlock FontSize="15" FontWeight="Bold" Width="368" Foreground="AntiqueWhite"  Margin="5,28,0,29" VerticalAlignment="Center"  FontFamily="/SoBasicEnglish;component/Fonts/#Lato Semibold" TextWrapping="Wrap" Height="auto" Text="{Binding ContentOfNotify}"></TextBlock>
+                        </StackPanel>
                     </Grid>
-
-                </Grid>
-                <Grid Grid.Row="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1.5*"></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0" >
-                        <Grid  Margin="20 10 10 0" 
-                               x:Name="gEdituserInfo"                               
-                              >
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="MouseDown">
-                                    <i:InvokeCommandAction Command="{Binding ClickEditUserInfo}"  />
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-
-                            <Grid.Background>
-                                <SolidColorBrush Color="CadetBlue" Opacity="0.2"/>
-                            </Grid.Background>
-                            <Label  FontSize="15" VerticalAlignment="Center"  Foreground="White" Content="Ratings" Width="138" Margin="7,0,45.8,0">
-                            </Label>
-                            <Image Margin="5 0 10 0" Source="..\Images/Assets/Rating - 03.png" Height="30" Width="30" HorizontalAlignment="Right">
-                                <Image.Clip>
-                                    <RectangleGeometry RadiusX="10"
-                                           RadiusY="10"
-                                           Rect="0,0,150,113"/>
-                                </Image.Clip>
-                            </Image>
-                        </Grid>
-                        <Grid Margin="20 10 10 0" 
-                               x:Name="gChangePass"                             
-                              >
-
-
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="MouseDown">
-                                    <i:InvokeCommandAction Command="{Binding ClickChangePassWord}"  />
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                            <Grid.Background>
-                                <SolidColorBrush Color="CadetBlue" Opacity="0.2"/>
-                            </Grid.Background>
-                            <Label                       
-                               x:Name="lbChangePassword"
-                               FontSize="15"
-                               VerticalAlignment="Center" Foreground="White" Content="Your lesson note" Width="138" Height="30" Margin="7,0,45.8,0">
-                            </Label>
-                            <Image Margin="5 0 10 0" Source="..\Images/Assets/File edit.png" Height="30" Width="30" HorizontalAlignment="Right"/>
-                        </Grid>
-                        <Grid Margin="20 10 10 0"
-                              x:Name="gLogOut"                              
-                              >
-                            <Grid.Background>
-                                <SolidColorBrush Color="CadetBlue" Opacity="0.2"/>
-                            </Grid.Background>
-                            <Label
-                               x:Name="lbLogOut"
-                               FontSize="15"
-                               VerticalAlignment="Center" Foreground="White" Content="Users's questions" Width="138" Margin="7,0,45.8,0">
-                            </Label>
-                            <Image Margin="5 0 10 0" Source="..\Images/Assets/Help - 02.png" Height="30" Width="30" HorizontalAlignment="Right"/>
-                        </Grid>
-                    </StackPanel>
-                </Grid>
-            </Grid>
-        </Controls:Flyout>-->
-
+                </Border>
+            </Controls:Flyout>
+        </Grid>
     </Grid>
 </Controls:MetroWindow>

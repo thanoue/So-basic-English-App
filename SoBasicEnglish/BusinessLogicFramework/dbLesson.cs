@@ -32,6 +32,19 @@ namespace BusinessLogicFramework
                 new SqlParameter("@turnNumber", turnNumber)
                 );
         }
+        public string GetLessonNoteByUserLoginName_Date(string userLoginName,int dateProcess)
+        {
+            return db.GetLessonNoteByUserLoginName_Date(userLoginName, dateProcess);
+        }
+        public bool UpdateLessonNote(ref string error, int dateProcess,string userLoginName,string contentOfNote)
+        {
+            return db.ExcuteNoneQuery("spUpdateLessonNote", CommandType.StoredProcedure,
+                ref error,
+                 new SqlParameter("@userLoginName", userLoginName),
+                 new SqlParameter("@dateProcess", dateProcess),
+                 new SqlParameter("@contentOfNote", contentOfNote)
+                );
+        }
         public bool DeleteGetReadyQuestionByLessonId(ref string error, int dateProcess)
         {
             return db.ExcuteNoneQuery("spDeleteGetReadyQuestion", CommandType.StoredProcedure,

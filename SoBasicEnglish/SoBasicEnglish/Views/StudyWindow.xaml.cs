@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace SoBasicEnglish.Views
 {
@@ -22,7 +23,14 @@ namespace SoBasicEnglish.Views
         public StudyWindow()
         {
             InitializeComponent();
+            Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
         }
 
+        private void Current_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            e.Handled = true;
+          //  UnhandledException exWin = new UnhandledException(e.Exception);
+            //exWin.ShowDialog();
+        }
     }
 }

@@ -44,9 +44,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dbDateProcess.cs" />
+    <Compile Include="dbLessonQuestion.cs" />
     <Compile Include="dbLessonRating.cs" />
     <Compile Include="dbLesson.cs" />
     <Compile Include="dbLogin.cs" />
+    <Compile Include="dbUserNotify.cs" />
     <Compile Include="dbUserScore.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

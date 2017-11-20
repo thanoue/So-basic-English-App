@@ -51,13 +51,16 @@ namespace SoBasicEnglish.ViewModels
         public ICommand GotFocus_HowToReadSentence { get; set; }
         public ICommand Click_DeleteLesson { get; set; }
         public ICommand Click_EditNameOfLesson { get; set; }
+        public ICommand Click_SubmitAnswerQuestion { get; set; }
         #endregion
         #region objects
 
         private dbDateProcess dbDateProcess;private byte[] DefaultImage;private byte[] AudioListenFile = null; private MediaPlayer mediaPlayer = new MediaPlayer();
         private DispatcherTimer timer;private DispatcherTimer TimeCoShowMessage;private bool mediaPlayerIsPlaying = false; private byte[] WordFile; private string convertedXpsDoc = ""; int temp = 0;private int DateProcess = 0;
-        dbLesson dbLesson;private bool EditingLesson = false;
+        dbLesson dbLesson;private bool EditingLesson = false;private dbLessonQuestion dbLessonQuestion;
         private DispatcherTimer TimerForCreating;
+        public ObservableCollection<LessonQuestion> LessonQuestionList { get => _lessonQuestionList; set { _lessonQuestionList = value; NotifyPropertyChanged("AnswerOfQuestion"); } }
+        private ObservableCollection<LessonQuestion> _lessonQuestionList = new ObservableCollection<LessonQuestion>();
         public ObservableCollection<ListeningPart2Question> ListeningPart2QuestionList { get => _listeningPart2QuestionList; set { _listeningPart2QuestionList = value; NotifyPropertyChanged("ListeningPart2QuestionList"); } }
         private ObservableCollection<ListeningPart2Question> _listeningPart2QuestionList = new ObservableCollection<ListeningPart2Question>();
         public ObservableCollection<ListeningQuestion> ListeningQuestionList { get => _listeningQuestionList; set { _listeningQuestionList = value; NotifyPropertyChanged("ListeningQuestionList"); } }
@@ -131,7 +134,7 @@ namespace SoBasicEnglish.ViewModels
         public EditorViewModel()
         {
             dbDateProcess = new dbDateProcess(Model.serverName); GetDateProcess(); GetSymbols();dbLesson = new dbLesson(Model.serverName);
-            System.Data.DataTable temp2 = dbDateProcess.GetLevelList(); Levels.Clear(); GetDefaultData();
+            System.Data.DataTable temp2 = dbDateProcess.GetLevelList(); Levels.Clear(); GetDefaultData(); dbLessonQuestion = new dbLessonQuestion(Model.serverName);
             foreach (DataRow i in temp2.Rows)
             {
                 Levels.Add(new Level { LevelIndex = Int32.Parse(i["Id"].ToString()), LevelValue = i["levelDetail"].ToString() });
@@ -156,6 +159,8 @@ namespace SoBasicEnglish.ViewModels
             Click_DeleteLesson = new RelayCommand<object>((p) => EditingLesson, DeleteLesson);
             GotFocus_HowToReadSentence = new RelayCommand<object>((p) => true, GotFocusHowToReadSentence);
             Click_EditNameOfLesson = new RelayCommand<object>((p) => EditingLesson, EditNameOfLesson);
+            Click_SubmitAnswerQuestion = new RelayCommand<UIElementCollection>((p) => p != null, SubmitAnswerQuestion);
+
              timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += timer_Tick;
@@ -168,11 +173,66 @@ namespace SoBasicEnglish.ViewModels
             TimeCoShowMessage.Interval = TimeSpan.FromMilliseconds(1200);
             TimeCoShowMessage.Tick += TimeCoShowMessage_Tick;
         }
+    
+        private void SubmitAnswerQuestion(UIElementCollection obj)////////////////////////////////
+        {
+            string tbContentOfAnswer = "";
+            int IdOfQuestion = 0;
+           foreach (var i in obj)
+            {
+                TextBox tb = i as TextBox;
+                if (tb != null)
+                {
+                    if (tb.Name == "tbContentOfAnswer")
+                        tbContentOfAnswer = tb.Text;
+                }
+                else
+                {
+                    TextBlock tbl = i as TextBlock;
+                    if (tbl != null)
+                        if (tbl.Name == "IdOfQuestion")
+                            IdOfQuestion = Int32.Parse(tbl.Text);
+                }
 
+            }
+            string er = "";
+            if(dbLessonQuestion.UpdateAnswerOfLessonQuestion(ref er, IdOfQuestion, tbContentOfAnswer))
+            {
+                LessonQuestionList.Clear();
+                IsOpenMessage = true;
+                MessageOfEdit = "A question has been answered";
+                TimeCoShowMessage.Start();
+                dbUserNotify dbUserNotify = new dbUserNotify(Model.serverName);
+                if(dbUserNotify.InsertNotify(ref er,Model.userLoginName,"Your question about the lesson '"+LessonName+"' is responsed. Check it out!"))
+                {
+                    if (LessonQuestionList.Count == 0)
+                    {
+                        var temp = dbLessonQuestion.GetLessonQuestionByDateProcess_full(Model.dateProcess);
+
+                        foreach (DataRow i in temp.Rows)
+                        {
+                            LessonQuestionList.Add(new LessonQuestion
+                            {
+                                UserAvt = (byte[])i["userAvatar"],
+                                UserName = i["userName"].ToString(),
+                                ContentOfQuestion = i["contentOfQuestion"].ToString(),
+                                AnswerOfQuestion = i["contentOfAnswer"].ToString(),
+                                TimeOfAsk = (Convert.ToDateTime(i["timeOfAsk"])).ToString(),
+                                Id = Int32.Parse(i["id"].ToString())
+                            });
+                        }
+                    }
+                }
+                
+             
+            }
+        }
+        #endregion
+        #region ICommands
         private void EditNameOfLesson(object obj)
         {
             string er = "";
-           if(dbLesson.EditNameOfLesson(ref er, LessonName, Model.dateProcess))
+            if (dbLesson.EditNameOfLesson(ref er, LessonName, Model.dateProcess))
             {
                 IsOpenMessage = true;
                 MessageOfEdit = "You have edited the name of lesson!";
@@ -184,74 +244,101 @@ namespace SoBasicEnglish.ViewModels
         private void DeleteLesson(object obj)
         {
             string er = "";
-           if(dbLesson.DeleteLessonByTurnNumber(ref er, Model.dateProcess))
+            if (dbLesson.DeleteLessonByTurnNumber(ref er, Model.dateProcess))
             {
                 GetDateProcess();
-                CreatingLesson = false;EditingLesson = false;
+                CreatingLesson = false; EditingLesson = false;
             }
         }
-        #endregion
-        #region ICommands
         private void TcLessonSelecionChanged()
         {
-            if (TcLessonSelectedIndex == 1)
-            {               
-                    if(KeyWordsList.Count==0)
-                         Model.GetKeyWordList(KeyWordsList, Model.dateProcess, Model.serverName);                
+            if (EditingLesson)
+            {
+
+                if (TcLessonSelectedIndex == 1)
+                {
+                    if (KeyWordsList.Count == 0)
+                        Model.GetKeyWordList(KeyWordsList, Model.dateProcess, Model.serverName);
                     if (KeyWordExList.Count == 0)
                     {
                         Model.GetKeyWordExListByLessonId_full(KeyWordExList, Model.dateProcess, Model.serverName);
-                    }               
-            }
-            else
-            {
-                if (TcLessonSelectedIndex == 2)
-                {
-                    if (SentenceList.Count == 0)
-                        Model.GetSentenceList(SentenceList, Model.dateProcess, Model.serverName);
-                    if (SentenceExList.Count == 0)
-                        Model.GetSentenceExListByLessonId_full(SentenceExList, Model.dateProcess, Model.serverName);
+                    }
                 }
                 else
                 {
-                    if(TcLessonSelectedIndex == 3)
+                    if (TcLessonSelectedIndex == 2)
                     {
-
-                        if (ListeningQuestionList.Count == 0)
-                        {
-                            Model.GetListenQuestionByLessonId_full(ListeningQuestionList, Model.dateProcess, Model.serverName);
-                        }
-                        if (ListeningPart2QuestionList.Count == 0)
-                            Model.GetListenPart2QuestionListById_full(ListeningPart2QuestionList, Model.dateProcess, Model.serverName);
-                        if (AudioListenFile == null)
-                        {
-                            AudioListenFile = dbLesson.GetAudioFileById(Model.dateProcess);
-                            string name = System.IO.Path.ChangeExtension(System.IO.Path.GetRandomFileName(), ".wav");
-                            string path = System.IO.Path.Combine(System.IO.Path.GetTempPath(), name);
-                            File.WriteAllBytes(path, AudioListenFile);
-                            mediaPlayer.Stop();
-                            mediaPlayer.Open(new Uri(path));
-                            timer.Stop();
-                            mediaPlayerIsPlaying = false;
-                        }
+                        if (SentenceList.Count == 0)
+                            Model.GetSentenceList(SentenceList, Model.dateProcess, Model.serverName);
+                        if (SentenceExList.Count == 0)
+                            Model.GetSentenceExListByLessonId_full(SentenceExList, Model.dateProcess, Model.serverName);
                     }
                     else
                     {
-                        if (TcLessonSelectedIndex == 4)
+                        if (TcLessonSelectedIndex == 3)
                         {
-                            if (WordFile == null)
+
+                            if (ListeningQuestionList.Count == 0)
                             {
-                                WordFile = dbLesson.GetGrammarWordFileByID(Model.dateProcess);
-                                DocumentWordFile = GetFixedDocumentSequence(WordFile);
+                                Model.GetListenQuestionByLessonId_full(ListeningQuestionList, Model.dateProcess, Model.serverName);
                             }
-                            if (GrammarQuestionList.Count == 0)
+                            if (ListeningPart2QuestionList.Count == 0)
+                                Model.GetListenPart2QuestionListById_full(ListeningPart2QuestionList, Model.dateProcess, Model.serverName);
+                            if (AudioListenFile == null)
                             {
-                                Model.GetGrammarQuestionById_full(GrammarQuestionList, Model.dateProcess, Model.serverName);
+                                AudioListenFile = dbLesson.GetAudioFileById(Model.dateProcess);
+                                string name = System.IO.Path.ChangeExtension(System.IO.Path.GetRandomFileName(), ".wav");
+                                string path = System.IO.Path.Combine(System.IO.Path.GetTempPath(), name);
+                                File.WriteAllBytes(path, AudioListenFile);
+                                mediaPlayer.Stop();
+                                mediaPlayer.Open(new Uri(path));
+                                timer.Stop();
+                                mediaPlayerIsPlaying = false;
+                            }
+                        }
+                        else
+                        {
+                            if (TcLessonSelectedIndex == 4)
+                            {
+                                if (WordFile == null)
+                                {
+                                    WordFile = dbLesson.GetGrammarWordFileByID(Model.dateProcess);
+                                    DocumentWordFile = GetFixedDocumentSequence(WordFile);
+                                }
+                                if (GrammarQuestionList.Count == 0)
+                                {
+                                    Model.GetGrammarQuestionById_full(GrammarQuestionList, Model.dateProcess, Model.serverName);
+                                }
+                            }
+                            else
+                            {
+                                if (TcLessonSelectedIndex == 5)
+                                {
+                                    if (LessonQuestionList.Count == 0)
+                                    {
+                                        //load data here
+
+                                        var temp = dbLessonQuestion.GetLessonQuestionByDateProcess_full(Model.dateProcess);
+                                        foreach (DataRow i in temp.Rows)
+                                        {
+                                            LessonQuestionList.Add(new LessonQuestion
+                                            {
+                                                UserAvt = (byte[])i["userAvatar"],
+                                                UserName = i["userName"].ToString(),
+                                                ContentOfQuestion = i["contentOfQuestion"].ToString(),
+                                                AnswerOfQuestion = i["contentOfAnswer"].ToString(),
+                                                TimeOfAsk = (Convert.ToDateTime(i["timeOfAsk"])).ToString(),
+                                                Id = Int32.Parse(i["id"].ToString())
+                                            });
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
                 }
             }
+           
         }
         private void EditingLessonItem(object obj)
         {
@@ -364,7 +451,6 @@ namespace SoBasicEnglish.ViewModels
         {
             IsCreating = true;
             TimerForCreating.Start();
-
         }
       
         private void StartCreatingLesson(object e)
@@ -688,7 +774,7 @@ namespace SoBasicEnglish.ViewModels
             DefaultImage = ms.GetBuffer();
             ms.Close();
             GettingReadyQuestionList.Clear(); KeyWordsList.Clear(); KeyWordExList.Clear(); SentenceList.Clear(); SentenceExList.Clear(); ListeningQuestionList.Clear(); ListeningPart2QuestionList.Clear();
-            GrammarQuestionList.Clear();
+            GrammarQuestionList.Clear();LessonQuestionList.Clear();
 
         }
         private XpsDocument ConvertWordToXps(string wordFilename, string xpsFilename)

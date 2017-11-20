@@ -9,10 +9,11 @@
         xmlns:ViewModels="clr-namespace:SoBasicEnglish.ViewModels"
     xmlns:xctk="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
     xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit"
+    xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
     x:Class="SoBasicEnglish.Views.EditorWindow"                         
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        
+      
         
         Height="822.6" Width="1170"
         Title="EditorScreen">
@@ -79,7 +80,7 @@
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
-                           
+
                             <TextBox  BorderBrush="Black" BorderThickness="1.5" Height="auto" Text="{Binding LessonName}" MinWidth="100" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Lesson name..." FontSize="20" MaxWidth="600" VerticalAlignment="Center" Margin="10 10 10 10" Width="auto"/>
                             <Button
                                 Command="{Binding Click_EditNameOfLesson}"
@@ -150,7 +151,7 @@
                                                                     <RadioButton IsChecked="{Binding ChoseD, Mode=TwoWay}"  Margin="0 13.5 0 0"/>
                                                                 </StackPanel>
                                                                 <StackPanel>
-                                                                    
+
                                                                     <TextBox Controls:TextBoxHelper.ClearTextButton="True" Margin="0 0 0 5"  Controls:TextBoxHelper.WatermarkAlignment="Right" Controls:TextBoxHelper.Watermark="The A choice" Width="auto" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="1" Text="{Binding AnsA, Mode=TwoWay}" FontSize="12"/>
                                                                     <TextBox Controls:TextBoxHelper.ClearTextButton="True" Margin="0 0 0 5"  Controls:TextBoxHelper.WatermarkAlignment="Right" Controls:TextBoxHelper.Watermark="The B choice" Width="auto" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="1" Text="{Binding AnsB, Mode=TwoWay}" FontSize="12"/>
                                                                     <TextBox Controls:TextBoxHelper.ClearTextButton="True" Margin="0 0 0 5"  Controls:TextBoxHelper.WatermarkAlignment="Right" Controls:TextBoxHelper.Watermark="The C choice" Width="auto" HorizontalAlignment="Left" MinWidth="50" Height="auto" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="1" Text="{Binding AnsC, Mode=TwoWay}" FontSize="12"/>
@@ -661,6 +662,50 @@
                                 </TabItem>
                             </TabControl>
                         </TabItem>
+                        <TabItem Header="Lesson Questions" >
+                            <Border BorderBrush="Black" BorderThickness="1">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="0.8*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0">
+                                        <StackPanel Background="AliceBlue" Margin="15,15,15,0">
+                                            <StackPanel  Height="336">
+                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
+                                                    <Ellipse Height="55" Margin="5" Width="55">
+                                                        <Ellipse.Fill>
+                                                            <ImageBrush x:Name="imgAVT" ImageSource="{Binding SelectedItem.UserAvt,ElementName=gvLessonQuestion}" />
+                                                        </Ellipse.Fill>
+                                                    </Ellipse>
+                                                    <TextBlock VerticalAlignment="Center" Text="{Binding SelectedItem.UserName,ElementName=gvLessonQuestion}" FontSize="25" Margin="5 0 0 0" Foreground="Black" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Heavy"></TextBlock>
+                                                    <TextBlock VerticalAlignment="Center" FontStyle="Oblique"  Text="{Binding SelectedItem.TimeOfAsk,ElementName=gvLessonQuestion}" Margin="5 0 0 0" Foreground="Black" FontSize="15" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Light" ></TextBlock>
+                                                </StackPanel>
+                                                <Border CornerRadius="20" Margin="140,5,54,0" Height="110" BorderBrush="Black" BorderThickness="1" >
+                                                    <TextBlock Margin="9,5,22,5" FontSize="15" Foreground="Black" TextWrapping="Wrap" Text="{Binding SelectedItem.ContentOfQuestion,ElementName=gvLessonQuestion}"></TextBlock>
+                                                </Border>
+                                                <StackPanel x:Name="stpEditLesonQuestion" Orientation="Horizontal" Height="160">
+                                                    <TextBlock FontSize="1" Foreground="Transparent" x:Name="IdOfQuestion"  VerticalAlignment="Center" Text="{Binding SelectedItem.Id,ElementName=gvLessonQuestion}" Margin="10 0 10 0" FontStyle="Italic"></TextBlock>
+                                                    <Image Height="40" VerticalAlignment="Center" Margin="30 0 0 0" Source="/SoBasicEnglish;component/Images/Assets/Out.png"  ></Image>
+                                                    <TextBox x:Name="tbContentOfAnswer" TextWrapping="Wrap" FontSize="15" Foreground="Black"  BorderThickness="1.5" Text="{Binding SelectedItem.AnswerOfQuestion,ElementName=gvLessonQuestion,Mode=TwoWay}"  Background="Transparent" Width="726" Margin="0,14,0,10" FontFamily="Arial">
+                                                        <!--<TextBlock Margin="10" Text="{Binding AnswerOfQuestion}" Foreground="Wheat" FontSize="15" TextWrapping="Wrap" ></TextBlock>-->
+                                                    </TextBox>
+                                                    <Button Command="{Binding Click_SubmitAnswerQuestion}"  CommandParameter="{Binding Children,ElementName=stpEditLesonQuestion}" Margin="10 0" VerticalAlignment="Center"  Background="Green"  Width="75" Height="75" HorizontalAlignment="Left"  Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                                        <Image Source="..\Images/Assets/Check-01.png" Height="40" Width="50" RenderTransformOrigin="0.5,0.62"/>
+                                                        <!--Click_SubmitAnswerQuestion  CommandParameter="{Binding Children,ElementName=stpEditLesonQuestion}" -->
+                                                    </Button>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Grid.Row="1">
+                                        <DataGrid Margin="5" x:Name="gvLessonQuestion" ItemsSource="{Binding LessonQuestionList,Mode=OneWay}" >
+
+                                        </DataGrid>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </TabItem>
                     </TabControl>
                 </Grid>
 
@@ -680,10 +725,8 @@
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
             </Grid>
-
-
         </Controls:Flyout>
-        <!--<simpleChildWindow:ChildWindow
+        <simpleChildWindow:ChildWindow
             x:Name="child01"
 		                               Title="TestChild 1"		   
                                        ShowTitleBar="False"
@@ -693,7 +736,7 @@
                                          Background="Transparent"
             IsOpen="{Binding IsCreating,Mode=TwoWay}"
          >
-            
+
             <Grid Background="Transparent" Height="200" Width="600">
                 <Border BorderThickness="0" CornerRadius="50" Margin="40" >
                     <Border.Background>
@@ -711,10 +754,8 @@
                         <TextBlock Text="{Binding StateOfCreating}" Margin="10 0" FontSize="20"  HorizontalAlignment="Center" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Light" FontStyle="Italic" Foreground="#FFF1F1F0"   />
                     </StackPanel>
                 </Border>
-
-
             </Grid>
-        </simpleChildWindow:ChildWindow>-->
+        </simpleChildWindow:ChildWindow>
         <Grid>
             <Controls:Flyout IsOpen="{Binding IsOpenMessage}" Visibility="Collapsed"  BorderThickness="0"  Foreground="black" Position="Right" TitleVisibility="Hidden" CloseButtonVisibility="Hidden" HorizontalContentAlignment="Right" Canvas.Left="245" Canvas.Top="10" Margin="722,0,5.2,685.8" RenderTransformOrigin="0.5,0.5" >
                 <Controls:Flyout.Background>
@@ -732,7 +773,6 @@
                     </Grid>
                 </Border>
             </Controls:Flyout>
-
         </Grid>
     </Grid>
 </Controls:MetroWindow>

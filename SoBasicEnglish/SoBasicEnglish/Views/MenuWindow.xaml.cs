@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using SoBasicEnglish.ViewModels;
 
 namespace SoBasicEnglish.Views
@@ -24,6 +25,12 @@ namespace SoBasicEnglish.Views
         {
             InitializeComponent();
             this.DataContext = new MenuViewModel();
+            Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
+        }
+
+        private void Current_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }
