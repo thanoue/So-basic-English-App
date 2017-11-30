@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SoBasicEnglish.Views"
+         xmlns:local1="clr-namespace:SoBasicEnglish"
          xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"   
         mc:Ignorable="d"
@@ -63,17 +64,17 @@
                 <StackPanel.Background>
                     <SolidColorBrush Color="SaddleBrown" Opacity="0.8"></SolidColorBrush>
                 </StackPanel.Background>
-                <TextBlock Width="auto"  Margin="450 0 0 0" VerticalAlignment="Center" FontSize="30" MinWidth="100" FontFamily="/SoBasicEnglish;component/Fonts/#VNI-Jamai">
-                    Name of the lesson
+                <TextBlock Width="auto" Text="{Binding LessonName}"  Margin="450 0 0 0" VerticalAlignment="Center" FontSize="30" MinWidth="100" FontFamily="Arial" >
+                    
                 </TextBlock>
                 <Button DataContext="{Binding LessonQuestionDataContext}"
                     Command="{Binding Click_ShowLessonQuestionMenu}"
-                    Margin="250 0 0 0 " VerticalAlignment="Center"    Background="SaddleBrown"  Width="60" Height="60" HorizontalAlignment="Left"  Style="{DynamicResource MetroCircleButtonStyle}">
+                    Margin="150 0 0 0 " VerticalAlignment="Center"    Background="SaddleBrown"  Width="60" Height="60" HorizontalAlignment="Left"  Style="{DynamicResource MetroCircleButtonStyle}">
                    
                     <Image Source="/SoBasicEnglish;component/Images/Assets/Help - 02.png" Height="40" Width="30"/>
                 </Button>
-                <Button
-                    Command="{Binding Click_GoToTheLessonMenu}"
+                <Button DataContext="{ Binding RatingViewModel}"
+                    Command="{Binding Click_ViewLessonRating}"
                     Margin="10 0 0 0 " VerticalAlignment="Center"    Background="SaddleBrown"  Width="60" Height="60" HorizontalAlignment="Left"  Style="{DynamicResource MetroCircleButtonStyle}"  >
                     <Image Source="/SoBasicEnglish;component/Images/Assets/Rating - 01.png" Height="40" Width="30"/>
                 </Button>
@@ -643,7 +644,6 @@
                                                             </i:Interaction.Triggers>
                                                             <ListView.ItemTemplate>
                                                                 <DataTemplate>
-
                                                                     <Grid Height="120">
                                                                         <Border BorderBrush="Black" BorderThickness="1.5">
                                                                             <StackPanel >
@@ -661,13 +661,10 @@
                                                                             </StackPanel>
                                                                         </Border>
                                                                     </Grid>
-
                                                                 </DataTemplate>
                                                             </ListView.ItemTemplate>
                                                         </ListView>
-
                                                     </Grid>
-
                                                 </StackPanel>
                                             </Border>
                                         </TabItem>
@@ -896,7 +893,6 @@
                                                                             </StackPanel>
                                                                         </Border>
                                                                     </Grid>
-
                                                                 </ListViewItem>
                                                             </DataTemplate>
                                                         </ListView.ItemTemplate>
@@ -1044,7 +1040,7 @@
             </Grid>
         </Grid>
         <Grid>
-            <Controls:Flyout IsOpen="{Binding IsOpenMessage}" Visibility="Collapsed"  BorderThickness="0"  Foreground="black" Position="Right" TitleVisibility="Hidden" CloseButtonVisibility="Hidden" HorizontalContentAlignment="Right" Canvas.Left="245" Canvas.Top="10" Margin="722,0,5,666" RenderTransformOrigin="0.5,0.5" >
+            <Controls:Flyout IsOpen="{Binding IsOpenMessage}" Visibility="Hidden"  BorderThickness="0"  Foreground="black" Position="Right" TitleVisibility="Hidden" CloseButtonVisibility="Hidden" HorizontalContentAlignment="Right" Canvas.Left="245" Canvas.Top="10" Margin="722,0,5,666" RenderTransformOrigin="0.5,0.5" >
                 <Controls:Flyout.Background>
                     <SolidColorBrush Color="Transparent" Opacity="0.7"></SolidColorBrush>
                 </Controls:Flyout.Background>
@@ -1061,95 +1057,192 @@
                 </Border>
             </Controls:Flyout>
         </Grid>
-        <Grid DataContext="{Binding LessonQuestionDataContext,Mode=TwoWay}">           
-            <Controls:Flyout IsOpen="{Binding IsOpenQuestion,Mode=OneWay}" Visibility="Collapsed" BorderThickness="2" x:Name="flChampions"   Foreground="black" Margin="170,0" Position="Top" TitleVisibility="Collapsed" CloseButtonVisibility="Collapsed" Height="789">
-                <Controls:Flyout.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                        <GradientStop Color="#FF507050" Offset="0"/>
-                        <GradientStop Color="#FF200000" Offset="1"/>
-                    </LinearGradientBrush>
-                </Controls:Flyout.Background>
-                <Grid >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height=".1*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid>
-                        <Border BorderBrush="Azure" BorderThickness="1" Margin="10">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height=".17*" />
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <StackPanel Orientation="Horizontal" Grid.Row="0" >
-                                    <Border BorderBrush="Wheat" Height="auto" BorderThickness="1.4" CornerRadius="20"   Margin="40 10 0 0" Width="640" >
-                                        <TextBox x:Name="txtContentOfQuestion" Text="{Binding ContentOfQuestion,Mode=OneWayToSource}" TextWrapping="Wrap" Height="auto"  BorderThickness="0" Controls:TextBoxHelper.Watermark="ask here..." Foreground="Wheat" Background="Transparent" FontSize="15" Margin="25,5,25,5"  />
-                                    </Border>
-                                    <Button
+        <Canvas>
+            <Grid DataContext="{Binding LessonQuestionDataContext,Mode=TwoWay}">
+                <Controls:Flyout IsOpen="{Binding IsOpenQuestion,Mode=OneWay}" Visibility="Hidden" BorderThickness="2" x:Name="flChampions"   Foreground="black" Margin="170,0" Position="Top" TitleVisibility="Collapsed" CloseButtonVisibility="Collapsed" Height="789">
+                    <Controls:Flyout.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Color="#FF507050" Offset="0"/>
+                            <GradientStop Color="#FF200000" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Controls:Flyout.Background>
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height=".1*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Border BorderBrush="Azure" BorderThickness="1" Margin="10">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height=".17*" />
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Orientation="Horizontal" Grid.Row="0" >
+                                        <Border BorderBrush="Wheat" Height="auto" BorderThickness="1.4" CornerRadius="20"   Margin="40 10 0 0" Width="640" >
+                                            <TextBox x:Name="txtContentOfQuestion" Text="{Binding ContentOfQuestion,Mode=OneWayToSource}" TextWrapping="Wrap" Height="auto"  BorderThickness="0" Controls:TextBoxHelper.Watermark="ask here..." Foreground="Wheat" Background="Transparent" FontSize="15" Margin="25,5,25,5"  />
+                                        </Border>
+                                        <Button
                                      Command="{Binding Click_InsertQuestion}" 
                                      Margin="5 0 0 0 "    Background="SaddleBrown"  Width="50" Height="50" HorizontalAlignment="Left"  Style="{DynamicResource MetroCircleButtonStyle}"  >
-                                        <Image Source="/SoBasicEnglish;component/Images/Assets/Help - 02.png" Height="25" Width="25"/>
-                                    </Button>
-                                </StackPanel>
-                                <Grid Grid.Row="1" >
-                                    <ListView  ItemsSource="{Binding LessonQuestionList}" Margin="10" Background="Transparent" >
-                                        <ListView.ItemTemplate>
-                                            <DataTemplate>
-                                                <ListViewItem> 
-                                                <StackPanel  Background="Transparent"  Height="240" Orientation="Horizontal">
-                                                        <Border Width="10" Background="SaddleBrown" >
-                                                        </Border>
-                                                        <StackPanel Background="Transparent" Margin="5">
-                                                            <StackPanel  Height="auto">
-                                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
-                                                                    <Ellipse Height="25" Width="25">
-                                                                        <Ellipse.Fill>
-                                                                            <ImageBrush x:Name="imgAVT" ImageSource="{Binding UserAvt}" />
-                                                                        </Ellipse.Fill>
-                                                                    </Ellipse>
-                                                                    <TextBlock VerticalAlignment="Center" Text="{Binding UserName}" FontSize="15" Margin="5 0 0 0" Foreground="Wheat" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Heavy"></TextBlock>
-                                                                    <TextBlock VerticalAlignment="Center" FontStyle="Oblique"  Text="{Binding TimeOfAsk}" Margin="5 0 0 0" Foreground="White" FontSize="10" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Light" ></TextBlock>
-                                                                </StackPanel>
-                                                                <Border Opacity="0.5" CornerRadius="20" Margin="20 5 0 0" Width="649" Height="65" BorderBrush="Wheat" BorderThickness="1" >
-                                                                    <TextBlock Margin="9,5,22,5" FontSize="12" Foreground="Wheat" TextWrapping="Wrap" Text="{Binding ContentOfQuestion}"></TextBlock>
-                                                                </Border>
-                                                                <StackPanel Orientation="Horizontal">
-                                                                    <Image Height="40" VerticalAlignment="Center" Margin="30 0 0 0" Source="/SoBasicEnglish;component/Images/Assets/Out.png"  ></Image>
-                                                                    <Border CornerRadius="20" Opacity="0.4" Background="SaddleBrown" Width="578" Height="114" Margin="0 14 0 3">
-                                                                        <TextBlock Margin="10" Text="{Binding AnswerOfQuestion}" Foreground="Wheat" FontSize="15" TextWrapping="Wrap" ></TextBlock>
+                                            <Image Source="/SoBasicEnglish;component/Images/Assets/Help - 02.png" Height="25" Width="25"/>
+                                        </Button>
+                                    </StackPanel>
+                                    <Grid Grid.Row="1" >
+                                        <ListView  ItemsSource="{Binding LessonQuestionList}" Margin="10" Background="Transparent" >
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <ListViewItem>
+                                                        <StackPanel  Background="Transparent"  Height="240" Orientation="Horizontal">
+                                                            <Border Width="10" Background="SaddleBrown" >
+                                                            </Border>
+                                                            <StackPanel Background="Transparent" Margin="5">
+                                                                <StackPanel  Height="auto">
+                                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
+                                                                        <Image Height="40" Width="35" Source="{Binding UserAvt}" Stretch="Uniform" >
+                                                                        </Image>
+                                                                        <TextBlock VerticalAlignment="Center" Text="{Binding UserName}" FontSize="15" Margin="10 0 0 0" Foreground="Wheat" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Heavy"></TextBlock>
+                                                                        <TextBlock VerticalAlignment="Center" FontStyle="Oblique"  Text="{Binding TimeOfAsk}" Margin="15 0 0 0" Foreground="White" FontSize="10" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Light" ></TextBlock>
+                                                                    </StackPanel>
+                                                                    <Border Opacity="0.5" CornerRadius="20" Margin="20 5 0 0" Width="649" Height="65" BorderBrush="Wheat" BorderThickness="1" >
+                                                                        <TextBlock Margin="9,5,22,5" FontSize="12" Foreground="Wheat" TextWrapping="Wrap" Text="{Binding ContentOfQuestion}"></TextBlock>
                                                                     </Border>
+                                                                    <StackPanel Orientation="Horizontal">
+                                                                        <Image Height="40" VerticalAlignment="Center" Margin="30 0 0 0" Source="/SoBasicEnglish;component/Images/Assets/Out.png"  ></Image>
+                                                                        <Border CornerRadius="20" Opacity="0.4" Background="SaddleBrown" Width="578" Height="114" Margin="0 14 0 3">
+                                                                            <TextBlock Margin="10" Text="{Binding AnswerOfQuestion}" Foreground="Wheat" FontSize="15" TextWrapping="Wrap" ></TextBlock>
+                                                                        </Border>
+                                                                    </StackPanel>
                                                                 </StackPanel>
                                                             </StackPanel>
                                                         </StackPanel>
-                                                    </StackPanel>
-                                                </ListViewItem>
-                                            </DataTemplate>
-                                        </ListView.ItemTemplate>                                     
-                                    </ListView>
+                                                    </ListViewItem>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </Border>
-                    </Grid>
-                    <Controls:Tile 
+                            </Border>
+                        </Grid>
+                        <Controls:Tile 
                         Command="{Binding CloseLessonQuestion}"
                         Margin="0,10,0,9.8" Background="Transparent" x:Name="btnCloseChampions" Height="Auto" Width="Auto" Grid.Row="1">
-                        <Image Source="..\Images/Assets/Up arrow.png" Height="56" Width="78" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" IsEnabled="False" VerticalAlignment="Center"  />
-                    </Controls:Tile>
-                </Grid>
-            </Controls:Flyout>
-            <Controls:Flyout Background="Transparent" IsOpen="{Binding IsOpenNotify}" Visibility="Collapsed"  BorderThickness="0"  Foreground="black" Position="Right" TitleVisibility="Hidden" CloseButtonVisibility="Hidden" HorizontalContentAlignment="Right" Canvas.Left="245" Canvas.Top="10" Margin="722,0,5,666" RenderTransformOrigin="0.5,0.5" >
-               <Border Width="auto" CornerRadius="40" BorderBrush="Navy" BorderThickness="0"  Height="106" Margin="-60,0,-1,0" RenderTransformOrigin="0.5,0.5" >
-                    <Border.Background>
-                        <SolidColorBrush Color="SaddleBrown" Opacity="0.7"></SolidColorBrush>
-                    </Border.Background>
-                    <Grid Width="auto" Margin="10.2,9.2,9.4,9.6">
-                        <StackPanel Width="auto" Orientation="Horizontal" Margin="0,0,-0.6,-0.2" >
-                            <Image VerticalAlignment="Center" Source="/SoBasicEnglish;component/Images/Assets/Check-01.png" Width="45" />
-                            <TextBlock FontSize="15" FontWeight="Bold" Width="368" Foreground="AntiqueWhite"  Margin="5,28,0,29" VerticalAlignment="Center"  FontFamily="/SoBasicEnglish;component/Fonts/#Lato Semibold" TextWrapping="Wrap" Height="auto" Text="{Binding ContentOfNotify}"></TextBlock>
-                        </StackPanel>
+                            <Image Source="..\Images/Assets/Up arrow.png" Height="56" Width="78" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" IsEnabled="False" VerticalAlignment="Center"  />
+                        </Controls:Tile>
                     </Grid>
-                </Border>
-            </Controls:Flyout>
-        </Grid>
+                </Controls:Flyout>
+                <Controls:Flyout Background="Transparent" IsOpen="{Binding IsOpenNotify}" Visibility="Hidden"  BorderThickness="0"  Foreground="black" Position="Right" TitleVisibility="Hidden" CloseButtonVisibility="Hidden" HorizontalContentAlignment="Right" Canvas.Left="245" Canvas.Top="10" Margin="722,0,5,666" RenderTransformOrigin="0.5,0.5" >
+                    <Border Width="auto" CornerRadius="40" BorderBrush="Navy" BorderThickness="0"  Height="106" Margin="-60,0,-1,0" RenderTransformOrigin="0.5,0.5" >
+                        <Border.Background>
+                            <SolidColorBrush Color="SaddleBrown" Opacity="0.7"></SolidColorBrush>
+                        </Border.Background>
+                        <Grid Width="auto" Margin="10.2,9.2,9.4,9.6">
+                            <StackPanel Width="auto" Orientation="Horizontal" Margin="0,0,-0.6,-0.2" >
+                                <Image VerticalAlignment="Center" Source="/SoBasicEnglish;component/Images/Assets/Check-01.png" Width="45" />
+                                <TextBlock FontSize="15" FontWeight="Bold" Width="368" Foreground="AntiqueWhite"  Margin="5,28,0,29" VerticalAlignment="Center"  FontFamily="/SoBasicEnglish;component/Fonts/#Lato Semibold" TextWrapping="Wrap" Height="auto" Text="{Binding ContentOfNotify}"></TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Controls:Flyout>
+            </Grid>
+            <Grid  >
+                <Controls:Flyout IsOpen="{Binding IsOpenLessonRating}" DataContext="{Binding RatingViewModel}" Visibility="Hidden" BorderThickness="2" x:Name="flRating"  Foreground="black" Margin="202,10,202,0" Position="Top" TitleVisibility="Hidden" CloseButtonVisibility="Collapsed" Height="769">
+                    <Controls:Flyout.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Color="#FF506450" Offset="0"/>
+                            <GradientStop Color="#FF200000" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Controls:Flyout.Background>
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height=".1*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Margin="0 0 20 0 ">
+
+                            <StackPanel Margin="0 10 0 0">
+                                <Grid MinHeight="100" Height="auto" >
+                                    <Border BorderBrush="Red" BorderThickness="1.5">
+                                        <Grid x:Name="gvRating">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="3.5*"/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <local1:Rating Margin="10 0 0 0" HorizontalAlignment="Left" Grid.ColumnSpan="2" Grid.Row="0" x:Name="rtLesson" Height="42" Width="170" Value="1" VerticalAlignment="Center"></local1:Rating>
+                                            <TextBox Grid.Row="1" x:Name="tbFeedBackContent"                                            
+                                           TextWrapping="Wrap"
+                                           Controls:TextBoxHelper.Watermark="Type your feedback here..."
+                                            Controls:TextBoxHelper.ClearTextButton="True" Text=""  Foreground="Wheat" Margin="10,10,10.2,10" Height="auto" MinHeight="50" MinWidth="440" Width="auto" FontSize="15"  BorderBrush="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Background="#FF220909" >
+                                            </TextBox>
+                                            <Controls:Tile
+                                                Command="{Binding Click_Rating}" CommandParameter="{Binding Children,ElementName=gvRating}"
+                                                Margin="15" Grid.Row="1" Grid.Column="1"  VerticalAlignment="Top"  Width="100" Height="48"  >
+                                                <Controls:Tile.Effect>
+                                                    <DropShadowEffect ShadowDepth="6" BlurRadius="7"></DropShadowEffect>
+                                                </Controls:Tile.Effect>
+                                                <Image Source="..\Images/Assets/Totheright.png" Height="25" Width="66" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" IsEnabled="False"  />
+                                            </Controls:Tile>
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                                <Grid Height="563">
+                                    <Grid Margin="0,28,0,0">
+                                        <Border BorderBrush="AliceBlue" BorderThickness="1.5" Margin="0,0,0,10">
+                                            <ListView  ItemsSource="{Binding LessonratingList}" x:Name="lvLessonRating" Margin="0,0,0,9" Background="Transparent" >
+                                                <ListView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <ListViewItem Margin="0 5 5 0" Background="Transparent">
+                                                            <Border BorderBrush="AntiqueWhite" BorderThickness="1.5">
+                                                                <StackPanel MinHeight="110" Height="auto" Orientation="Horizontal">
+                                                                    <Image Width="110" Height="110"  Source="{Binding UserAvt}" Stretch="Fill" RenderTransformOrigin="0.432,0.544" >
+                                                                        <Image.Clip>
+                                                                            <EllipseGeometry Center="50,50" RadiusX="40" RadiusY="40" />
+                                                                        </Image.Clip>
+                                                                    </Image>
+                                                                    <StackPanel Width="auto" >
+                                                                        <TextBlock Foreground="NavajoWhite" Margin="10 0 0 0" FontSize="20" Text="{Binding UserName}" ></TextBlock>
+                                                                        <StackPanel Margin="10 5 0 0" Height="30" Orientation="Horizontal">
+                                                                            <ToggleButton   Margin="0 0 0 0"   Width="30" IsChecked="{Binding Check1}" IsEnabled="False" Height="30" Style="{DynamicResource MetroCircleToggleButtonStyle}"  >
+                                                                                <Image Source="..\Images/Assets/Rating - 03.png" Height="15" Width="15"></Image>
+                                                                            </ToggleButton>
+                                                                            <ToggleButton  Margin="0 0 0 0"   Width="30"  IsChecked="{Binding Check2}" IsEnabled="False" Height="30" Style="{DynamicResource MetroCircleToggleButtonStyle}"  >
+                                                                                <Image Source="..\Images/Assets/Rating - 03.png" Height="15" Width="15"></Image>
+                                                                            </ToggleButton>
+                                                                            <ToggleButton  Margin="0 0 0 0"    Width="30"  IsChecked="{Binding Check3}" IsEnabled="False" Height="30" Style="{DynamicResource MetroCircleToggleButtonStyle}"  >
+                                                                                <Image Source="..\Images/Assets/Rating - 03.png" Height="15" Width="15"></Image>
+                                                                            </ToggleButton>
+                                                                            <ToggleButton  Margin="0 0 0 0"   Width="30"  IsChecked="{Binding Check4}" IsEnabled="False" Height="30" Style="{DynamicResource MetroCircleToggleButtonStyle}"  >
+                                                                                <Image Source="..\Images/Assets/Rating - 03.png" Height="15" Width="15"></Image>
+                                                                            </ToggleButton>
+                                                                            <ToggleButton  Margin="0 0 0 0"   Width="30"  IsChecked="{Binding Check5}" IsEnabled="False" Height="30" Style="{DynamicResource MetroCircleToggleButtonStyle}"  >
+                                                                                <Image Source="..\Images/Assets/Rating - 03.png" Height="15" Width="15"></Image>
+                                                                            </ToggleButton>
+                                                                        </StackPanel>
+                                                                        <TextBlock Height="auto"  Foreground="Beige" Margin="5 0 10 0" TextWrapping="Wrap" Text="{Binding FeedBack}" Width="auto" MaxWidth="400" ></TextBlock>
+                                                                    </StackPanel>
+                                                                </StackPanel>
+                                                            </Border>
+                                                        </ListViewItem>
+                                                    </DataTemplate>
+                                                </ListView.ItemTemplate>
+                                            </ListView>
+                                        </Border>
+                                    </Grid>
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                        <Controls:Tile Margin="10,0,19.8,9" Background="Transparent" Command="{Binding Click_ViewLessonRating}" x:Name="btnCloseRating"   Height="Auto" Width="Auto" Grid.Row="1">
+                            <Image Source="..\Images/Assets/Up arrow.png" Height="149" Width="102" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" IsEnabled="False" VerticalAlignment="Center"  />
+                        </Controls:Tile>
+                    </Grid>
+                </Controls:Flyout>
+            </Grid>
+        </Canvas>
+        
     </Grid>
 </Controls:MetroWindow>

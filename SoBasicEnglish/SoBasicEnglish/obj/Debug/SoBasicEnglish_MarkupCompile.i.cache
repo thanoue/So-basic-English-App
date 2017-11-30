@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\So Basic English\git\So-basic-English-App\SoBasicEnglish\SoBasicEnglish\App.xaml
-23370452580
+12186999263
 1755683254
-54-1937120662
+441845661587
 1071266141105
-ChangePasswordScreen.xaml;EditorScreen.xaml;EditUserProfileScreen.xaml;ExamScreen.xaml;GameScreen.xaml;MainScreen.xaml;LoginScreen.xaml;Menu.xaml;Rating.xaml;Resources\Icons.xaml;Resources\IconsNonShared.xaml;SignUpScreen.xaml;SplashScreen.xaml;StudyScreen.xaml;Styles\Fonts.xaml;UserRoleScreen.xaml;Views\EditorWindow.xaml;Views\ExamWindow.xaml;Views\LoginWindow.xaml;Views\MenuWindow.xaml;Views\SignUpWindow.xaml;Views\StudyWindow.xaml;Views\UserRoleWindow.xaml;
+MainScreen.xaml;Resources\UserControls\Rating.xaml;Resources\Icons.xaml;Resources\IconsNonShared.xaml;Styles\Fonts.xaml;Views\EditorWindow.xaml;Views\ExamWindow.xaml;Views\MenuWindow.xaml;Views\SignInWindow.xaml;Views\SignUpWindow.xaml;Views\StudyWindow.xaml;Views\UserRoleWindow.xaml;
 
-True
+False
 

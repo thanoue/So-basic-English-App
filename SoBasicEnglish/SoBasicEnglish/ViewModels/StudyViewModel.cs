@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using BusinessLogicFramework;
@@ -27,6 +28,7 @@ using System.Windows.Documents;
 using System.IO.Packaging;
 using System.Speech.Synthesis;
 using System.Speech.Recognition;
+using System.Windows.Forms;
 
 namespace SoBasicEnglish.ViewModels
 {
@@ -65,10 +67,9 @@ namespace SoBasicEnglish.ViewModels
         #endregion
         #region objects
         public LessonQuestionViewModel LessonQuestionDataContext { get => _lessonQuestionDataContext; set { _lessonQuestionDataContext = value; NotifyPropertyChanged("LessonQuestionDataContext"); } }
-        private LessonQuestionViewModel _lessonQuestionDataContext = new LessonQuestionViewModel();
-        
+        private LessonQuestionViewModel _lessonQuestionDataContext = new LessonQuestionViewModel(); dbUserScore dbUserScore;
         DispatcherTimer TimeToNextQuestion, audioTimer,TimeToCloseMessage; private bool CheckAutoNext = false;private int ListenPart1GainedScore = 0;private int ListenPart2GainedScore=0; private int KeyWordExGainedScore = 0; private int GetReadyGainedScore = 0;private int SentenceExGainedScore=0;
-        private SpeechRecognitionEngine recEngine = new SpeechRecognitionEngine();private string keySentenceToSpeech = ""; private byte[] ListeningAudioFile; private byte[] GrammarWordFile;
+        static SpeechRecognitionEngine recEngine;private string keySentenceToSpeech = ""; private byte[] ListeningAudioFile; private byte[] GrammarWordFile;
         dbLesson dbLesson;MediaPlayer audioMediaPlayer;private bool isPlayingAudioFile = false;private string[] ListenPart2Ans;private int GrammarExGainedScore = 0;
         #region colors
         private SolidColorBrush _aBr = new SolidColorBrush(Colors.Transparent), _bBr = new SolidColorBrush(Colors.Transparent), _cBr = new SolidColorBrush(Colors.Transparent), _dBr = new SolidColorBrush(Colors.Transparent), _quesContenBrush = new SolidColorBrush(Colors.Transparent), _bVoiceRecBtn = new SolidColorBrush(Colors.Green);
@@ -80,6 +81,9 @@ namespace SoBasicEnglish.ViewModels
         public SolidColorBrush CBr { get => _cBr; set { _cBr = value; NotifyPropertyChanged("CBr"); } }
         public SolidColorBrush DBr { get => _dBr; set { _dBr = value; NotifyPropertyChanged("DBr"); } }
         #endregion
+        public RatingViewModel RatingViewModel { get => _ratingViewModel; set { _ratingViewModel = value; NotifyPropertyChanged("RatingViewModel"); } }
+        private RatingViewModel _ratingViewModel = new RatingViewModel();
+        public string LessonName { get => Model.LessonName; }
         private string _contentOfMessage = "";
         public string ContentOfMessage { get => _contentOfMessage; set { _contentOfMessage = value;NotifyPropertyChanged("ContentOfMessage"); } }
         public bool IsOpenMessage { get => _isOpenMessage; set { _isOpenMessage = value; NotifyPropertyChanged("IsOpenMessage"); } }
@@ -143,15 +147,13 @@ namespace SoBasicEnglish.ViewModels
         public ObservableCollection<TextBlock> OralWordList { get => _oralWordList; set { _oralWordList = value; NotifyPropertyChanged("OralWordList"); } }
         private ObservableCollection<TextBlock> _oralWordList = new ObservableCollection<TextBlock>();
         public ObservableCollection<GrammarQuestion> GrammarQuestionList { get => _grammarQuestionList; set { _grammarQuestionList = value; NotifyPropertyChanged("GrammarQuestionList"); } }
-
-
         private ObservableCollection<GrammarQuestion> _grammarQuestionList = new ObservableCollection<GrammarQuestion>();
         #endregion
         #endregion
         #region constructor
         public StudyViewModel()
         {
-            dbLesson = new dbLesson(Model.serverName);
+            dbLesson = new dbLesson(Model.serverName);dbUserScore = new dbUserScore(Model.serverName);
             SelectionChanged_lbMenuLesson = new DelegateCommand(ChoosePartOfLesson);
             Click_GoToTheMenuLb = new RelayCommand<object>((p)=>!DoingEx,GoToTheLessonMenu);
             Click_GoToStudyTabItem = new RelayCommand<object>((p) => !DoingEx  , GoToStudyTabItem);
@@ -181,8 +183,9 @@ namespace SoBasicEnglish.ViewModels
             {
                 Interval = TimeSpan.FromSeconds(1.5)               
             }; TimeToNextQuestion.Tick += TimeToNextQuestion_Tick;
-            recEngine.SpeechRecognized += RecEngine_SpeechRecognized;
+           
         }
+      
         private void TimeToCloseMessage_Tick(object sender, EventArgs e)
         {
             IsOpenMessage = false;
@@ -210,10 +213,10 @@ namespace SoBasicEnglish.ViewModels
             var temp = obj as Sentence;
             if(temp!=null)
             LoadOralSentence(temp.KeySentence);
-            recEngine.SetInputToDefaultAudioDevice();
+          
             keySentenceToSpeech = temp.KeySentence;
             //VoiceOfUserOraltest = "";
-            GrammarBuilder(temp.KeySentence);
+         //   GrammarBuilder(temp.KeySentence);
         }
         private void ListenSentence(object obj)
         {
@@ -225,11 +228,22 @@ namespace SoBasicEnglish.ViewModels
             if (TcLessonSelectedIndex == 1)
             {
                 IsOpenFailMenu = false; IsOpenSucessMenu = false;
-                TcLessonSelectedIndex = 0; LbLessonMenuSelectedIndex = -1;
+                TcLessonSelectedIndex = 0;
+                if (audioMediaPlayer != null && audioMediaPlayer.NaturalDuration.HasTimeSpan)
+                {
+                    audioMediaPlayer.Stop();
+                    audioMediaPlayer.Position = TimeSpan.FromSeconds(0);
+                    audioMediaPlayer.Stop();
+                }
+                TcKeyWordSelectedIndex = 0; TcSentenceSelectedIndex = 0; TcListenSelectedIndex = 0;
+                LbLessonMenuSelectedIndex = -1; IsOpenSucessMenu = false; IsOpenFailMenu = false;
+                PracticeButtonColor = new SolidColorBrush(Colors.Transparent);
+                StudyButtonColor = new SolidColorBrush(Colors.Transparent);
+                OralTestButtonColor = new SolidColorBrush(Colors.Transparent);
+                CheckIfPassLessonOrNot();
             }
             else
-            {
-               
+            {              
                     IsOpenFailMenu = false; IsOpenSucessMenu = false;
             }
 
@@ -594,7 +608,7 @@ namespace SoBasicEnglish.ViewModels
                 BBr = new SolidColorBrush(Colors.Transparent);
                 CBr = new SolidColorBrush(Colors.Transparent);
                 DBr = new SolidColorBrush(Colors.Transparent);                
-                CurentGetReadyQuestion.ChoseA = false; CurentGetReadyQuestion.ChoseB = false; CurentGetReadyQuestion.ChoseC = false; CurentGetReadyQuestion.ChoseD = false;
+              //  CurentGetReadyQuestion.ChoseA = false; CurentGetReadyQuestion.ChoseB = false; CurentGetReadyQuestion.ChoseC = false; CurentGetReadyQuestion.ChoseD = false;
                 GetTheGetReadyGainedScore(); TimeToNextQuestion.Stop();
             }           
         }
@@ -644,10 +658,6 @@ namespace SoBasicEnglish.ViewModels
                 else
                 {
                     DoingEx = false;
-                    //ABr = new SolidColorBrush(Colors.Transparent);
-                    //BBr = new SolidColorBrush(Colors.Transparent);
-                    //CBr = new SolidColorBrush(Colors.Transparent);
-                    //DBr = new SolidColorBrush(Colors.Transparent);
                     TimeToNextQuestion.Start();
                     
                 }
@@ -767,6 +777,7 @@ namespace SoBasicEnglish.ViewModels
                         break;
                     case 1:
                         TcLessonSelectedIndex = 2;
+
                         LoadKeyWorData();
                         break;
                     case 2:
@@ -814,6 +825,7 @@ namespace SoBasicEnglish.ViewModels
             PracticeButtonColor = new SolidColorBrush(Colors.Transparent);
             StudyButtonColor = new SolidColorBrush(Colors.Transparent);
             OralTestButtonColor = new SolidColorBrush(Colors.Transparent);
+            CheckIfPassLessonOrNot();
         }
         #endregion
         #region functions
@@ -950,26 +962,53 @@ namespace SoBasicEnglish.ViewModels
             return mediaPlayer;
         }
         #endregion
+        private void CheckIfPassLessonOrNot()
+        {
+            if(GetReadyGainedScore>=(GettingReadyQuestionList.Count*10)/2+1  && KeyWordExGainedScore>=(KeyWordExList.Count*10)/2 + 1 &&
+                SentenceExGainedScore>=(SentenceExList.Count*10)/2 + 1 && (ListenPart1GainedScore+ListenPart2GainedScore)>= (((ListeningQuestionList.Count * 10) / 2) + ((ListeningPart2QuestionList.Count * 10) / 2)) + 1
+                && GrammarExGainedScore >= (GrammarQuestionList.Count * 10) / 2 + 1)
+            {
+                string er = "";
+                if (Model.dateProcess == Model.userDateProcess)
+                {
+                    if (dbUserScore.UpdateUserScore(ref er, Model.userLoginName, GetReadyGainedScore + KeyWordExGainedScore + SentenceExGainedScore + ListenPart1GainedScore + ListenPart2GainedScore + GrammarExGainedScore))
+                    {
+                        dbLogin dbLogin = new dbLogin(Model.serverName);
+
+                        if (dbLogin.UpdateUserProcess(ref er,Model.userLoginName))
+                        {
+                            NotifyIcon trayIcon = new NotifyIcon();
+                            trayIcon.Icon = Properties.Resources.ROFL_01_WF;
+                            trayIcon.BalloonTipText = "You've got a new lesson, check it out!";
+                            trayIcon.Visible = true;
+                            trayIcon.BalloonTipTitle = "Message";
+                            trayIcon.ShowBalloonTip(2000, "Message", "You've got a new lesson, check it out!", ToolTipIcon.Info);
+                        }
+                    }
+                }
+            }
+        }
         private void StartToSpeech(object a)
         {
+           // SpeechRecognizer speechRecognizer = new SpeechRecognizer();
+            recEngine = new SpeechRecognitionEngine();
             BVoiceRecBtn = new SolidColorBrush(Colors.Brown);
+            recEngine.SetInputToDefaultAudioDevice();
+            recEngine.LoadGrammar(new DictationGrammar());           
             recEngine.RecognizeAsync(RecognizeMode.Multiple);
+            recEngine.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(RecEngine_SpeechRecognized);
         }
         private void RecEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
             VoiceOfUserOraltest = e.Result.Text;
+            BResultOfSpeech = new SolidColorBrush(Colors.Wheat);
+            BVoiceRecBtn = new SolidColorBrush(Colors.Green);
             if (VoiceOfUserOraltest !="")
             {
-                recEngine.RecognizeAsyncStop();
-                BResultOfSpeech = new SolidColorBrush(Colors.Wheat);
-                BVoiceRecBtn = new SolidColorBrush(Colors.Green);
+                //recEngine.RecognizeAsyncStop();
+             
             }
-            //else
-            //{
-            //    recEngine.RecognizeAsyncStop();
-            //    BResultOfSpeech = new SolidColorBrush(Colors.Green);
-            //    BVoiceRecBtn = new SolidColorBrush(Colors.Green);
-            //}
+        
         }
         private void LoadOralSentence(string Sentence)
         {
@@ -1012,13 +1051,13 @@ namespace SoBasicEnglish.ViewModels
         }
         private void GrammarBuilder(string inputgrammar)
         {
-            Choices command = new Choices();
-            command.Add(inputgrammar);
-            GrammarBuilder gBuilder = new GrammarBuilder();
-            gBuilder.AppendDictation();
-           // gBuilder.Append(command);
-            Grammar grammar = new Grammar(gBuilder);
-            recEngine.LoadGrammarAsync(grammar);
+           // Choices command = new Choices();
+           // command.Add(inputgrammar);
+           // GrammarBuilder gBuilder = new GrammarBuilder();
+           // gBuilder.AppendDictation();
+           //// gBuilder.Append(command);
+           // Grammar grammar = new Grammar(gBuilder);
+           
           
         }
         private void LoadKeyWorData()
@@ -1040,6 +1079,7 @@ namespace SoBasicEnglish.ViewModels
             DBr = new SolidColorBrush(Colors.Transparent);
             Model.GetGettingReadyList(GettingReadyQuestionList, Model.dateProcess, Model.serverName);
             CurentGetReadyQuestion = GettingReadyQuestionList[0];
+
             Turn = 1;
         }
         private void LoadSentenceData()

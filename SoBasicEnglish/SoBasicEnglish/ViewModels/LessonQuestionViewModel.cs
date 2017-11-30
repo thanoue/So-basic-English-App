@@ -110,8 +110,7 @@ namespace SoBasicEnglish.ViewModels
                 LessonQuestionList.Add(new LessonQuestion {UserAvt=(byte[])i["userAvatar"],UserName=i["userName"].ToString(),ContentOfQuestion=i["contentOfQuestion"].ToString(),
                     AnswerOfQuestion = i["contentOfAnswer"].ToString(),TimeOfAsk = (Convert.ToDateTime(i["timeOfAsk"])).ToString()
                 });
-            }
-         
+            }        
            
         }
        

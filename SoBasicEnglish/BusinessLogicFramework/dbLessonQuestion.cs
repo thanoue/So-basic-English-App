@@ -26,6 +26,10 @@ namespace BusinessLogicFramework
                 new SqlParameter("@timeOfAsk",timeOfAsk)
                 );
         }
+        public bool GetNotAnsweredYetLessonQuestion()
+        {
+            return db.GetNotAnsweredYetLessonQuestion();
+        }
         public bool UpdateAnswerOfLessonQuestion(ref string error,int Id, string contentOfAnswer)
         {
             return db.ExcuteNoneQuery("spUpdateAnswerOfLessonQuestion", CommandType.StoredProcedure,

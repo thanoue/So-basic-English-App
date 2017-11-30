@@ -16,7 +16,7 @@ namespace SoBasicEnglish
         }
         private byte[] _userAvt = Model.five;
         public byte[] UserAvt { get => _userAvt; set { _userAvt = value; NotifyPropertyChanged("UserAvt"); } }
-
+        private string _loginName = "";
         public string UserName { get => _userName; set { _userName = value;NotifyPropertyChanged("UserName"); } }
         private string _userName = "";
         public string TimeOfAsk { get => _timeOfAsk; set { _timeOfAsk = value; NotifyPropertyChanged("TimeOfAsk"); } }
@@ -26,6 +26,7 @@ namespace SoBasicEnglish
         public string AnswerOfQuestion { get => _answerOfQuestion; set { _answerOfQuestion = value;NotifyPropertyChanged("AnswerOfQuestion"); } }
 
         public int Id { get => _id; set { _id = value; NotifyPropertyChanged("Id"); } }
+        public string LoginName { get => _loginName; set { _loginName = value; NotifyPropertyChanged("LoginName"); } }
 
         private string _answerOfQuestion = "";
         private int _id = 0;

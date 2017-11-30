@@ -225,8 +225,9 @@ namespace SoBasicEnglish.ViewModels
                 try
                 {
                     Model.dateProcess = temp.TurnNumber;
+                    Model.LessonName = temp.DetailInfo;
                     StudyWindow a = new StudyWindow(); a.ShowDialog();
-                    GvDateProcessSelectedIndex = -1;
+                    GvDateProcessSelectedIndex = -1;GetScore(); GetDateProcess();
 
                 }
                 catch (Exception ) {
@@ -391,11 +392,11 @@ namespace SoBasicEnglish.ViewModels
         {
             DataTable temp = new DataTable();
             temp = dbDateProcess.DatesprocessList();
-            int process = dbLogin.GetProcessByUserLoginName(Model.userLoginName);
+            Model.userDateProcess = dbLogin.GetProcessByUserLoginName(Model.userLoginName);
             DateList.Clear();
             foreach (DataRow i in temp.Rows)
             {
-                if(process >= Convert.ToInt32(i["turnNumber"].ToString()))
+                if (Model.userDateProcess >= Convert.ToInt32(i["turnNumber"].ToString()))
                     DateList.Add(new DateProcess { TurnNumber = Convert.ToInt32(i["turnNumber"].ToString()), DetailInfo = i["detailInfo"].ToString(), LevelDetail = i["levelDetail"].ToString() });
             }
             _dateListOnGridView = new ListCollectionView(DateList);

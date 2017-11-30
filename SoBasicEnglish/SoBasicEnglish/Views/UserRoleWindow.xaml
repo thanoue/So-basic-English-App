@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SoBasicEnglish.Views"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
        Title="UserRoleScreen" Height="506.956" Width="769.928"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow">
@@ -38,11 +39,17 @@
                                 <StackPanel Orientation="Horizontal" Width="auto" Margin="20,10,8.4,0" Height="53">
                                     <TextBlock VerticalAlignment="Center" Width="auto" FontSize="20" Foreground="Olive">Role:</TextBlock>
                                     <TextBlock  VerticalAlignment="Center" Margin="15 0 0 0" Width="auto" Text="{Binding SelectedItem.Role,ElementName=gvUserList }" FontSize="20" FontWeight="Bold" FontStyle="Italic" Foreground="Red"></TextBlock>
-                                    <Controls:Tile Command="{Binding Click_ChangRole}" CommandParameter="{Binding SelectedItem,ElementName=gvUserList}" x:Name="btnChangeRole" Width="45" Height="Auto" Margin="21,3,26.6,9.8"   >
+                                    <Controls:Tile Command="{Binding Click_ChangRole}" CommandParameter="{Binding SelectedItem,ElementName=gvUserList}" x:Name="btnChangeRole" Width="45" Height="Auto" Margin="21,3,26.6,0"   >
                                         <Controls:Tile.Effect>
                                             <DropShadowEffect ShadowDepth="6" BlurRadius="7"></DropShadowEffect>
                                         </Controls:Tile.Effect>
                                         <Image Source="..\Images/Assets/Edit_04.png" Height="25" Width="30" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" IsEnabled="False"  />
+                                    </Controls:Tile>
+                                    <Controls:Tile Background="Brown"  Command="{Binding Click_Delete}" CommandParameter="{Binding SelectedItem,ElementName=gvUserList}" Width="45" Height="Auto" Margin="0,3,0,0"   >
+                                        <Controls:Tile.Effect>
+                                            <DropShadowEffect ShadowDepth="6" BlurRadius="7"></DropShadowEffect>
+                                        </Controls:Tile.Effect>
+                                        <Image Source="..\Images/Assets/Garbage-Closed.png" Height="25" Width="30" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" IsEnabled="False"  />
                                     </Controls:Tile>
                                 </StackPanel>
 
@@ -67,6 +74,40 @@
 		                               CloseByEscape="True"		   
                                        CloseOnOverlay="True"          
                                        IsOpen="{Binding OpenConfirmDiaglog,Mode=TwoWay}"
+		                              >
+                <Grid  Height="150" Width="310">
+                    <Grid.Background>
+                        <SolidColorBrush Color="#FFDA9595" Opacity="0.9" ></SolidColorBrush>
+                    </Grid.Background>
+                    <StackPanel>
+                        <StackPanel Margin="5 20 0 0" Orientation="Horizontal">
+                            <Image Margin="5" Source="..\Images/Assets/Help - 02.png" ></Image>
+                            <TextBlock  VerticalAlignment="Center" FontSize="17" TextAlignment="Center" Width="241" FontFamily="Showcard Gothic" > You Really want?</TextBlock>
+                        </StackPanel>
+                        <StackPanel Margin="0 5 0 0" Orientation="Horizontal" >
+                            <Button
+                            Command="{Binding Click_ConfirmChangeRole}" CommandParameter="{Binding SelectedItem,ElementName=gvUserList}"
+                            Margin="90 0 0 0" HorizontalAlignment="Left" Background="#FF53E453" Width="60" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                <Image Source="..\Images/Assets/Check-01.png" Height="30" Width="30"></Image>
+                            </Button>
+                            <Button
+                             Command="{Binding CLick_CancelChangeRole,Mode=TwoWay}"
+                            Margin="20 0 0 0"  HorizontalAlignment="Left"  Background="Red" Width="60" Height="60" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                <Image Source="..\Images/Assets/Cancel.png" Height="30" Width="30"></Image>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </simpleChildWindow:ChildWindow>
+        </Grid>
+        <Grid>
+            <simpleChildWindow:ChildWindow 
+		                               Title="TestChild 1"		   
+                                       ShowTitleBar="False"
+                                       ShowCloseButton="False"		                              
+		                               CloseByEscape="True"		   
+                                       CloseOnOverlay="True"          
+                                       IsOpen="{Binding OpenConfirmDeleteUserDiaglog,Mode=TwoWay}"
 		                              >
                 <Grid  Height="150" Width="310">
                     <Grid.Background>

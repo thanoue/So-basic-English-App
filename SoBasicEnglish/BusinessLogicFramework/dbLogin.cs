@@ -86,6 +86,20 @@ namespace BusinessLogicFramework
                     new SqlParameter("@roleId", roleId)
                 );
         }
+        public bool UpdateUserProcess(ref string error,string loginName)
+        {
+            return db.ExcuteNoneQuery("spUpdateUserProcess", CommandType.StoredProcedure,
+                ref error,
+                 new SqlParameter("@userLoginName", loginName)
+                );
+        }
+        public bool DeleteUser(ref string error, string loginName)
+        {
+            return db.ExcuteNoneQuery("spDeleteUser", CommandType.StoredProcedure,
+                ref error,
+                 new SqlParameter("@loginName", loginName)
+                );
+        }
 
     }
 }

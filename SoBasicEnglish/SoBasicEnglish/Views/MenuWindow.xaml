@@ -189,13 +189,12 @@
                         </Grid>
                         <Border Grid.Column="0" Width="102" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center"
                                      BorderBrush="Green" BorderThickness="1" CornerRadius="15">
-                            <Border x:Name="pcLevel" Width="{Binding WidthOfProgress}" Height="25" BorderThickness="0" CornerRadius="15"
+                            <Border x:Name="pcLevel" Width="{Binding WidthOfProgress}" MaxWidth="101" Height="25" BorderThickness="0" CornerRadius="15"
                             HorizontalAlignment="Left" VerticalAlignment="Center">
                                 <Border.Background>
                                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
                                         <GradientStop Color="SandyBrown" Offset="0.2"></GradientStop>
                                         <GradientStop Color="LightGray" Offset="0.4"></GradientStop>
-
                                     </LinearGradientBrush>
                                 </Border.Background>
                             </Border>

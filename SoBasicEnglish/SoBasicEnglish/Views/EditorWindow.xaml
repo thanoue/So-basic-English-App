@@ -12,9 +12,7 @@
     xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
     x:Class="SoBasicEnglish.Views.EditorWindow"                         
         mc:Ignorable="d"
-        WindowStartupLocation="CenterScreen"
-      
-        
+        WindowStartupLocation="CenterScreen"     
         Height="822.6" Width="1170"
         Title="EditorScreen">
     <Window.DataContext>
@@ -678,7 +676,7 @@
                                                             <ImageBrush x:Name="imgAVT" ImageSource="{Binding SelectedItem.UserAvt,ElementName=gvLessonQuestion}" />
                                                         </Ellipse.Fill>
                                                     </Ellipse>
-                                                    <TextBlock VerticalAlignment="Center" Text="{Binding SelectedItem.UserName,ElementName=gvLessonQuestion}" FontSize="25" Margin="5 0 0 0" Foreground="Black" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Heavy"></TextBlock>
+                                                    <TextBlock VerticalAlignment="Center" Text="{Binding SelectedItem.LoginName,ElementName=gvLessonQuestion}" FontSize="25" Margin="5 0 0 0" Foreground="Black" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Heavy"></TextBlock>
                                                     <TextBlock VerticalAlignment="Center" FontStyle="Oblique"  Text="{Binding SelectedItem.TimeOfAsk,ElementName=gvLessonQuestion}" Margin="5 0 0 0" Foreground="Black" FontSize="15" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Light" ></TextBlock>
                                                 </StackPanel>
                                                 <Border CornerRadius="20" Margin="140,5,54,0" Height="110" BorderBrush="Black" BorderThickness="1" >
@@ -686,8 +684,9 @@
                                                 </Border>
                                                 <StackPanel x:Name="stpEditLesonQuestion" Orientation="Horizontal" Height="160">
                                                     <TextBlock FontSize="1" Foreground="Transparent" x:Name="IdOfQuestion"  VerticalAlignment="Center" Text="{Binding SelectedItem.Id,ElementName=gvLessonQuestion}" Margin="10 0 10 0" FontStyle="Italic"></TextBlock>
+                                                    <TextBlock FontSize="1" Foreground="Transparent" x:Name="IndexOfGV"  VerticalAlignment="Center" Text="{Binding SelectedIndex,ElementName=gvLessonQuestion}" FontStyle="Italic"></TextBlock>
                                                     <Image Height="40" VerticalAlignment="Center" Margin="30 0 0 0" Source="/SoBasicEnglish;component/Images/Assets/Out.png"  ></Image>
-                                                    <TextBox x:Name="tbContentOfAnswer" TextWrapping="Wrap" FontSize="15" Foreground="Black"  BorderThickness="1.5" Text="{Binding SelectedItem.AnswerOfQuestion,ElementName=gvLessonQuestion,Mode=TwoWay}"  Background="Transparent" Width="726" Margin="0,14,0,10" FontFamily="Arial">
+                                                    <TextBox x:Name="tbContentOfAnswer" Controls:TextBoxHelper.Watermark="Answer here..." Controls:TextBoxHelper.ClearTextButton="True" TextWrapping="Wrap" FontSize="15" Foreground="Black"  BorderThickness="1.5" Text="{Binding SelectedItem.AnswerOfQuestion,ElementName=gvLessonQuestion,Mode=TwoWay}"  Background="Transparent" Width="726" Margin="0,14,0,10" FontFamily="Arial">
                                                         <!--<TextBlock Margin="10" Text="{Binding AnswerOfQuestion}" Foreground="Wheat" FontSize="15" TextWrapping="Wrap" ></TextBlock>-->
                                                     </TextBox>
                                                     <Button Command="{Binding Click_SubmitAnswerQuestion}"  CommandParameter="{Binding Children,ElementName=stpEditLesonQuestion}" Margin="10 0" VerticalAlignment="Center"  Background="Green"  Width="75" Height="75" HorizontalAlignment="Left"  Style="{DynamicResource MetroCircleButtonStyle}"  >

@@ -19,6 +19,7 @@ namespace SoBasicEnglish.ViewModels
         public ICommand Click_ChangRole { get; set; }
         public ICommand Click_ConfirmChangeRole { get; set; }
         public ICommand CLick_CancelChangeRole { get; set; }
+        public ICommand Click_Delete { get; set; }
         #endregion
         #region objects
         private bool _openConfirmDiaglog = false;
@@ -28,8 +29,9 @@ namespace SoBasicEnglish.ViewModels
         private dbLogin dbLogin;
         public ObservableCollection<User> Userlist { get => _userlist; set { _userlist = value; NotifyPropertyChanged("Userlist"); } }
 
+        public bool OpenConfirmDeleteUserDiaglog { get => _openConfirmDeleteUserDiaglog; set { _openConfirmDeleteUserDiaglog = value;NotifyPropertyChanged("OpenConfirmDeleteUserDiaglog"); } }
 
-
+        private bool _openConfirmDeleteUserDiaglog = false;
         #endregion
         #region Constructor
         public UserRoleViewModel()
@@ -38,33 +40,51 @@ namespace SoBasicEnglish.ViewModels
             Click_ChangRole = new RelayCommand<object>((p)=>p!=null, ShowConfirmDialog);
             Click_ConfirmChangeRole =  new RelayCommand<object>((p) => p != null, ChangeUserRole);
             CLick_CancelChangeRole = new DelegateCommand(CancelChangeRole);
+            Click_Delete = new RelayCommand<object>((p) => p != null, ShowConfirmDeleteUserDiaglog);
             LoadData();
+        }
+
+        private void ShowConfirmDeleteUserDiaglog(object obj)
+        {
+            OpenConfirmDeleteUserDiaglog = true;
+            //User temp = obj as User;
+          
         }
 
         private void CancelChangeRole()
         {
-            OpenConfirmDiaglog = false;
+            OpenConfirmDiaglog = false;OpenConfirmDeleteUserDiaglog = false;
         }
 
         private void ShowConfirmDialog(object obj)
         {
             OpenConfirmDiaglog = true;
         }
-
-
         #endregion
         #region Icommand
         private void ChangeUserRole(object obj)
         {
             User temp = obj as User;
-            
+            if (OpenConfirmDiaglog)
+            {
                 string err = "";
                 if (dbLogin.ChangTheRole(ref err, temp.UserLoginName, temp.RoleId))
                 {
                     LoadData();
                 }
-            OpenConfirmDiaglog = false;
-     
+                OpenConfirmDiaglog = false;
+            }
+            else
+            {
+                string er = "";
+                if (dbLogin.DeleteUser(ref er, temp.UserLoginName))
+                {
+                    LoadData();
+                }
+                OpenConfirmDeleteUserDiaglog = false;
+            }
+
+
         }      
         #endregion
         #region functions

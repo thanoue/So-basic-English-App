@@ -161,21 +161,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ChangePasswordScreen.xaml.cs">
-      <DependentUpon>ChangePasswordScreen.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EditorScreen.xaml.cs">
-      <DependentUpon>EditorScreen.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EditUserProfileScreen.xaml.cs">
-      <DependentUpon>EditUserProfileScreen.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ExamScreen.xaml.cs">
-      <DependentUpon>ExamScreen.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GameScreen.xaml.cs">
-      <DependentUpon>GameScreen.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Models\DateProcess.cs" />
     <Compile Include="Models\GettingreadyQuestion.cs" />
     <Compile Include="Models\GrammarQuestion.cs" />
@@ -183,9 +168,6 @@
     <Compile Include="Models\KeyWordEx.cs" />
     <Compile Include="MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Menu.xaml.cs">
-      <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\LessonQuestion.cs" />
     <Compile Include="Models\LessonRating.cs" />
@@ -195,7 +177,7 @@
     <Compile Include="Models\Sentence.cs" />
     <Compile Include="Models\SentenceEx.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Rating.xaml.cs">
+    <Compile Include="Resources\UserControls\Rating.xaml.cs">
       <DependentUpon>Rating.xaml</DependentUpon>
     </Compile>
     <Compile Include="RuntimeTextTemplate1.cs">
@@ -203,24 +185,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RuntimeTextTemplate1.tt</DependentUpon>
     </Compile>
-    <Compile Include="SignUpScreen.xaml.cs">
-      <DependentUpon>SignUpScreen.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SplashScreen.xaml.cs">
-      <DependentUpon>SplashScreen.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="StudyScreen.xaml.cs">
-      <DependentUpon>StudyScreen.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserRoleScreen.xaml.cs">
-      <DependentUpon>UserRoleScreen.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\EditorViewModel.cs" />
     <Compile Include="ViewModels\ExamViewModel.cs" />
     <Compile Include="ViewModels\LessonQuestionViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\QuestionOfLesson.cs" />
+    <Compile Include="ViewModels\RatingViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
     <Compile Include="ViewModels\SliderExtension.cs" />
@@ -232,11 +203,11 @@
     <Compile Include="Views\ExamWindow.xaml.cs">
       <DependentUpon>ExamWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\LoginWindow.xaml.cs">
-      <DependentUpon>LoginWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\MenuWindow.xaml.cs">
       <DependentUpon>MenuWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SignInWindow.xaml.cs">
+      <DependentUpon>SignInWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SignUpWindow.xaml.cs">
       <DependentUpon>SignUpWindow.xaml</DependentUpon>
@@ -247,47 +218,15 @@
     <Compile Include="Views\UserRoleWindow.xaml.cs">
       <DependentUpon>UserRoleWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="ChangePasswordScreen.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="EditorScreen.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="EditUserProfileScreen.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ExamScreen.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="GameScreen.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="LoginScreen.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="LoginScreen.xaml.cs">
-      <DependentUpon>LoginScreen.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="Menu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Rating.xaml">
+    <Page Include="Resources\UserControls\Rating.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -299,23 +238,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SignUpScreen.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="SplashScreen.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="StudyScreen.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Styles\Fonts.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserRoleScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -327,11 +250,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\LoginWindow.xaml">
+    <Page Include="Views\MenuWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MenuWindow.xaml">
+    <Page Include="Views\SignInWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -662,6 +585,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Assets\Out.png" />
+    <None Include="Resources\number-1.png" />
+    <None Include="Resources\number-1 %281%29.png" />
+    <Resource Include="Images\Assets\Swap-Right.png" />
     <Content Include="RuntimeTextTemplate1.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>RuntimeTextTemplate1.cs</LastGenOutput>

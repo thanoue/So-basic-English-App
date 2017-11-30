@@ -69,7 +69,7 @@ namespace SoBasicEnglish
                 NotifyPropertyChanged("UserName");
             }
         }
-        private byte[] userAvt;
+        private byte[] userAvt = Model.eight;
         public byte[] UserAvt
         {
             get { return userAvt; }

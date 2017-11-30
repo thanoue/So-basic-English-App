@@ -28,14 +28,19 @@ namespace SoBasicEnglish.ViewModels
         public ICommand CLickNo { get; set; }
         public ICommand ShowSignUpCommand { get; set; }
         public ICommand Click_ForgetPassword { get; set; }
+        public ICommand ExpanderControl_Expanded { get; set; }
+        public ICommand ExpanderControl_Collapsed { get; set; }
         public ICommand ShowMenuCommand
         {
             get;
             set;
         }
+        public RelayCommand<Window> CloseWindowCommand { get; private set; }
         #endregion
         #region Objects
         dbLogin dbLogin;
+        public double HeighOfWindow { get => _heighOfWindow; set { _heighOfWindow = value; NotifyPropertyChanged("HeighOfWindow"); } }
+        private double _heighOfWindow = 381;
         private bool _isSendingEmai = false;
         public bool IsActive
         { get => _isSendingEmai; set { _isSendingEmai = value;
@@ -78,10 +83,31 @@ namespace SoBasicEnglish.ViewModels
             ShowMenuCommand = new DelegateCommand(ShowMenu);
             ShowSignUpCommand = new DelegateCommand(ShowSignUp);
             Click_ForgetPassword = new RelayCommand<UIElementCollection>(CanClickForgetPassword, ForgetPassword);
+            CloseWindowCommand = new RelayCommand<Window>((p)=>true,CloseWindow);
+            ExpanderControl_Collapsed = new DelegateCommand(CollapsedExpander);
+            ExpanderControl_Expanded = new DelegateCommand(ExpandedExpander);
             timerToCloseNotify = new DispatcherTimer();
             timerToCloseNotify.Tick += TimerToCloseNotify_Tick;
             timerToCloseNotify.Interval = new TimeSpan(0, 0, 2);
 
+        }
+
+        private void CloseWindow(Window obj)
+        {
+            if (obj != null)
+            {
+                obj.Close();
+            }
+        }
+
+        private void ExpandedExpander()
+        {
+            HeighOfWindow = 516;
+        }
+
+        private void CollapsedExpander()
+        {
+            HeighOfWindow = 381;
         }
         #endregion
         #region Functions
@@ -93,22 +119,31 @@ namespace SoBasicEnglish.ViewModels
             NotiList.Clear();
             dbUserNotify dbUserNotify = new dbUserNotify(Model.serverName);
             var temp = dbUserNotify.GetNotAnsweredyetNotify(Model.userLoginName);
-           
+            //int userRole = dbLogin.GetRoleByUserLoginName(Model.userLoginName);
+            dbLessonQuestion dbLessonQuestion = new dbLessonQuestion(Model.serverName);
+            if (Model.role > 1)
+            {
+                if (dbLessonQuestion.GetNotAnsweredYetLessonQuestion())
+                {
+                    trayIcon.Icon = Properties.Resources.ROFL_01_WF;
+                    trayIcon.BalloonTipText = "You have some question to answer, check it out!";
+                    trayIcon.Visible = true;
+                    trayIcon.BalloonTipTitle = "Your Message";
+                    trayIcon.ShowBalloonTip(2000);
+                }
+            }           
             new Thread(() =>
             {
                 foreach (DataRow t in temp.Rows)
                 {
-
                     trayIcon.Icon = Properties.Resources.ROFL_01_WF;
                     trayIcon.BalloonTipText = t["contentOfNotify"].ToString();
                     trayIcon.Visible = true;
                     trayIcon.BalloonTipTitle = "Your Message";
                     trayIcon.ShowBalloonTip(2000);
-                 //   Thread.Sleep(2000);
                 }
             }
             ).Start();
-
         }
         private void ForgetPassword(UIElementCollection obj)
         {

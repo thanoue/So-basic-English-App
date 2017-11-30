@@ -295,6 +295,27 @@ namespace DataAccessFramework
                 conn.Close();
             return kq;
         }
+        public bool GetNotAnsweredYetLessonQuestion()
+        {
+            if (conn.State == ConnectionState.Open)
+                conn.Close();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("select MAX(id) from CauHoi_NguoiDung_NgayHoc where statusOfQues='NAY' ", conn);
+            int kq = 0;
+            try
+            {
+
+                kq = (int)cmd.ExecuteScalar();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            if (conn.State == ConnectionState.Open)
+                conn.Close();
+            return true;
+        }
         public bool ExcuteNoneQuery(string cmdText, CommandType cmdType, ref string error, params SqlParameter[] sqlParam)
         {
             if (conn.State == ConnectionState.Closed)

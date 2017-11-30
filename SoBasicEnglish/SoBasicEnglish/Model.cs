@@ -57,6 +57,14 @@ namespace SoBasicEnglish
                 return ms.GetBuffer();
             }
         }
+        public static byte[] seven {
+            get
+            {
+                MemoryStream ms = new MemoryStream();
+                Properties.Resources.Digital___Seven.Save(ms, Properties.Resources.Digital___Seven.RawFormat);
+                return ms.GetBuffer();
+            }
+        }
         public static byte[] six
         {
             get
@@ -93,6 +101,8 @@ namespace SoBasicEnglish
                 return ms.GetBuffer();
             }
         }
+        public static string LessonName { get; set; }
+        public static int userDateProcess { get; set; }
         public static string serverName { get; set; }
         public static string userFullname { get; set; }
         public static string userLoginName { get; set; }
@@ -254,7 +264,7 @@ namespace SoBasicEnglish
                     case "A":
                         KeyWordExList.Add(new KeyWordEx
                         {
-                            ChoseA = true,
+                            ChoseA = false,
                             ChoseB = false,
                             ChoseC = false,
                             ChoseD = false,
@@ -270,7 +280,7 @@ namespace SoBasicEnglish
                         KeyWordExList.Add(new KeyWordEx
                         {
                             ChoseA = false,
-                            ChoseB = true,
+                            ChoseB = false,
                             ChoseC = false,
                             ChoseD = false,
                             KeyWord = row["keyWord"].ToString(),
@@ -286,7 +296,7 @@ namespace SoBasicEnglish
                         {
                             ChoseA = false,
                             ChoseB = false,
-                            ChoseC = true,
+                            ChoseC = false,
                             ChoseD = false,
                             KeyWord = row["keyWord"].ToString(),
                             AnsA = row["ansA"].ToString(),
@@ -302,7 +312,7 @@ namespace SoBasicEnglish
                             ChoseA = false,
                             ChoseB = false,
                             ChoseC = false,
-                            ChoseD = true,
+                            ChoseD = false,
                             KeyWord = row["keyWord"].ToString(),
                             AnsA = row["ansA"].ToString(),
                             AnsB = row["ansB"].ToString(),

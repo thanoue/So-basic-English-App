@@ -177,7 +177,7 @@ namespace SoBasicEnglish.ViewModels
         private void SubmitAnswerQuestion(UIElementCollection obj)////////////////////////////////
         {
             string tbContentOfAnswer = "";
-            int IdOfQuestion = 0;
+             int IndexOfGV = 0;
            foreach (var i in obj)
             {
                 TextBox tb = i as TextBox;
@@ -190,20 +190,21 @@ namespace SoBasicEnglish.ViewModels
                 {
                     TextBlock tbl = i as TextBlock;
                     if (tbl != null)
-                        if (tbl.Name == "IdOfQuestion")
-                            IdOfQuestion = Int32.Parse(tbl.Text);
+                        if (tbl.Name == "IndexOfGV")
+                            IndexOfGV = Int32.Parse(tbl.Text);
+
                 }
 
             }
             string er = "";
-            if(dbLessonQuestion.UpdateAnswerOfLessonQuestion(ref er, IdOfQuestion, tbContentOfAnswer))
+            if(dbLessonQuestion.UpdateAnswerOfLessonQuestion(ref er, LessonQuestionList[IndexOfGV].Id, tbContentOfAnswer))
             {
                 LessonQuestionList.Clear();
                 IsOpenMessage = true;
                 MessageOfEdit = "A question has been answered";
                 TimeCoShowMessage.Start();
                 dbUserNotify dbUserNotify = new dbUserNotify(Model.serverName);
-                if(dbUserNotify.InsertNotify(ref er,Model.userLoginName,"Your question about the lesson '"+LessonName+"' is responsed. Check it out!"))
+                if(dbUserNotify.InsertNotify(ref er, LessonQuestionList[IndexOfGV].LoginName, "Your question about the lesson '"+ LessonName + "' is responsed. Check it out!"))
                 {
                     if (LessonQuestionList.Count == 0)
                     {
@@ -214,7 +215,7 @@ namespace SoBasicEnglish.ViewModels
                             LessonQuestionList.Add(new LessonQuestion
                             {
                                 UserAvt = (byte[])i["userAvatar"],
-                                UserName = i["userName"].ToString(),
+                                LoginName = i["loginName"].ToString(),
                                 ContentOfQuestion = i["contentOfQuestion"].ToString(),
                                 AnswerOfQuestion = i["contentOfAnswer"].ToString(),
                                 TimeOfAsk = (Convert.ToDateTime(i["timeOfAsk"])).ToString(),
@@ -324,7 +325,7 @@ namespace SoBasicEnglish.ViewModels
                                             LessonQuestionList.Add(new LessonQuestion
                                             {
                                                 UserAvt = (byte[])i["userAvatar"],
-                                                UserName = i["userName"].ToString(),
+                                                LoginName = i["loginName"].ToString(),
                                                 ContentOfQuestion = i["contentOfQuestion"].ToString(),
                                                 AnswerOfQuestion = i["contentOfAnswer"].ToString(),
                                                 TimeOfAsk = (Convert.ToDateTime(i["timeOfAsk"])).ToString(),
@@ -451,8 +452,7 @@ namespace SoBasicEnglish.ViewModels
         {
             IsCreating = true;
             TimerForCreating.Start();
-        }
-      
+        }      
         private void StartCreatingLesson(object e)
         {
             CreatingLesson = true;EditingLesson = false;
