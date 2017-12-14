@@ -52,7 +52,6 @@
                             <i:InvokeCommandAction Command="{Binding FlipSelectionChanged}"  />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-
                     <Controls:FlipView.Items>
                         <Grid Background="#2E8DEF">
                             <Image IsEnabled="False" Source="/SoBasicEnglish;component/Images/learn.jpg" Stretch="Fill" ></Image>
@@ -66,7 +65,6 @@
                         </Grid>
                         <Grid Background="#BF1E4B">
                             <Image IsEnabled="False" Source="/SoBasicEnglish;component/Images/11.jpg" Stretch="Fill" ></Image>
-
                         </Grid>
                     </Controls:FlipView.Items>
                 </Controls:FlipView>
@@ -139,9 +137,9 @@
                         </Grid>
                         <Grid Grid.Row="1">
                             <Controls:Tile Command="{Binding ClickSetting}" TitleFontSize="10" Title="Setting" Height="Auto" Margin="10,5,20.8,10" Width="Auto">
-                                <Controls:Tile.Effect>
-                                    <DropShadowEffect ShadowDepth="6" BlurRadius="7"></DropShadowEffect>
-                                </Controls:Tile.Effect>
+                                    <Controls:Tile.Effect>
+                                        <DropShadowEffect ShadowDepth="6" BlurRadius="7"></DropShadowEffect>
+                                    </Controls:Tile.Effect>
                                 <Image Source="..\Images/Assets/User Unlocked-02-WF.png" Height="50" Width="50" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" IsEnabled="False"  />
                             </Controls:Tile>
                         </Grid>
@@ -161,7 +159,6 @@
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid Height="auto" Margin="30 10 30 1" Background="Transparent" >
-
                     <Grid.RowDefinitions>
                         <RowDefinition Height="4.5*"/>
                         <RowDefinition Height="1*"/>
@@ -316,8 +313,7 @@
                         <DataGridTemplateColumn Header="" Width="Auto" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock  Text="{Binding Path=DetailInfo}">
-                                         
+                                    <TextBlock  Text="{Binding Path=DetailInfo}">                                         
                                     </TextBlock>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -403,10 +399,8 @@
                                                             </TextBlock>
                                                         </Border>
                                                     </StackPanel>
-
                                                 </StackPanel>
                                             </StackPanel>
-
                                         </Border>
                                     </ListViewItem>
                                 </DataTemplate>

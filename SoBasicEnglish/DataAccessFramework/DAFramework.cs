@@ -21,6 +21,27 @@ namespace DataAccessFramework
             conn = new SqlConnection(sqlConnect);
             cmd = conn.CreateCommand();
         }
+
+        public int GetProcessLevel(int process)
+        {
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("select NgayHoc.processLevel from NgayHoc where turnNumber = '" + process + "'", conn);
+            int kq = 0;
+            try
+            {
+
+                kq = (int)cmd.ExecuteScalar();
+
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+            if (conn.State == ConnectionState.Open)
+                conn.Close();
+            return kq;
+        }
+
         public int GetMaxLessonIndexByLevelId(int levelId)
         {
             conn.Open();

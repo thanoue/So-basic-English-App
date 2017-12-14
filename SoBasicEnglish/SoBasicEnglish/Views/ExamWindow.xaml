@@ -34,7 +34,7 @@
                                 <TextBox BorderThickness="0" Foreground="SaddleBrown" Text="11111111111111111" Margin="20" MinWidth="250" FontSize="40" Width="auto" Background="Transparent" FontFamily="/SoBasicEnglish;component/Fonts/#Lato Light"    ></TextBox>
                             </Border>
                         </StackPanel>
-                        <Button Margin="10 0 0 0" VerticalAlignment="Center"   Background="SaddleBrown" Height="65" Width="65" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                        <Button Margin="10 0 0 0" VerticalAlignment="Center" IsDefault="True"  Background="SaddleBrown" Height="65" Width="65" Style="{DynamicResource MetroCircleButtonStyle}"  >
                             <Image Source="..\Images/Assets/Totheright.png" Height="25" Width="25"/>
                         </Button>
                     </StackPanel>

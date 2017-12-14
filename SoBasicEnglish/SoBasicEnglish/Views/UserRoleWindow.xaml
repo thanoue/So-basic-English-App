@@ -34,7 +34,7 @@
                                 <TextBlock Text="{Binding SelectedItem.UserName,ElementName=gvUserList}" FontSize="30" Margin="20 10 0 0" FontWeight="ExtraBold" FontFamily="/SoBasicEnglish;component/Fonts/#VNI-Tubes" ></TextBlock>
                                 <StackPanel Orientation="Horizontal" Margin="20 10 0 0">
                                     <TextBlock FontSize="20" Foreground="Red">Level:</TextBlock>
-                                    <TextBlock Margin="15 0 0 0" Text="{Binding SelectedItem.UserName,ElementName=gvUserList }" FontSize="20" FontWeight="Bold" FontStyle="Italic" Foreground="Red"></TextBlock>
+                                    <TextBlock Margin="15 0 0 0" Text="{Binding SelectedItem.UserLevel,ElementName=gvUserList }" FontSize="20" FontWeight="Bold" FontStyle="Italic" Foreground="Red"></TextBlock>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Width="auto" Margin="20,10,8.4,0" Height="53">
                                     <TextBlock VerticalAlignment="Center" Width="auto" FontSize="20" Foreground="Olive">Role:</TextBlock>

@@ -63,10 +63,7 @@ namespace SoBasicEnglish.ViewModels
         private bool _openErrorDialog = false;
         public bool OpenErrorDialog { get => _openErrorDialog; set { _openErrorDialog = value; NotifyPropertyChanged("OpenErrorDialog"); } }
 
-        public bool IsOpenError { get => _isOpenError; set { _isOpenError = value; NotifyPropertyChanged("IsOpenError"); } }
-
-      
-
+        public bool IsOpenError { get => _isOpenError; set { _isOpenError = value; NotifyPropertyChanged("IsOpenError"); } }           
         public void NotifyPropertyChanged(string propName)
         {
             if (this.PropertyChanged != null)

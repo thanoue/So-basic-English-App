@@ -68,7 +68,7 @@ namespace SoBasicEnglish.ViewModels
         #region objects
         public LessonQuestionViewModel LessonQuestionDataContext { get => _lessonQuestionDataContext; set { _lessonQuestionDataContext = value; NotifyPropertyChanged("LessonQuestionDataContext"); } }
         private LessonQuestionViewModel _lessonQuestionDataContext = new LessonQuestionViewModel(); dbUserScore dbUserScore;
-        DispatcherTimer TimeToNextQuestion, audioTimer,TimeToCloseMessage; private bool CheckAutoNext = false;private int ListenPart1GainedScore = 0;private int ListenPart2GainedScore=0; private int KeyWordExGainedScore = 0; private int GetReadyGainedScore = 0;private int SentenceExGainedScore=0;
+        DispatcherTimer TimeToNextQuestion, audioTimer,TimeToCloseMessage; private int ListenPart1GainedScore = 0;private int ListenPart2GainedScore=0; private int KeyWordExGainedScore = 0; private int GetReadyGainedScore = 0;private int SentenceExGainedScore=0;
         static SpeechRecognitionEngine recEngine;private string keySentenceToSpeech = ""; private byte[] ListeningAudioFile; private byte[] GrammarWordFile;
         dbLesson dbLesson;MediaPlayer audioMediaPlayer;private bool isPlayingAudioFile = false;private string[] ListenPart2Ans;private int GrammarExGainedScore = 0;
         #region colors
@@ -83,6 +83,8 @@ namespace SoBasicEnglish.ViewModels
         #endregion
         public RatingViewModel RatingViewModel { get => _ratingViewModel; set { _ratingViewModel = value; NotifyPropertyChanged("RatingViewModel"); } }
         private RatingViewModel _ratingViewModel = new RatingViewModel();
+        public bool CheckAutoNext { get => _checkAutoNext; set { _checkAutoNext = value; NotifyPropertyChanged("CheckAutoNext"); } }
+        private bool _checkAutoNext = false;
         public string LessonName { get => Model.LessonName; }
         private string _contentOfMessage = "";
         public string ContentOfMessage { get => _contentOfMessage; set { _contentOfMessage = value;NotifyPropertyChanged("ContentOfMessage"); } }
@@ -147,6 +149,9 @@ namespace SoBasicEnglish.ViewModels
         public ObservableCollection<TextBlock> OralWordList { get => _oralWordList; set { _oralWordList = value; NotifyPropertyChanged("OralWordList"); } }
         private ObservableCollection<TextBlock> _oralWordList = new ObservableCollection<TextBlock>();
         public ObservableCollection<GrammarQuestion> GrammarQuestionList { get => _grammarQuestionList; set { _grammarQuestionList = value; NotifyPropertyChanged("GrammarQuestionList"); } }
+
+
+
         private ObservableCollection<GrammarQuestion> _grammarQuestionList = new ObservableCollection<GrammarQuestion>();
         #endregion
         #endregion
@@ -607,7 +612,8 @@ namespace SoBasicEnglish.ViewModels
                 ABr = new SolidColorBrush(Colors.Transparent);
                 BBr = new SolidColorBrush(Colors.Transparent);
                 CBr = new SolidColorBrush(Colors.Transparent);
-                DBr = new SolidColorBrush(Colors.Transparent);                
+                DBr = new SolidColorBrush(Colors.Transparent);
+                CheckAutoNext = false;
               //  CurentGetReadyQuestion.ChoseA = false; CurentGetReadyQuestion.ChoseB = false; CurentGetReadyQuestion.ChoseC = false; CurentGetReadyQuestion.ChoseD = false;
                 GetTheGetReadyGainedScore(); TimeToNextQuestion.Stop();
             }           
@@ -1079,7 +1085,6 @@ namespace SoBasicEnglish.ViewModels
             DBr = new SolidColorBrush(Colors.Transparent);
             Model.GetGettingReadyList(GettingReadyQuestionList, Model.dateProcess, Model.serverName);
             CurentGetReadyQuestion = GettingReadyQuestionList[0];
-
             Turn = 1;
         }
         private void LoadSentenceData()

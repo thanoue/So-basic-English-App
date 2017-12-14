@@ -44,6 +44,7 @@ namespace SoBasicEnglish.ViewModels
         public ICommand  Click_Start { get; set; }
         #endregion
         #region objects
+        dbExam dbExam;
         public double ProgressBarValue { get => _progressBarValue; set { _progressBarValue = value; NotifyPropertyChanged("ProgressBarValue"); } }
         private double _progressBarValue = 170;
         private double MaxValueOfProgress =0;
@@ -59,11 +60,14 @@ namespace SoBasicEnglish.ViewModels
         #region constructor
         public ExamViewModel()
         {
+            dbExam = new dbExam(Model.serverName);
             Click_Start = new RelayCommand<object>((p) => !IsDoingEX, StartDoingEX);
             DoingEXClock = new DispatcherTimer();
             DoingEXClock.Interval = TimeSpan.FromSeconds(0.1);
             DoingEXClock.Tick += DoingEXClock_Tick;
             MaxValueOfProgress = ProgressBarValue;
+            GetTest();
+
         }
 
         private void DoingEXClock_Tick(object sender, EventArgs e)
@@ -162,6 +166,11 @@ namespace SoBasicEnglish.ViewModels
         }
         #endregion
         #region functions
+        private void GetTest()
+        {
+            int turn = dbExam.GetProcessLevel(Model.userDateProcess);
+
+        }
         #endregion
 
     }

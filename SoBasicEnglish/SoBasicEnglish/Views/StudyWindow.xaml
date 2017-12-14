@@ -56,11 +56,7 @@
                 <RowDefinition Height=".09*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,0.2"  >
-                <!--<StackPanel.DataContext>
-                    <ViewModels:LessonQuestionViewModel>
-                    </ViewModels:LessonQuestionViewModel>
-                </StackPanel.DataContext>-->
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,0.2"  >                
                 <StackPanel.Background>
                     <SolidColorBrush Color="SaddleBrown" Opacity="0.8"></SolidColorBrush>
                 </StackPanel.Background>
@@ -211,13 +207,14 @@
                                                                         </i:InvokeCommandAction>
                                                                     </i:EventTrigger>
                                                                 </i:Interaction.Triggers>
-
                                                                 <Image Source="..\Images/Assets/Check-02.png" Height="25" Width="36"></Image>
                                                             </ToggleButton>
                                                             <TextBlock  Foreground="Wheat" FontStyle="Italic" FontSize="20" Margin="220,0,-52.2,6" VerticalAlignment="Bottom">Show question</TextBlock>
                                                         </Grid>
                                                         <Grid Grid.Column="1">
-                                                            <ToggleButton       Name="btnAutoNextGetReadyQuestion"                                                                                        
+                                                            <ToggleButton     
+                                                                IsChecked="{Binding CheckAutoNext,Mode=OneWay}"
+                                                                Name="btnAutoNextGetReadyQuestion"                                                                                        
                                                                                         Margin="102,9,158.8,0.4"
                                                                                        Style="{DynamicResource MetroCircleToggleButtonStyle}">
                                                                 <i:Interaction.Triggers>
@@ -264,7 +261,6 @@
                                                                     <Image Source="..\Images/Assets/Totheright.png" Height="103" Width="77" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" IsEnabled="False"  />
                                                                 </Controls:Tile>
                                                             </Grid>
-
                                                             <DockPanel Grid.Column="0" Margin="20">
                                                                 <ListBox SelectionMode="Single" x:Name="lbGetReadyQuestion" ItemContainerStyle="{StaticResource RoundedList}"  Background="Transparent"  Width="450"   Margin="0 25 0 0" DockPanel.Dock="Top" >
                                                                     <i:Interaction.Triggers>
@@ -278,26 +274,26 @@
                                                                         IsSelected="{Binding CurentGetReadyQuestion.ChoseA,Mode=TwoWay}"
                                                                         Margin="0 10 0 0" Height="50" Width="417">
                                                                         <Border Height="50" Width="417" CornerRadius="30" Background="{Binding ABr}" >
-                                                                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Wheat" Text="{Binding CurentGetReadyQuestion.AnsA}"  FontSize="20"></TextBlock>
+                                                                            <Controls:TransitioningContentControl VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Wheat" Content="{Binding CurentGetReadyQuestion.AnsA}" Transition="LeftReplace" FontSize="20"></Controls:TransitioningContentControl>
                                                                         </Border>
                                                                     </ListBoxItem>
                                                                     <ListBoxItem  
                                                                         IsSelected="{Binding CurentGetReadyQuestion.ChoseB,Mode=TwoWay}"
                                                                         Margin="0 10 0 0" Height="50"  Width="417">
                                                                         <Border Height="50" Width="417" CornerRadius="30" Background="{Binding BBr}" >
-                                                                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Wheat" Text="{Binding CurentGetReadyQuestion.AnsB}"  FontSize="20"></TextBlock>
+                                                                            <Controls:TransitioningContentControl VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Wheat" Content="{Binding CurentGetReadyQuestion.AnsB}" Transition="LeftReplace" FontSize="20"></Controls:TransitioningContentControl>
                                                                         </Border>
                                                                     </ListBoxItem>
                                                                     <ListBoxItem 
                                                                         IsSelected="{Binding CurentGetReadyQuestion.ChoseC,Mode=TwoWay}"
                                                                         Margin="0 10 0 0" Height="50" Width="417">
                                                                         <Border Height="50" Width="417" CornerRadius="30" Background="{Binding CBr}" >
-                                                                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Wheat" Text="{Binding CurentGetReadyQuestion.AnsC}"  FontSize="20"></TextBlock>
+                                                                            <Controls:TransitioningContentControl VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Wheat" Transition="LeftReplace" Content="{Binding CurentGetReadyQuestion.AnsC}"  FontSize="20"></Controls:TransitioningContentControl>
                                                                         </Border>
                                                                     </ListBoxItem>
                                                                     <ListBoxItem IsSelected="{Binding CurentGetReadyQuestion.ChoseD,Mode=TwoWay}"  Margin="0 10 0 0" Height="50"  Width="417">
                                                                         <Border Height="50" Width="417" CornerRadius="30" Background="{Binding DBr}" >
-                                                                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Wheat" Text="{Binding CurentGetReadyQuestion.AnsD}"  FontSize="20"></TextBlock>
+                                                                            <Controls:TransitioningContentControl VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Wheat" Transition="LeftReplace" Content="{Binding CurentGetReadyQuestion.AnsD}"  FontSize="20"></Controls:TransitioningContentControl>
                                                                         </Border>
                                                                     </ListBoxItem>
                                                                 </ListBox>
@@ -351,13 +347,13 @@
                                         SelectedIndex="{Binding TcKeyWordSelectedIndex,Mode=TwoWay}">
                                         <TabItem Background="Transparent" >
                                             <Grid >
-                                                <ListView       ItemsSource="{Binding KeyWordsList}"
+                                                <ItemsControl       ItemsSource="{Binding KeyWordsList}"
                                                                 Margin="20,20,20,0"
                                                                 ScrollViewer.VerticalScrollBarVisibility="Visible"
                                                                 x:Name="lvKeywords"       
                                                                 Background="Transparent"
                                                                   >
-                                                    <ListView.ItemTemplate>
+                                                    <ItemsControl.ItemTemplate>
                                                         <DataTemplate>
                                                             <Border BorderBrush="Black" BorderThickness="1">
                                                                 <Border.Background>
@@ -408,8 +404,8 @@
                                                                 </Grid>
                                                             </Border>
                                                         </DataTemplate>
-                                                    </ListView.ItemTemplate>
-                                                </ListView>
+                                                    </ItemsControl.ItemTemplate>
+                                                </ItemsControl>
                                             </Grid>
                                         </TabItem>
                                         <TabItem  Background="Transparent">
@@ -432,10 +428,10 @@
                                                             <Image Source="..\Images/Assets/Submit-01.png" Height="40" Width="30"></Image>
                                                         </Button>
                                                     </StackPanel>
-                                                    <ListView
+                                                    <ItemsControl
                                                         Margin="29.6,10,30,9.6"
                                                         ItemsSource="{Binding KeyWordExList}" Background="Transparent" Grid.Column="1" BorderBrush="Black" BorderThickness="1" x:Name="lvKeyWordExList" >
-                                                        <ListView.ItemTemplate>
+                                                        <ItemsControl.ItemTemplate>
                                                             <DataTemplate>
                                                                 <ListViewItem>
                                                                     <Grid Height="190" >
@@ -463,8 +459,8 @@
                                                                     </Grid>
                                                                 </ListViewItem>
                                                             </DataTemplate>
-                                                        </ListView.ItemTemplate>
-                                                    </ListView>
+                                                        </ItemsControl.ItemTemplate>
+                                                    </ItemsControl>
                                                 </Grid>
                                             </Border>
                                         </TabItem>
@@ -511,17 +507,15 @@
                                     </Grid.Background>
                                     <Controls:MetroAnimatedSingleRowTabControl SelectedIndex="{Binding TcSentenceSelectedIndex}" Background="Transparent">
                                         <TabItem>
-                                            <ListView  ItemsSource="{Binding SentenceList}"
+                                            <ItemsControl  ItemsSource="{Binding SentenceList}"
                                                                      ScrollViewer.VerticalScrollBarVisibility="Visible" 
                                                                 x:Name="lvSentences"
                                                        Background="Transparent"
                                                        Margin="20,20,20,5.2"
                                                                 HorizontalAlignment="Stretch"  >
-                                                <ListView.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <ListViewItem>
-                                                            <Grid Height="120">
-                                                                <Border BorderBrush="Black" BorderThickness="1.5">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>                                                                                                                    <Grid Height="120">
+                                                                <Border BorderBrush="Black" BorderThickness="1" Margin="5">
                                                                     <StackPanel >
                                                                         <StackPanel Margin="10 10 0 0" Orientation="Horizontal">
                                                                             <Button Margin="10 0 0 0" Background="Brown" 
@@ -533,15 +527,13 @@
                                                                             <TextBlock  Margin="5 0 0 0 " Text="{Binding KeySentence}" FontSize="30" Foreground="LightSeaGreen" TextAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Width="auto" Height="auto"  ></TextBlock>
                                                                         </StackPanel>
                                                                         <TextBlock Margin="10 0 0 0" HorizontalAlignment="Left" Text="{Binding HowToRead}" FontSize="20" Foreground="Black" TextAlignment="Left" VerticalAlignment="Center" Width="auto" Height="auto" ></TextBlock>
-                                                                        <TextBlock Margin="10 0 0 0" HorizontalAlignment="Left" Text="{Binding VieMeanOfSentence}" FontSize="20" Foreground="BlueViolet" TextAlignment="Center" VerticalAlignment="Center" FontStyle="Italic"  Width="auto" Height="auto" ></TextBlock>
+                                                                        <TextBlock Margin="10 0 0 0" HorizontalAlignment="Left" Text="{Binding VieMeanOfSentence}" FontSize="20" Foreground="Wheat" TextAlignment="Center" VerticalAlignment="Center" FontStyle="Italic"  Width="auto" Height="auto" ></TextBlock>
                                                                     </StackPanel>
                                                                 </Border>
                                                             </Grid>
-
-                                                        </ListViewItem>
                                                     </DataTemplate>
-                                                </ListView.ItemTemplate>
-                                            </ListView>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
                                         </TabItem>
                                         <TabItem>
                                             <Border   BorderThickness="0"  Margin="20 0 " >
@@ -563,12 +555,12 @@
                                                             <Image Source="..\Images/Assets/Submit-01.png" Height="40" Width="30"></Image>
                                                         </Button>
                                                     </StackPanel>
-                                                    <ListView
+                                                    <ItemsControl
                                                         Margin="29.6,30,30,10.2"
                                                         ItemsSource="{Binding SentenceExList}" Background="Transparent" Grid.Column="1" BorderBrush="Black" BorderThickness="1" x:Name="lvSentenceExList" >
-                                                        <ListView.ItemTemplate>
+                                                        <ItemsControl.ItemTemplate>
                                                             <DataTemplate>
-                                                                <ListViewItem>
+                                                              
                                                                     <Grid Height="190" >
                                                                         <Border Margin="5" BorderBrush="Black" BorderThickness="1">
                                                                             <StackPanel Margin="5">
@@ -591,11 +583,10 @@
                                                                                 </StackPanel>
                                                                             </StackPanel>
                                                                         </Border>
-                                                                    </Grid>
-                                                                </ListViewItem>
+                                                                    </Grid>                                                                
                                                             </DataTemplate>
-                                                        </ListView.ItemTemplate>
-                                                    </ListView>
+                                                        </ItemsControl.ItemTemplate>
+                                                    </ItemsControl>
                                                 </Grid>
                                             </Border>
                                         </TabItem>
@@ -741,8 +732,8 @@
                                                             <ColumnDefinition/>
                                                         </Grid.ColumnDefinitions>
                                                         <Grid Margin="10.8,0,10,10.2" Grid.Column="1">
-                                                            <ListView Background="Transparent" Margin="10,10,39.6,10.2" ItemsSource="{Binding ListeningQuestionList}"   x:Name="lvListeningExList" >
-                                                                <ListView.ItemTemplate>
+                                                            <ItemsControl Background="Transparent" Margin="10,10,39.6,10.2" ItemsSource="{Binding ListeningQuestionList}"   x:Name="lvListeningExList" >
+                                                                <ItemsControl.ItemTemplate>
                                                                     <DataTemplate>
                                                                         <ListViewItem>
                                                                             <Grid Height="190" >
@@ -771,16 +762,16 @@
 
                                                                         </ListViewItem>
                                                                     </DataTemplate>
-                                                                </ListView.ItemTemplate>
-                                                            </ListView>
+                                                                </ItemsControl.ItemTemplate>
+                                                            </ItemsControl>
 
                                                         </Grid>
                                                     </Grid>
                                                 </TabItem>
                                                 <TabItem Background="Transparent">
                                                     <StackPanel Orientation="Horizontal" Margin="10">
-                                                        <ListView ItemsSource="{Binding ListeningPart2QuestionList}" x:Name="lvListenPart2QuestionList"   Background="Transparent" Margin="10,10,10,10"  Width="auto" MinWidth="700" >
-                                                            <ListView.ItemTemplate>
+                                                        <ItemsControl ItemsSource="{Binding ListeningPart2QuestionList}" x:Name="lvListenPart2QuestionList"   Background="Transparent" Margin="10,10,10,10"  Width="auto" MinWidth="700" >
+                                                            <ItemsControl.ItemTemplate>
                                                                 <DataTemplate>
                                                                     <ListViewItem Background="Transparent">
                                                                         <Grid Height="auto"  Margin="20,10,0,10" >
@@ -792,8 +783,8 @@
                                                                         </Grid>
                                                                     </ListViewItem>
                                                                 </DataTemplate>
-                                                            </ListView.ItemTemplate>
-                                                        </ListView>
+                                                            </ItemsControl.ItemTemplate>
+                                                        </ItemsControl>
                                                     </StackPanel>
                                                 </TabItem>
                                             </Controls:MetroAnimatedSingleRowTabControl>
@@ -866,10 +857,9 @@
                                                             <Image Source="..\Images/Assets/Submit-01.png" Height="40" Width="30"></Image>
                                                         </Button>
                                                     </StackPanel>
-                                                    <ListView Background="Transparent" ItemsSource="{Binding GrammarQuestionList}" Grid.Column="1" BorderBrush="Black" BorderThickness="0" Margin="20" x:Name="lvGrammarExList" >
-                                                        <ListView.ItemTemplate>
+                                                    <ItemsControl Background="Transparent" ItemsSource="{Binding GrammarQuestionList}" Grid.Column="1" BorderBrush="Black" BorderThickness="0" Margin="20" x:Name="lvGrammarExList" >
+                                                        <ItemsControl.ItemTemplate>
                                                             <DataTemplate>
-                                                                <ListViewItem>
                                                                     <Grid Height="190" >
                                                                         <Border Margin="5" BorderBrush="Black" BorderThickness="1">
                                                                             <StackPanel Margin="5">
@@ -892,11 +882,10 @@
                                                                                 </StackPanel>
                                                                             </StackPanel>
                                                                         </Border>
-                                                                    </Grid>
-                                                                </ListViewItem>
+                                                                    </Grid>                                                                
                                                             </DataTemplate>
-                                                        </ListView.ItemTemplate>
-                                                    </ListView>
+                                                        </ItemsControl.ItemTemplate>
+                                                    </ItemsControl>
                                                 </Grid>
                                             </Grid>
                                         </TabItem>

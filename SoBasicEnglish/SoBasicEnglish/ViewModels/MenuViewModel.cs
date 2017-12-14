@@ -103,9 +103,7 @@ namespace SoBasicEnglish.ViewModels
             } }
         private ObservableCollection<DateProcess> _dateList = new ObservableCollection<DateProcess>();
         public ObservableCollection<DateProcess> DateList { get => _dateList; set { _dateList = value; NotifyPropertyChanged("DateList"); } }
-
         public int GvDateProcessSelectedIndex { get => _gvDateProcessSelectedIndex; set { _gvDateProcessSelectedIndex = value; NotifyPropertyChanged("GvDateProcessSelectedIndex"); } }
-
         //public List<DateProcess> dateList = new List<DateProcess>();
         private ListCollectionView _dateListOnGridView;
         DispatcherTimer timerToCloseNotify;

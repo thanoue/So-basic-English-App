@@ -362,7 +362,6 @@
                                                     </DataTemplate>
                                                 </ListView.ItemTemplate>
                                             </ListView>
-
                                         </Grid>
 
                                     </Border>
@@ -707,9 +706,7 @@
                         </TabItem>
                     </TabControl>
                 </Grid>
-
             </Border>
-
         </Grid>
         <Controls:Flyout  IsOpen="{Binding Isopen_Symbols}" Visibility="Hidden" x:Name="PronFlyout"  Header="The Symbols" Foreground="White"  Margin="0,172,0,190.8" Width="314" Height="auto"  >
             <Controls:Flyout.Background>

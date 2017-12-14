@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dbDateProcess.cs" />
+    <Compile Include="dbExam.cs" />
     <Compile Include="dbLessonQuestion.cs" />
     <Compile Include="dbLessonRating.cs" />
     <Compile Include="dbLesson.cs" />
